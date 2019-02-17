@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.test.parent">
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="337dp"
+        android:layout_height="439dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="35dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Full Name Of Parent"
+            android:inputType="textAutoCorrect|textPersonName|textAutoComplete|textCapWords"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Email id"
+            android:inputType="textAutoCorrect|textAutoComplete|textEmailAddress"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Password : atleast 6 characters long"
+            android:inputType="textAutoCorrect|textPassword|textAutoComplete"
+            android:singleLine="true" />
+
+
+        <EditText
+            android:id="@+id/checkPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Re-enter Password"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Phone Number"
+            android:inputType="textAutoCorrect|textAutoComplete|phone"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Postal Address"
+            android:inputType="textAutoCorrect|textMultiLine|textAutoComplete|textPostalAddress|textCapWords" />
+
+        <Button
+            android:id="@+id/uploadpic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/side_nav_bar"
+            android:text="UPLOAD YOUR PICTURE" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="98dp"
+            android:layout_height="54dp"
+            android:layout_weight="1"
+            android:src="@drawable/parent"
+            android:visibility="visible"
+            tools:layout_editor_absoluteY="430dp" />
+
+        <Button
+            android:id="@+id/signup"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:background="@color/colorAccent"
+            android:text="CREATE ACCOUNT"
+            tools:layout_editor_absoluteX="231dp"
+            tools:layout_editor_absoluteY="501dp" />
+
+        <Button
+            android:id="@+id/goBack"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:background="@drawable/side_nav_bar"
+            android:text="GO BACK" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

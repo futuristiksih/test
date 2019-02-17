@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "915087615393",
+    "firebase_url": "https://fiemsih.firebaseio.com",
+    "project_id": "fiemsih",
+    "storage_bucket": "fiemsih.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915087615393:android:39edc59b7833da50",
+        "android_client_info": {
+          "package_name": "com.example.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915087615393-sb19kp9773o2lcg183anot3of5krk102.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.test",
+            "certificate_hash": "9c6431dae97ac2459c0840d0443e43358b3ca7f9"
+          }
+        },
+        {
+          "client_id": "915087615393-ocloig759m3u14hamcmgil3hnqsis1gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSLQiZHrRWXXZemy8hkNpmbGRee8fzaNM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915087615393-ocloig759m3u14hamcmgil3hnqsis1gd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

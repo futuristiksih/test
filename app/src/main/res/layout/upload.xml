@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/up"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="15dp"
+        android:text="SYMPTOMS  (SCROLL FOR MORE)"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="8dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/TT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+        <LinearLayout
+            android:id="@+id/symptom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sudden onset with slight fever" />
+
+            <CheckBox
+                android:id="@+id/b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Blister-type rash" />
+
+            <CheckBox
+                android:id="@+id/c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Spots or blisters" />
+
+            <CheckBox
+                android:id="@+id/d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fever, sore throat, small greyish blisters in mouth " />
+
+            <CheckBox
+                android:id="@+id/e"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="A skin infection with moist, purulent, yellow crusted sores surrounded by redness. Spreads forming new sores. " />
+
+            <CheckBox
+                android:id="@+id/f"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fever, inflamed eyes, dry cough, runny nose, dusky red blotchy rash" />
+
+            <CheckBox
+                android:id="@+id/g"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="intense headache, nausea,vomiting, stiff neck, and often a pinpoint rash." />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/TT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="14dp"
+        android:text="EXPECTED DISEASE (SCROLL FOR MORE)"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <Button
+        android:id="@+id/upload"
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="236dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="99dp"
+        android:background="@drawable/side_nav_bar"
+        android:text="UPLOAD DETAILS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="189dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="236dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="99dp"
+        android:background="@drawable/side_nav_bar"
+        android:text="GO BACK"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/upload"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:layout_marginTop="10dp"
+        android:fillViewport="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TT">
+
+        <LinearLayout
+            android:id="@+id/disease"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/h"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chickenpox" />
+
+            <CheckBox
+                android:id="@+id/i"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fifth Disease " />
+
+            <CheckBox
+                android:id="@+id/j"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hand / Foot / Mouth Disease" />
+
+            <CheckBox
+                android:id="@+id/k"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Herpes “cold sores” " />
+
+            <CheckBox
+                android:id="@+id/l"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Impetigo" />
+
+            <CheckBox
+                android:id="@+id/m"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Measles “red measles” " />
+
+            <CheckBox
+                android:id="@+id/n"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Meningococcal Meningitis " />
+
+            <CheckBox
+                android:id="@+id/o"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mumps " />
+
+            <CheckBox
+                android:id="@+id/p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Roseola Infantum “Sixth Disease”  " />
+
+            <CheckBox
+                android:id="@+id/q"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rubella “German measles”  " />
+
+            <CheckBox
+                android:id="@+id/r"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shingles   " />
+
+            <CheckBox
+                android:id="@+id/s"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Streptococcal   " />
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
