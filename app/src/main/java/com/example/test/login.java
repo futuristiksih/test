@@ -1,11 +1,17 @@
 package com.example.test;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,7 +30,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
 public class login extends AppCompatActivity {
-    private FirebaseAuth mAuth;private EditText email, password;FirebaseFirestore db;String userEmail="";TextView forgot;
+    private FirebaseAuth mAuth;final Context context=this;
+    private EditText email, password;FirebaseFirestore db;String userEmail="",userPass="";TextView forgot;
     public void getUser(String userEmail){
         db.collection("Person").whereEqualTo("email", userEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -94,34 +101,52 @@ public class login extends AppCompatActivity {
         super.onCreate(savedInstanceState);setContentView(R.layout.login);
         email =  findViewById(R.id.email);password = findViewById(R.id.password);
         setTitle("LOGIN");db = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();FirebaseUser user = mAuth.getCurrentUser();
-        if(user!=null){
-        if (user.isEmailVerified()) {
-            userEmail=user.getEmail();getUser(userEmail);
-        }}
+        mAuth = FirebaseAuth.getInstance();
         forgot=findViewById(R.id.forgot);
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!TextUtils.isEmpty(email.getText()) && !TextUtils.isEmpty(password.getText())){
-                mAuth.signInWithEmailAndPassword(email.getText().toString().trim(), password.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                userPass="";userEmail="";
+                LayoutInflater li = LayoutInflater.from(context);
+                View promptsView = li.inflate(R.layout.prompts, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setView(promptsView);
+                final EditText mail =promptsView.findViewById(R.id.email);
+                final EditText pass =promptsView.findViewById(R.id.pass);
+                builder.setPositiveButton("SEND", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-                        if(task.isSuccessful()&& user.isEmailVerified()){
-                            FirebaseAuth.getInstance().sendPasswordResetEmail(""+email.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        userEmail = mail.getText().toString().trim();
+                        userPass= pass.getText().toString().trim();
+                        if(!userEmail.equals("") && !userPass.equals("")){
+                            mAuth.signInWithEmailAndPassword(userEmail,userPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) Toast.makeText(getApplicationContext(),"PASSWORD RECOVERY EMAIL TO "+email.getText().toString().trim(),Toast.LENGTH_LONG).show();
-                                    else Toast.makeText(getApplicationContext(),"UNABLE TO SEND PASSWORD RECOVERY EMAIL TO "+email.getText().toString().trim(),Toast.LENGTH_LONG).show();
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+                                    if(task.isSuccessful()&& user.isEmailVerified()){
+                                        FirebaseAuth.getInstance().sendPasswordResetEmail(""+userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) Toast.makeText(getApplicationContext(),"PASSWORD RECOVERY EMAIL TO "+userEmail,Toast.LENGTH_LONG).show();
+                                                else Toast.makeText(getApplicationContext(),"UNABLE TO SEND PASSWORD RECOVERY EMAIL TO "+userEmail,Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                    }
+                                    else Toast.makeText(getApplicationContext(),"ACCOUNT NOT EMAIL VERIFIED OR NO SUCH ACCOUNT EXISTS",Toast.LENGTH_LONG).show();
                                 }
                             });
                         }
-                        else Toast.makeText(getApplicationContext(),"ACCOUNT NOT EMAIL VERIFIED OR NO SUCH ACCOUNT EXISTS",Toast.LENGTH_LONG).show();
                     }
                 });
-            }
-                else Toast.makeText(getApplicationContext(),"EMPTY FIELDS",Toast.LENGTH_LONG).show();
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alertDialog=builder.create();
+                alertDialog.show();
+
             }
         });
 
