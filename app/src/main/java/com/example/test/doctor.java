@@ -222,7 +222,7 @@ public class doctor extends Fragment {
                             }
                             else{
                                     db = FirebaseFirestore.getInstance();
-                                    objectDoctor current = new objectDoctor(name.getText().toString().trim(), phone.getText().toString().trim(), email.getText().toString().trim(),degree.getText().toString().trim(),gender_type, clinic.getText().toString(),mci.getText().toString(),specialization.getText().toString(),city.getText().toString(),exp_yrs.getText().toString(),"3",false);
+                                    objectDoctor current = new objectDoctor(name.getText().toString().trim(), phone.getText().toString().trim(), email.getText().toString().trim(),degree.getText().toString().trim(),gender_type, clinic.getText().toString(),mci.getText().toString(),specialization.getText().toString(),city.getText().toString(),exp_yrs.getText().toString(),"0",false);
                                     db.collection("Email").document("doctor "+email.getText().toString().trim()).set(current)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

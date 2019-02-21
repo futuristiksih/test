@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,8 @@ public class doclistadapter extends ArrayAdapter<doclistdesign> {
     }
     public int getCount() { return this.item.size(); }
     private static class ViewHolder {
-        private TextView name, exp_yrs,city, degree;RatingBar ratingBar;
+        private TextView name, exp_yrs,city, degree;
+        RatingBar ratingBar;
     }
     @SuppressLint("ViewHolder") @NonNull @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -34,7 +36,7 @@ public class doclistadapter extends ArrayAdapter<doclistdesign> {
 
             holder = new ViewHolder();
             holder.name =  convertView.findViewById(R.id.name);
-            holder.exp_yrs =  convertView.findViewById(R.id.expe_yrs);
+            holder.exp_yrs =  convertView.findViewById(R.id.exp_yrs);
             holder.degree =  convertView.findViewById(R.id.profession);
             holder.ratingBar = convertView.findViewById(R.id.ratingBar);
             holder.city=convertView.findViewById(R.id.city);
@@ -45,7 +47,7 @@ public class doclistadapter extends ArrayAdapter<doclistdesign> {
         doclistdesign doclistdesignitem = item.get(position);
         holder.name.setText(doclistdesignitem.getName());
         holder.ratingBar.setRating(Float.parseFloat(doclistdesignitem.getRating()));
-        holder.exp_yrs.setText(doclistdesignitem.getExp_yrs());
+        holder.exp_yrs.setText(doclistdesignitem.getExp_yrs()+" years of experience");
         holder.degree.setText(doclistdesignitem.getDegree());
         holder.city.setText(doclistdesignitem.getCity());
         return convertView;

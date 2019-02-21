@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.view.menu.ActionMenuItem;
 import android.text.Editable;
 import android.text.TextWatcher;
 import com.bumptech.glide.Glide;
@@ -181,6 +182,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         ((ConstraintLayout)findViewById(R.id.profile)).removeAllViews();
         if (id == R.id.appointment) {
+            //ActionMenuItem menuItem=findViewById(R.id.editProfile);menuItem.setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.contentpage, new doclist()).commit();
         }
         else if (id == R.id.viewprofile) {

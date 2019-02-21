@@ -23,58 +23,59 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/profile"
-        android:layout_width="339dp"
-        android:layout_height="600dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="78dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="13dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="393dp"
+        android:layout_height="535dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="16dp"
+        android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar">
 
-        <ImageView
-            android:id="@+id/docPic"
-            android:layout_width="104dp"
-            android:layout_height="89dp"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/doc"
-            android:visibility="visible"
-            app:layout_constraintEnd_toStartOf="@+id/ratingBar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="192dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="25dp"
-            app:layout_constraintBottom_toTopOf="@+id/scrollView3"
-            app:layout_constraintStart_toEndOf="@+id/docPic" />
-
-        <ScrollView
-            android:id="@+id/scrollView3"
-            android:layout_width="301dp"
-            android:layout_height="445dp"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="21dp"
-            android:layout_marginBottom="60dp"
-            android:fillViewport="true"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="78dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="13dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/docPic">
+            app:layout_constraintTop_toBottomOf="@+id/appbar">
+
+            <ImageView
+                android:id="@+id/docPic"
+                android:layout_width="104dp"
+                android:layout_height="89dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/doc"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/ratingBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
+                android:layout_width="180dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="33dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:stepSize="0.1"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintStart_toEndOf="@+id/docPic" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="474dp"
                 android:layout_marginTop="36dp"
                 android:layout_marginBottom="8dp"
                 android:orientation="vertical"
@@ -237,8 +238,8 @@
 
 
             </LinearLayout>
-        </ScrollView>
 
-    </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
