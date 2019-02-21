@@ -59,6 +59,17 @@
             app:layout_constraintBottom_toTopOf="@+id/scrollView3"
             app:layout_constraintStart_toEndOf="@+id/docPic" />
 
+        <Button
+            android:id="@+id/choose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="CHOOSE"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ScrollView
             android:id="@+id/scrollView3"
             android:layout_width="301dp"

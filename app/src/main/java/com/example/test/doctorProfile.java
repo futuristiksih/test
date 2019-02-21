@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -38,7 +39,7 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
     EditText name,phone,email,degree,gender,specialization,exp_yrs,city,clinic,mci;ImageView docPic,navPic;
     RatingBar ratingBar;
     public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;TextView navName;FirebaseFirestore db;
-    StorageReference imageref;String emailid;
+    StorageReference imageref;String emailid="";
     FirebaseUser user;
     public void updateDoctor(objectDoctor doctor){
         name.setText(doctor.getName());email.setText(doctor.getEmail());degree.setText(doctor.getDegree());phone.setText(doctor.getPhone());exp_yrs.setText(doctor.getExp_yrs());
@@ -82,8 +83,7 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
 
         imageref = FirebaseStorage.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        assert user != null;
-        emailid = user.getEmail();
+        if(user != null) emailid = user.getEmail();
         db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("Email").document("doctor "+emailid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

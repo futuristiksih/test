@@ -1,4 +1,5 @@
 package com.example.test;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,7 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Objects;
 public class doclist extends Fragment {
-    View view;ArrayList<doclistdesign> doclistdesigns;doclistadapter doclistadapter;
+    View view;ArrayList<doclistdesign> doclistdesigns;doclistadapter doclistadapter;ArrayList<String> emails;
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final FirebaseFirestore db;
@@ -34,6 +35,7 @@ public class doclist extends Fragment {
         doclistdesigns = new ArrayList<>();
         doclistadapter = new doclistadapter(getActivity(),doclistdesigns);
         db = FirebaseFirestore.getInstance();
+        emails=new ArrayList<String>();
         db.collection("Email").whereEqualTo("verified",true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -41,7 +43,7 @@ public class doclist extends Fragment {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     if (document.exists()) {
                         doclistdesigns.add(new doclistdesign(document.get("name").toString(),document.get("degree").toString(),document.get("exp_yrs").toString(),document.get("rating").toString(),document.get("city").toString()));
-                        Log.i("data",document.get("name").toString()+document.get("degree").toString()+document.get("exp_yrs").toString()+document.get("rating").toString());
+                        emails.add(document.get("email").toString());
                         doclistadapter.notifyDataSetChanged();
                         }
                     }
@@ -52,9 +54,12 @@ public class doclist extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                ((RelativeLayout)view.findViewById(R.id.doc)).removeAllViews();
-                fragmentManager.beginTransaction().replace(R.id.doc, new Appointment()).commit();
+                //android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                //((RelativeLayout)view.findViewById(R.id.doc)).removeAllViews();
+
+                Intent intent=new Intent(getActivity(),showDoctor.class);
+                intent.putExtra("email",emails.get(i));
+                startActivity(intent);
             }
         });
     }

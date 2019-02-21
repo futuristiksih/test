@@ -33,6 +33,10 @@
             android:label="MY PROFILE"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".showDoctor"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
 
     </application>
 
