@@ -7,11 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string-array name="gender">
-        <item>MALE</item>
-        <item>FEMALE</item>
-    </string-array>
-    <string-array name="speciality">
-        <item>PAEDIATRICIAN</item>
-        <item>DERMATOLOGIST</item>
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
 </resources>

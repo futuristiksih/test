@@ -163,7 +163,7 @@ public class parent extends Fragment {
                             else{
                                 db = FirebaseFirestore.getInstance();
                                 objectParent current = new objectParent(name.getText().toString().trim(), phone.getText().toString().trim(), email.getText().toString().trim(), address.getText().toString().trim());
-                                db.collection("Person").document("PARENT " + email.getText().toString().trim()).set(current)
+                                db.collection("Email").document("parent " + email.getText().toString().trim()).set(current)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {

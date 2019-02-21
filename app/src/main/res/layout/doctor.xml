@@ -6,150 +6,184 @@
     android:layout_height="match_parent"
     tools:context="com.example.test.doctor">
 
-    <LinearLayout
-        android:id="@+id/linearlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="35dp"
-        android:orientation="vertical"
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="185dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="23dp"
+        android:layout_weight="1"
+        android:src="@drawable/doc"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/uploadpic"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView4" />
+
+    <Button
+        android:id="@+id/uploadpic"
+        android:layout_width="196dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="3dp"
+        android:background="@android:color/holo_orange_light"
+        android:text="upload Profile Picture"
+        app:layout_constraintBottom_toTopOf="@+id/signup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView4" />
+
+    <Button
+        android:id="@+id/goBack"
+        android:layout_width="200dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="3dp"
+        android:background="@color/nav_color"
+        android:text="GO BACK"
+        app:layout_constraintEnd_toStartOf="@+id/signup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image" />
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="207dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorAccent"
+        android:text="CREATE ACCOUNT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/goBack"
+        app:layout_constraintTop_toBottomOf="@+id/uploadpic" />
+
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="381dp"
+        android:layout_height="432dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="16dp"
+        android:fillViewport="true"
+        android:scrollbarSize="20dip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Full Name Of Doctor"
-            android:inputType="textAutoCorrect|textPersonName|textAutoComplete|textCapWords"
-            android:singleLine="true" />
-
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Email id"
-            android:inputType="textAutoCorrect|textAutoComplete|textEmailAddress"
-            android:singleLine="true" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Password : atleast 6 characters long"
-            android:inputType="textAutoCorrect|textPassword|textAutoComplete"
-            android:singleLine="true" />
-
-
-        <EditText
-            android:id="@+id/checkPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Re-enter Password"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Phone Number"
-            android:inputType="textAutoCorrect|textAutoComplete|phone"
-            android:singleLine="true" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside">
 
         <LinearLayout
+            android:id="@+id/linearlayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="36dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textView9"
+            <EditText
+                android:id="@+id/name"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="         Speciality:"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+                android:layout_height="40dp"
+                android:ems="10"
+                android:hint="Full Name"
+                android:inputType="textAutoCorrect|textPersonName|textAutoComplete|textCapWords"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/mci"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:hint="MCI Registration Number"
+                android:inputType="textShortMessage"
+                android:selectAllOnFocus="false" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:hint="Email id"
+                android:inputType="textAutoCorrect|textAutoComplete|textEmailAddress"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:hint="Password : atleast 6 characters long"
+                android:inputType="textAutoCorrect|textPassword|textAutoComplete"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/checkPassword"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:hint="Re-enter Password"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:hint="Phone Number"
+                android:inputType="textAutoCorrect|textAutoComplete|phone"
+                android:singleLine="true" />
 
             <Spinner
-                android:id="@+id/speciality"
-                android:layout_width="198dp"
-                android:layout_height="36dp" />
+                android:id="@+id/gender"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:hint="Current City"
+                android:inputType="textShortMessage" />
+
+
+            <EditText
+                android:id="@+id/degree"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:hint="Degree(s)"
+                android:inputType="textShortMessage|textAutoCorrect" />
+
+            <EditText
+                android:id="@+id/exp_yrs"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:hint="Years of Experience "
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/specialization"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:hint="Specialization(s)"
+                android:inputType="textAutoCorrect|textCapWords" />
+
+            <EditText
+                android:id="@+id/clinic"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:hint="Personal Clinic/Hospital"
+                android:inputType="textShortMessage" />
+
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/degree"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Degree/Education"
-            android:inputType="textLongMessage|textAutoCorrect|textMultiLine|textAutoComplete" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/upload_certi"
-                android:layout_width="185dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/side_nav_bar"
-                android:text="UPLOAD DOCTOR'S CERTIFICATE" />
-
-            <Button
-                android:id="@+id/uploadpic"
-                android:layout_width="167dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/side_nav_bar"
-                android:text="UPLOAD YOUR PICTURE" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/certificate"
-                android:layout_width="146dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@color/common_google_signin_btn_text_light_disabled" />
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="131dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/doc"
-                android:visibility="visible"
-                tools:layout_editor_absoluteX="67dp"
-                tools:layout_editor_absoluteY="470dp" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/signup"
-            android:layout_width="match_parent"
-            android:layout_height="41dp"
-            android:background="@color/colorAccent"
-            android:text="CREATE ACCOUNT"
-            tools:layout_editor_absoluteX="239dp"
-            tools:layout_editor_absoluteY="526dp" />
-
-        <Button
-            android:id="@+id/goBack"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@drawable/side_nav_bar"
-            android:text="GO BACK" />
-
-    </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

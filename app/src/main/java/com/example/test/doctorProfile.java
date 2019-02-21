@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,12 +35,15 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class doctorProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    EditText name,phone,email,degree,type;ImageView docPic,navPic,certi;
+    EditText name,phone,email,degree,gender,specialization,exp_yrs,city,clinic,mci;ImageView docPic,navPic;
+    RatingBar ratingBar;
     public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;TextView navName;FirebaseFirestore db;
     StorageReference imageref;String emailid;
     FirebaseUser user;
     public void updateDoctor(objectDoctor doctor){
-        name.setText(doctor.getName());email.setText(doctor.getEmail());degree.setText(doctor.getDegree());phone.setText(doctor.getPhone());type.setText(doctor.getType());
+        name.setText(doctor.getName());email.setText(doctor.getEmail());degree.setText(doctor.getDegree());phone.setText(doctor.getPhone());exp_yrs.setText(doctor.getExp_yrs());
+        gender.setText(doctor.getGender());specialization.setText(doctor.getSpecialization());clinic.setText(doctor.getClinic());city.setText(doctor.getCity());mci.setText(doctor.getMci());
+        ratingBar.setRating(Float.parseFloat(doctor.getRating()));
         final NavigationView navigationView = findViewById(R.id.nav_view);navigationView.setNavigationItemSelectedListener(this);
         final View hView =  navigationView.getHeaderView(0);
         navName= hView.findViewById(R.id.navName);navName.setText(name.getText().toString());
@@ -51,12 +55,7 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
                 Glide.with(getApplicationContext()).load(uri).into(navPic);
             }
         });
-        imageref.child(emailid+" Certificate").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(getApplicationContext()).load(uri).into(certi);
-            }
-        });
+
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -74,20 +73,19 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView = findViewById(R.id.nav_view);navigationView.setNavigationItemSelectedListener(this);
         View hView =  navigationView.getHeaderView(0);
 
-        name=findViewById(R.id.name);name.setEnabled(false);
-        phone=findViewById(R.id.phone);phone.setEnabled(false);
-        email=findViewById(R.id.email);email.setEnabled(false);
-        degree=findViewById(R.id.degree);degree.setEnabled(false);
-        type=findViewById(R.id.type);type.setEnabled(false);
+        name=findViewById(R.id.name);name.setEnabled(false);phone=findViewById(R.id.phone);phone.setEnabled(false);
+        email=findViewById(R.id.email);email.setEnabled(false);degree=findViewById(R.id.degree);degree.setEnabled(false);
+        gender =findViewById(R.id.gender);gender.setEnabled(false);clinic=findViewById(R.id.clinic);clinic.setEnabled(false);
+        specialization=findViewById(R.id.specialization);specialization.setEnabled(false);exp_yrs=findViewById(R.id.exp_yrs);exp_yrs.setEnabled(false);
+        city=findViewById(R.id.city);city.setEnabled(false);mci=findViewById(R.id.mci);mci.setEnabled(false);ratingBar=findViewById(R.id.ratingBar);ratingBar.setEnabled(false);
         docPic=findViewById(R.id.docPic);docPic.setEnabled(false);
-        certi=findViewById(R.id.certi);certi.setEnabled(false);
 
         imageref = FirebaseStorage.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         emailid = user.getEmail();
         db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("Person").document("DOCTOR "+emailid);
+        DocumentReference docRef = db.collection("Email").document("doctor "+emailid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -128,11 +126,13 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
         if (id == R.id.editProfile) {
             if(item.getTitle()=="EDIT PROFILE"){
                 item.setTitle("SAVE CHANGES");
-                name.setEnabled(true);email.setEnabled(true);degree.setEnabled(true);phone.setEnabled(true);docPic.setEnabled(true);type.setEnabled(true);
+                name.setEnabled(true);email.setEnabled(true);degree.setEnabled(true);phone.setEnabled(true);docPic.setEnabled(true);
+                gender.setEnabled(true);mci.setEnabled(true);city.setEnabled(true);clinic.setEnabled(true);specialization.setEnabled(true);exp_yrs.setEnabled(true);
             }
             else{
                 item.setTitle("EDIT PROFILE");
-                name.setEnabled(false);email.setEnabled(false);degree.setEnabled(false);phone.setEnabled(false);docPic.setEnabled(false);type.setEnabled(false);
+                name.setEnabled(false);email.setEnabled(false);degree.setEnabled(false);phone.setEnabled(false);docPic.setEnabled(false);
+                gender.setEnabled(false);mci.setEnabled(false);city.setEnabled(false);clinic.setEnabled(false);specialization.setEnabled(false);exp_yrs.setEnabled(false);
                 name.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -179,7 +179,7 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
                     public void afterTextChanged(Editable editable) {
                     }
                 });
-                type.addTextChangedListener(new TextWatcher() {
+                gender.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
                     @Override

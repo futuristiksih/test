@@ -78,7 +78,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
         assert user != null;
         emailid = user.getEmail();
         db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("Person").document("PARENT "+emailid);
+        DocumentReference docRef = db.collection("Email").document("parent "+emailid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -181,7 +181,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         ((ConstraintLayout)findViewById(R.id.profile)).removeAllViews();
         if (id == R.id.appointment) {
-            fragmentManager.beginTransaction().replace(R.id.contentpage, new Appointment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.contentpage, new doclist()).commit();
         }
         else if (id == R.id.viewprofile) {
             Intent i=new Intent(getApplicationContext(),parentProfile.class);startActivity(i);finish();

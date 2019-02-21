@@ -33,14 +33,14 @@ public class login extends AppCompatActivity {
     private FirebaseAuth mAuth;final Context context=this;
     private EditText email, password;FirebaseFirestore db;String userEmail="",userPass="";TextView forgot;
     public void getUser(String userEmail){
-        db.collection("Person").whereEqualTo("email", userEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("Email").whereEqualTo("email", userEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document: Objects.requireNonNull(task.getResult())) {
                         if (document.exists()) {
                             String temp = document.getId().split(" ")[0];
-                            if (temp.equals("PARENT")) {
+                            if (temp.equals("parent")) {
                                 Intent i = new Intent(getApplicationContext(), parentProfile.class);startActivity(i);finish();
                             }
                             else {

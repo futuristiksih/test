@@ -34,10 +34,10 @@
 
         <ImageView
             android:id="@+id/docPic"
-            android:layout_width="246dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="44dp"
-            android:layout_marginEnd="121dp"
+            android:layout_width="138dp"
+            android:layout_height="108dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginEnd="133dp"
             android:src="@drawable/parent"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,14 +46,15 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="417dp"
-            android:layout_marginTop="36dp"
+            android:layout_width="359dp"
+            android:layout_height="493dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="22dp"
             android:layout_marginBottom="8dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/docPic">
 
@@ -61,7 +62,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="FULL NAME OF PARENT"
+                android:text="FULL NAME"
                 android:textColor="@color/colorAccent" />
 
             <EditText
@@ -77,7 +78,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="EMERGENCY NUMBER / CONTACT NUMBER"
+                android:text="CONTACT NUMBER"
                 android:textColor="@color/colorAccent" />
 
             <EditText
