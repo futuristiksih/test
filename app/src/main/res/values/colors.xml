@@ -7,4 +7,8 @@
     <color name="text_secondary">#000000</color>
     <color name="window_background">#FFFFFF</color>
     <color name="nav_color">#98FB98</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="purple_trans">#66872C76</color>
+    <color name="yellow">#FFF895</color>
+    <color name="txt_hint">#33FFFFFF</color>
 </resources>

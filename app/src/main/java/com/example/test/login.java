@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -155,7 +156,7 @@ public class login extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-                        ((ConstraintLayout)findViewById(R.id.log)).removeAllViews();
+                        ((RelativeLayout)findViewById(R.id.log)).removeAllViews();
                         fragmentManager.beginTransaction().replace(R.id.log, new register()).commit();
                     }
                 });
