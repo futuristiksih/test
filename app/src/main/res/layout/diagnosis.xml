@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/a1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="149dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="56dp">
+
+        <CheckBox
+            android:id="@+id/a2"
+            android:layout_width="180dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="215dp"
+            android:clickable="true"
+            android:text="Amoxicillin"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="406dp" />
+
+        <CheckBox
+            android:id="@+id/a3"
+            android:layout_width="180dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="215dp"
+            android:clickable="true"
+            android:text="Azithromycin"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="201dp" />
+
+        <CheckBox
+            android:id="@+id/a4"
+            android:layout_width="180dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="215dp"
+            android:clickable="true"
+            android:text="Albuterol"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="346dp" />
+
+        <CheckBox
+            android:id="@+id/a5"
+            android:layout_width="180dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="215dp"
+            android:clickable="true"
+            android:text="Amoxicillin"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="276dp" />
+
+        <CheckBox
+            android:id="@+id/a6"
+            android:layout_width="180dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="215dp"
+            android:clickable="true"
+            android:text="Cefdinir"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="72dp" />
+
+        <CheckBox
+            android:id="@+id/a7"
+            android:layout_width="180dp"
+            android:layout_height="34dp"
+            android:layout_marginEnd="215dp"
+            android:clickable="true"
+            android:text="Cephalexin"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="138dp" />
+
+        <CheckBox
+            android:id="@+id/a8"
+            android:layout_width="180dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="224dp"
+            android:clickable="true"
+            android:text="Fluticasone"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="557dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginEnd="160dp"
+        android:text="SUBMIT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="647dp" />
+
+    <EditText
+        android:id="@+id/description_box"
+        android:layout_width="390dp"
+        android:layout_height="78dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="252dp" />
+
+    <TextView
+        android:id="@+id/description_bar"
+        android:layout_width="261dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="4dp"
+        android:text="Extra Description"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="217dp" />
+
+    <TextView
+        android:id="@+id/medicine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medicine"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+</android.support.constraint.ConstraintLayout>

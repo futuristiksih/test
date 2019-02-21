@@ -10,4 +10,15 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    <string-array name="medicine">
+    <item>Prednisolone Sodium Phosphate</item>
+    <item>Ibuprofen</item>
+    <item>Singulair (Montelukast Sodium)</item>
+    <item>Trimethoprim</item>
+    <item>Codeine Phosphate</item>
+    <item>Acetaminophen</item>
+    <item>Mupirocin</item>
+    <item>Nystatin</item>
+    <item>Methylphenidate</item>
+    <item>Prednisone</item>
 </resources>
