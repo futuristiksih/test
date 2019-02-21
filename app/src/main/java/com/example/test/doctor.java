@@ -43,7 +43,6 @@ public class doctor extends Fragment {
     View view;FirebaseFirestore db;private FirebaseAuth mAuth;private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     public static final int RESULT_LOAD_IMAGE = 1;Uri Image;String gender_type="";
     @Override
-    public Button button;
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
