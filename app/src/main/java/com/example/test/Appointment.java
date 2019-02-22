@@ -1,7 +1,5 @@
 package com.example.test;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
@@ -18,17 +16,13 @@ import android.widget.Spinner;
 import java.util.Calendar;
 
 public class Appointment extends Fragment {
-    Spinner gender;EditText dob,weight,age,medication;String genderType;DatePicker picker;Button next;
-    public void next(View view){
-        Intent i=new Intent(getActivity(),uploadChildCase.class);startActivity(i);getActivity().finish();
-    }
+    Spinner spinner;EditText dob,birth_weight,name;String gender,doc_name,doc_email;DatePicker picker;Button next;
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                genderType="";
-                genderType = adapterView.getItemAtPosition(i).toString();
+                gender= adapterView.getItemAtPosition(i).toString();
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) { }
@@ -44,6 +38,13 @@ public class Appointment extends Fragment {
             public void onClick(View view) {
                 android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 ((ConstraintLayout)getActivity().findViewById(R.id.cl)).removeAllViews();
+                Bundle bundle=new Bundle();
+                bundle.putString("name",name.getText().toString());bundle.putString("birth_weight",birth_weight.getText().toString());
+                bundle.putString("dob",dob.getText().toString());bundle.putString("gender",gender);
+                bundle.putString("doc_name",doc_name);bundle.putString("doc_email",doc_email);
+
+                uploadChildCase uploadChildCase=new uploadChildCase();
+                uploadChildCase.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.cl, new uploadChildCase()).commit();
             }
         });
@@ -57,13 +58,13 @@ public class Appointment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.appointment, container, false);
         getActivity().setTitle("CHILD DETAILS");
-        age=view.findViewById(R.id.age);
-        dob=view.findViewById(R.id.dob);dob.setEnabled(false);
-        weight=view.findViewById(R.id.weight);
-        medication=view.findViewById(R.id.medication);
-        gender = view.findViewById(R.id.gender);
+        Bundle bundle=new Bundle();doc_name=bundle.getString("doc_name");doc_email=bundle.getString("doc_email");
+
+        name=view.findViewById(R.id.name);dob=view.findViewById(R.id.dob);dob.setEnabled(false);
+        birth_weight=view.findViewById(R.id.birth_weight);
+        spinner = view.findViewById(R.id.gender);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.gender,android.R.layout.simple_spinner_item);
-        gender.setAdapter(adapter);
+        spinner.setAdapter(adapter);
         picker=view.findViewById(R.id.dobspin);
         Calendar c= Calendar.getInstance();
         int year = c.get(Calendar.YEAR);

@@ -27,8 +27,7 @@ import com.google.firebase.storage.StorageReference;
 public class showDoctor extends AppCompatActivity {
     EditText name,phone,email,degree,gender,specialization,exp_yrs,city,clinic,mci;
     ImageView docPic;RatingBar ratingBar;Button choose;
-    Uri selectedImage;FirebaseFirestore db;StorageReference imageref;String emailid="";
-    FirebaseUser user;
+    FirebaseFirestore db;StorageReference imageref;String emailid="";
     public void updateDoctor(objectDoctor doctor){
         name.setText(doctor.getName());email.setText(doctor.getEmail());degree.setText(doctor.getDegree());phone.setText(doctor.getPhone());exp_yrs.setText(doctor.getExp_yrs());
         gender.setText(doctor.getGender());specialization.setText(doctor.getSpecialization());clinic.setText(doctor.getClinic());city.setText(doctor.getCity());mci.setText(doctor.getMci());
@@ -52,7 +51,7 @@ public class showDoctor extends AppCompatActivity {
         docPic=findViewById(R.id.docPic);docPic.setEnabled(false);
         choose=findViewById(R.id.choose);
 
-        Intent intent=getIntent();
+        final Intent intent=getIntent();
         emailid=intent.getStringExtra("email");
 
         imageref = FirebaseStorage.getInstance().getReference();
@@ -80,6 +79,14 @@ public class showDoctor extends AppCompatActivity {
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                    Bundle bundle=new Bundle();
+                    bundle.putString("doc_name",name.getText().toString());
+                    bundle.putString("doc_email",email.getText().toString());
+                    Appointment appointment=new Appointment();
+                    appointment.setArguments(bundle);
+
+                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.contentpage, new Appointment()).commit();
 
             }
         });

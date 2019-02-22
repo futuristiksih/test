@@ -34,13 +34,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 public class doctorProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    EditText name,phone,email,degree,gender,specialization,exp_yrs,city,clinic,mci;ImageView docPic,navPic;
+    EditText name,phone,email,degree,gender,specialization,exp_yrs,city,clinic,mci;ImageView docPic,navPic;MenuItem menuItem;
     RatingBar ratingBar;
     public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;TextView navName;FirebaseFirestore db;
-    StorageReference imageref;String emailid="";
-    FirebaseUser user;
+    StorageReference imageref;String emailid="";FirebaseUser user;
     public void updateDoctor(objectDoctor doctor){
         name.setText(doctor.getName());email.setText(doctor.getEmail());degree.setText(doctor.getDegree());phone.setText(doctor.getPhone());exp_yrs.setText(doctor.getExp_yrs());
         gender.setText(doctor.getGender());specialization.setText(doctor.getSpecialization());clinic.setText(doctor.getClinic());city.setText(doctor.getCity());mci.setText(doctor.getMci());
@@ -117,7 +115,7 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);menuItem.setVisible(true);
         return true;
     }
     @Override
@@ -126,12 +124,19 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
         if (id == R.id.editProfile) {
             if(item.getTitle()=="EDIT PROFILE"){
                 item.setTitle("SAVE CHANGES");
-                name.setEnabled(true);email.setEnabled(true);degree.setEnabled(true);phone.setEnabled(true);docPic.setEnabled(true);
+                name.setEnabled(true);degree.setEnabled(true);phone.setEnabled(true);docPic.setEnabled(true);
                 gender.setEnabled(true);mci.setEnabled(true);city.setEnabled(true);clinic.setEnabled(true);specialization.setEnabled(true);exp_yrs.setEnabled(true);
+                docPic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(i,RESULT_LOAD_IMAGE);
+                    }
+                });
             }
             else{
                 item.setTitle("EDIT PROFILE");
-                name.setEnabled(false);email.setEnabled(false);degree.setEnabled(false);phone.setEnabled(false);docPic.setEnabled(false);
+                name.setEnabled(false);degree.setEnabled(false);phone.setEnabled(false);docPic.setEnabled(false);
                 gender.setEnabled(false);mci.setEnabled(false);city.setEnabled(false);clinic.setEnabled(false);specialization.setEnabled(false);exp_yrs.setEnabled(false);
                 name.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -145,49 +150,17 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
                         navName = hView.findViewById(R.id.navName);navName.setText(name.getText().toString());
                     }
                 });
-                email.addTextChangedListener(new TextWatcher() {
+                db.collection("Email").document("doctor "+user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void afterTextChanged(Editable editable) {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            db.collection("Email").document("doctor "+user.getEmail()).update("name",name.getText().toString().trim(),"specialization",specialization.getText().toString().trim(),"phone",phone.getText().toString().trim(),"city",city.getText().toString().trim(),"clinic",clinic.getText().toString().trim());
+                            db.collection("Email").document("doctor "+user.getEmail()).update("degree",degree.getText().toString().trim(),"mci",mci.getText().toString().trim(),"exp_yrs",exp_yrs.getText().toString().trim(),"gender",gender.getText().toString().trim());
+                        }
+
                     }
                 });
-                docPic.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent i=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(i,RESULT_LOAD_IMAGE);
-                    }
-                });
-                phone.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-                    }
-                });
-                degree.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-                    }
-                });
-                gender.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-                    }
-                });
+
             }
         }
         return super.onOptionsItemSelected(item);
@@ -196,14 +169,17 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        ((ConstraintLayout)findViewById(R.id.profile)).removeAllViews();
+        //android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        //((ConstraintLayout)findViewById(R.id.profile)).removeAllViews();
         if (id == R.id.viewprofile) {
             Intent i=new Intent(getApplicationContext(),doctorProfile.class);startActivity(i);finish();
         }
         else if (id == R.id.signout) {
             FirebaseAuth.getInstance().signOut();
             Intent intent=new Intent(getApplicationContext(),login.class);startActivity(intent);finish();
+        }
+        else if(id==R.id.my_appointments){
+
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -31,12 +31,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 public class parentProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     EditText name,phone,email,address;ImageView parentPic,navPic;String emailid;
-    FirebaseFirestore db;StorageReference imageref;FirebaseUser user;
+    FirebaseFirestore db;StorageReference imageref;FirebaseUser user;MenuItem menuItem;
     public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;TextView navName;
 
     public void updateParent(objectParent parent){
@@ -56,9 +56,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==RESULT_LOAD_IMAGE && resultCode==RESULT_OK && data!=null ){
-            selectedImage=data.getData();
-            parentPic.setImageURI(selectedImage);
-            navPic.setImageURI(selectedImage);
+            selectedImage=data.getData();parentPic.setImageURI(selectedImage);navPic.setImageURI(selectedImage);
         }
     }
     @Override
@@ -112,6 +110,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        menuItem=menu.findItem(R.id.editProfile);menuItem.setVisible(true);
         return true;
     }
     @Override
@@ -120,11 +119,19 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
         if (id == R.id.editProfile) {
             if(item.getTitle()=="EDIT PROFILE"){
                 item.setTitle("SAVE CHANGES");
-                name.setEnabled(true);email.setEnabled(true);address.setEnabled(true);phone.setEnabled(true);parentPic.setEnabled(true);
+                name.setEnabled(true);address.setEnabled(true);phone.setEnabled(true);parentPic.setEnabled(true);
+                parentPic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(i,RESULT_LOAD_IMAGE);
+                    }
+                });
+
             }
             else{
                 item.setTitle("EDIT PROFILE");
-                name.setEnabled(false);email.setEnabled(false);address.setEnabled(false);phone.setEnabled(false);parentPic.setEnabled(false);
+                name.setEnabled(false);address.setEnabled(false);phone.setEnabled(false);parentPic.setEnabled(false);
                 name.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -137,38 +144,13 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
                         navName = hView.findViewById(R.id.navName);navName.setText(name.getText().toString());
                     }
                 });
-                email.addTextChangedListener(new TextWatcher() {
+                db.collection("Email").document("parent "+user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-                    }
-                });
-                parentPic.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent i=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(i,RESULT_LOAD_IMAGE);
-                    }
-                });
-                phone.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-                    }
-                });
-                address.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                    @Override
-                    public void afterTextChanged(Editable editable) {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            db.collection("Email").document("parent "+user.getEmail()).update("name",name.getText().toString().trim(),"address",address.getText().toString().trim(),"phone",phone.getText().toString().trim());
+                        }
+
                     }
                 });
             }
@@ -182,11 +164,14 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         ((ConstraintLayout)findViewById(R.id.profile)).removeAllViews();
         if (id == R.id.appointment) {
-            //ActionMenuItem menuItem=findViewById(R.id.editProfile);menuItem.setVisible(false);
+            menuItem.setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.contentpage, new doclist()).commit();
         }
         else if (id == R.id.viewprofile) {
             Intent i=new Intent(getApplicationContext(),parentProfile.class);startActivity(i);finish();
+        }
+        else if(id==R.id.prev_appointments){
+
         }
         else if (id == R.id.signout) {
             FirebaseAuth.getInstance().signOut();

@@ -8,6 +8,9 @@
             android:id="@+id/viewprofile"
             android:title="VIEW PROFILE" />
         <item
+            android:id="@+id/my_appointments"
+            android:title="MY APPOINTMENTS" />
+        <item
             android:id="@+id/signout"
             android:title="SIGN OUT" />
     </group>

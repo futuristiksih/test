@@ -228,13 +228,11 @@ public class doctor extends Fragment {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     StorageReference imgeref = mStorageRef.child(email.getText().toString());
-                                    if (Image != null) {
-                                        imgeref.putFile(Image).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    imgeref.putFile(Image).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                             @Override
                                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                             }
                                         });
-                                    }
                                     Toast.makeText(getActivity(), "ACCOUNT CREATED", Toast.LENGTH_SHORT).show();
                                     mAuth.signInWithEmailAndPassword(email.getText().toString().trim(), pass.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                         @Override
