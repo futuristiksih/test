@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 public class showDoctor extends AppCompatActivity {
-    EditText name,phone,email,degree,gender,specialization,exp_yrs,city,clinic,mci;
+    TextView name,phone,email,degree,gender,specialization,exp_yrs,city,clinic,mci;
     ImageView docPic;RatingBar ratingBar;Button choose;
     Uri selectedImage;FirebaseFirestore db;StorageReference imageref;String emailid="";
     FirebaseUser user;
