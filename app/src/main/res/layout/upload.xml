@@ -1,220 +1,336 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/up"
+    android:id="@+id/log"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.example.test.appoinment1">
 
-    <TextView
-        android:id="@+id/textView8"
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="15dp"
-        android:text="SYMPTOMS  (SCROLL FOR MORE)"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/bg" />
+    <TextView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fill Up the details"
+
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="@dimen/space40"/>
 
     <ScrollView
-        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="98dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="8dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/TT"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_back">
 
         <LinearLayout
-            android:id="@+id/symptom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_above="@id/ll_bottom"
+            android:layout_below="@id/iv_back"
+            android:layout_marginTop="@dimen/space40"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/space20"
+            android:paddingRight="@dimen/space20">
 
-            <CheckBox
-                android:id="@+id/a"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sudden onset with slight fever" />
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/space5"
 
-            <CheckBox
-                android:id="@+id/b"
+                android:layout_marginBottom="@dimen/space40">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space5"
+                    android:text="Bowel Movement"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/bowel_movement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/txt16" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Blister-type rash" />
+                android:layout_marginBottom="@dimen/space20"
+                android:orientation="horizontal"
 
-            <CheckBox
-                android:id="@+id/c"
+                android:paddingBottom="@dimen/space5">
+
+                <CheckBox
+                    android:id="@+id/breast_feed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="breast feed" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Spots or blisters" />
+                android:layout_marginBottom="@dimen/space20"
+                android:orientation="horizontal"
 
-            <CheckBox
-                android:id="@+id/d"
+                android:paddingBottom="@dimen/space5">
+
+                <CheckBox
+                    android:id="@+id/vomit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginRight="14dp"
+                    android:text="Vomit" />
+
+                <CheckBox
+                    android:id="@+id/dehydration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginRight="14dp"
+                    android:text="Dehydration" />
+
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fever, sore throat, small greyish blisters in mouth " />
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/space5"
 
-            <CheckBox
-                android:id="@+id/e"
+                android:layout_marginBottom="@dimen/space40">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space5"
+                    android:text="Fever"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/fever"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/txt16" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="A skin infection with moist, purulent, yellow crusted sores surrounded by redness. Spreads forming new sores. " />
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/space5"
 
-            <CheckBox
-                android:id="@+id/f"
+                android:layout_marginBottom="@dimen/space40">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space5"
+                    android:text="Immunisation"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/immunization"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/txt16" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fever, inflamed eyes, dry cough, runny nose, dusky red blotchy rash" />
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/space5"
 
-            <CheckBox
-                android:id="@+id/g"
+                android:layout_marginBottom="@dimen/space40">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space5"
+                    android:text="Inception"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/inception"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/txt16" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="intense headache, nausea,vomiting, stiff neck, and often a pinpoint rash." />
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/space5"
+
+                android:layout_marginBottom="@dimen/space40">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space5"
+                    android:text="Infected Area"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/infected_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/txt16" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/space5"
+
+                android:layout_marginBottom="@dimen/space40">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space5"
+                    android:text="Intake"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/intake"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/txt16" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/space5"
+
+                android:layout_marginBottom="@dimen/space40">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space5"
+                    android:text="Environment"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/environment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/txt16" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/space5"
+
+                android:layout_marginBottom="@dimen/space40">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space5"
+                    android:text="Crying"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/crying"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/txt16" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="50dp">
+
+                <Button
+                    android:id="@+id/login"
+                    android:layout_width="@dimen/btn_width"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_marginBottom="@dimen/space20"
+                    android:background="@drawable/btn_white_selector"
+                    android:onClick="setDate"
+                    android:text="Save and Next Page"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/txt16"
+                    />
+
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/TT"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="14dp"
-        android:text="EXPECTED DISEASE (SCROLL FOR MORE)"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
-
-    <Button
-        android:id="@+id/upload"
-        android:layout_width="219dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="236dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="99dp"
-        android:background="@drawable/side_nav_bar"
-        android:text="UPLOAD DETAILS"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
-
-    <Button
-        android:id="@+id/back"
-        android:layout_width="189dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="236dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="99dp"
-        android:background="@drawable/side_nav_bar"
-        android:text="GO BACK"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/upload"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
-
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="98dp"
-        android:layout_marginTop="10dp"
-        android:fillViewport="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TT">
-
-        <LinearLayout
-            android:id="@+id/disease"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <CheckBox
-                android:id="@+id/h"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Chickenpox" />
-
-            <CheckBox
-                android:id="@+id/i"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Fifth Disease " />
-
-            <CheckBox
-                android:id="@+id/j"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hand / Foot / Mouth Disease" />
-
-            <CheckBox
-                android:id="@+id/k"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Herpes “cold sores” " />
-
-            <CheckBox
-                android:id="@+id/l"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Impetigo" />
-
-            <CheckBox
-                android:id="@+id/m"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Measles “red measles” " />
-
-            <CheckBox
-                android:id="@+id/n"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Meningococcal Meningitis " />
-
-            <CheckBox
-                android:id="@+id/o"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mumps " />
-
-            <CheckBox
-                android:id="@+id/p"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Roseola Infantum “Sixth Disease”  " />
-
-            <CheckBox
-                android:id="@+id/q"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Rubella “German measles”  " />
-
-            <CheckBox
-                android:id="@+id/r"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Shingles   " />
-
-            <CheckBox
-                android:id="@+id/s"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Streptococcal   " />
-        </LinearLayout>
-    </ScrollView>
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

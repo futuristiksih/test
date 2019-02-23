@@ -1,138 +1,269 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cl"
+    android:id="@+id/log"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.example.test.appoinment1">
 
-    <LinearLayout
-        android:id="@+id/LinearLayout"
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="603dp"
-        android:layout_marginTop="126dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/bg" />
+    <TextView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fill Up the details"
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="192dp"
-                android:layout_height="wrap_content"
-                android:text="DATE OF BIRTH OF CHILD"
-                android:textColor="@color/colorAccent" />
-
-            <EditText
-                android:id="@+id/dob"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="date|textAutoCorrect|textAutoComplete"
-                android:selectAllOnFocus="true"
-                android:singleLine="true" />
-
-        </LinearLayout>
-
-        <DatePicker
-            android:id="@+id/dobspin"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="@dimen/space40"/>
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/space20"
+        android:layout_marginBottom="@dimen/space20">
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="83dp"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
+            android:layout_height="wrap_content"
+            android:text="Dont't have an account? "
+            android:textSize="@dimen/txt14"
+            android:textStyle="normal"
+            android:textColor="@android:color/white"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/signUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Sign Up"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txt14"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_back"
+        android:layout_above="@id/ll_bottom"
+        android:layout_marginTop="@dimen/space40"
+        android:paddingLeft="@dimen/space20"
+        android:paddingRight="@dimen/space20"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space5"
 
+            android:layout_marginBottom="@dimen/space20">
             <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="31dp"
-                android:text="CURRENT AGE OF CHILD IN MONTHS"
-                android:textColor="@color/colorAccent" />
-
-            <EditText
-                android:id="@+id/age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date|textAutoCorrect|textAutoComplete"
-                android:selectAllOnFocus="true"
-                android:singleLine="true" />
-        </LinearLayout>
+                android:text="Doctor's Name"
+                android:textColor="@android:color/white"
+                android:textSize="20dp"
+                android:layout_marginBottom="@dimen/space5"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="41dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="193dp"
-                android:layout_height="30dp"
-                android:text="GENDER OF CHILD"
-                android:textColor="@color/colorAccent" />
-
-            <Spinner
-                android:id="@+id/gender"
+            <EditText
+                android:id="@+id/doc_name"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Doctor's name"
+                android:inputType="text"
+                android:lines="1"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/txt_hint"
+                android:textSize="@dimen/txt16" />
+        </LinearLayout><LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space5"
 
+        android:layout_marginBottom="@dimen/space20">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Doctor's Email"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:layout_marginBottom="@dimen/space5"/>
+
+        <EditText
+            android:id="@+id/doc_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint=""
+            android:inputType="text"
+            android:lines="1"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/txt_hint"
+            android:textSize="@dimen/txt16" />
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space5"
 
+            android:layout_marginBottom="@dimen/space20">
             <TextView
-                android:id="@+id/textView11"
-                android:layout_width="193dp"
-                android:layout_height="match_parent"
-                android:text="WEIGHT OF CHILD (IN KG)"
-                android:textColor="@color/colorAccent" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Child's Name"
+                android:textColor="@android:color/white"
+                android:textSize="20dp"
+                android:layout_marginBottom="@dimen/space5"/>
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Child's name"
+                android:inputType="text"
+                android:lines="1"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/txt_hint"
+                android:textSize="@dimen/txt16" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space5"
+
+            android:layout_marginBottom="@dimen/space40">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Birth Weight(in Kg)"
+                android:textSize="20dp"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="@dimen/space5"/>
 
             <EditText
                 android:id="@+id/weight"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="textAutoCorrect|textAutoComplete|numberDecimal"
-                android:selectAllOnFocus="true"
-                android:singleLine="true" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Birth weight"
+                android:inputType="text"
+                android:lines="1"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/txt_hint"
+                android:textSize="@dimen/txt16" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView7"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MEDICATION GOING ON (If any)"
-            android:textColor="@color/colorAccent" />
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/space5"
+            android:id="@+id/l1"
+            android:layout_marginBottom="@dimen/space40">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textSize="20dp"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="@dimen/space5"/>
+            <RadioGroup
+               android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
 
-        <EditText
-            android:id="@+id/medication"
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:id="@+id/radioButton"
+                    android:buttonTint="@color/window_background"
+                    android:textColor="@android:color/white"
+                    android:checked="false"
+                    android:textSize="15dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:buttonTint="@color/window_background"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/radioButton2"
+                    android:layout_marginLeft="10dp"
+                    android:checked="false"
+                    android:textSize="15dp" />
+            </RadioGroup>
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textLongMessage|textAutoCorrect|textMultiLine|textCapSentences|textAutoComplete"
-            android:singleLine="true" />
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space5"
 
-        <Button
-            android:id="@+id/next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/side_nav_bar"
-            android:text="NEXT" />
+            android:layout_marginBottom="@dimen/space40">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date Of Birth"
+                android:textSize="20dp"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="@dimen/space5"/>
 
+            <EditText
+                android:id="@+id/dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Present Weigth"
+                android:inputType="text"
+                android:lines="1"
+                android:onClick="setDate"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/txt_hint"
+                android:textSize="@dimen/txt16" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_button"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginBottom="@dimen/space20"
+                android:background="@drawable/btn_white_selector"
+                android:onClick="setDate"
+                android:text="Save and Next Page"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/txt16" />
+
+
+        </LinearLayout>
     </LinearLayout>
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
