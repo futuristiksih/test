@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/log"
+    android:id="@+id/Log"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.test.appoinment1">
+    tools:context="com.example.test.Appointment">
 
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/image"
@@ -13,67 +13,52 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/bg" />
+
     <TextView
         android:id="@+id/iv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fill Up the details"
-
         android:layout_marginLeft="150dp"
-        android:layout_marginTop="@dimen/space40"/>
+
+        android:layout_marginTop="@dimen/space40"
+        android:text="Fill Up the details" />
+
     <LinearLayout
         android:id="@+id/ll_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/space20"
-        android:layout_marginBottom="@dimen/space20">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dont't have an account? "
-            android:textSize="@dimen/txt14"
-            android:textStyle="normal"
-            android:textColor="@android:color/white"
-            android:gravity="center_horizontal"/>
+        android:layout_marginBottom="@dimen/space20"
+        android:orientation="horizontal" />
 
-        <TextView
-            android:id="@+id/signUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Sign Up"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/txt14"
-            android:textStyle="bold" />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_back"
         android:layout_above="@id/ll_bottom"
+        android:layout_below="@id/iv_back"
         android:layout_marginTop="@dimen/space40"
-        android:paddingLeft="@dimen/space20"
-        android:paddingRight="@dimen/space20"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/space20"
+        android:paddingRight="@dimen/space20">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space20"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/space5"
 
-            android:layout_marginBottom="@dimen/space20">
+            android:paddingBottom="@dimen/space5">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space5"
                 android:text="Doctor's Name"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"
-                android:layout_marginBottom="@dimen/space5"/>
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/doc_name"
@@ -86,48 +71,53 @@
                 android:textColor="@android:color/white"
                 android:textColorHint="@color/txt_hint"
                 android:textSize="@dimen/txt16" />
-        </LinearLayout><LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/space5"
+        </LinearLayout>
 
-        android:layout_marginBottom="@dimen/space20">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Doctor's Email"
-            android:textColor="@android:color/white"
-            android:textSize="20dp"
-            android:layout_marginBottom="@dimen/space5"/>
-
-        <EditText
-            android:id="@+id/doc_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:hint=""
-            android:inputType="text"
-            android:lines="1"
-            android:text=""
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/txt_hint"
-            android:textSize="@dimen/txt16" />
-    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space20"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/space5"
 
-            android:layout_marginBottom="@dimen/space20">
+            android:paddingBottom="@dimen/space5">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space5"
+                android:text="Doctor's Email"
+                android:textColor="@android:color/white"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/doc_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint=""
+                android:inputType="text"
+                android:lines="1"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/txt_hint"
+                android:textSize="@dimen/txt16" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space20"
+            android:orientation="vertical"
+
+            android:paddingBottom="@dimen/space5">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space5"
                 android:text="Child's Name"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"
-                android:layout_marginBottom="@dimen/space5"/>
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/child_name"
@@ -141,20 +131,22 @@
                 android:textColorHint="@color/txt_hint"
                 android:textSize="@dimen/txt16" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space40"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/space5"
 
-            android:layout_marginBottom="@dimen/space40">
+            android:paddingBottom="@dimen/space5">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space5"
                 android:text="Birth Weight(in Kg)"
-                android:textSize="20dp"
                 android:textColor="@android:color/white"
-                android:layout_marginBottom="@dimen/space5"/>
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/birth_weight"
@@ -170,19 +162,20 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/l1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space40"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/space5"
-            android:id="@+id/l1"
-            android:layout_marginBottom="@dimen/space40">
+            android:paddingBottom="@dimen/space5">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space5"
                 android:text="Gender"
-                android:textSize="20dp"
                 android:textColor="@android:color/white"
-                android:layout_marginBottom="@dimen/space5"/>
+                android:textSize="20dp" />
 
             <RadioGroup
                 android:id="@+id/gender"
@@ -197,7 +190,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/window_background"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="Male"
                     android:textColor="@android:color/white"
                     android:textSize="15dp" />
@@ -215,20 +208,22 @@
             </RadioGroup>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space40"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/space5"
 
-            android:layout_marginBottom="@dimen/space40">
+            android:paddingBottom="@dimen/space5">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space5"
                 android:text="Date Of Birth"
-                android:textSize="20dp"
                 android:textColor="@android:color/white"
-                android:layout_marginBottom="@dimen/space5"/>
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/dob"
@@ -237,12 +232,12 @@
                 android:background="@android:color/transparent"
                 android:inputType="text"
                 android:lines="1"
-                android:onClick="setDate"
                 android:text=""
                 android:textColor="@android:color/white"
                 android:textColorHint="@color/txt_hint"
                 android:textSize="@dimen/txt16" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_button"
             android:layout_width="wrap_content"

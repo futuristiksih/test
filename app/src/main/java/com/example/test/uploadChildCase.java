@@ -22,9 +22,14 @@ public class uploadChildCase extends Fragment {
         getActivity().setTitle("SYMPTOMS");
 
         Bundle args=getArguments();
-        doc_name=args.getString("doc_name");doc_email=args.getString("doc_email");birth_weight=args.getString("birth_weight");
-        dob=args.getString("dob");child_name=args.getString("child_name");gender=args.getString("gender");
-
+        if(args!=null) {
+            doc_name = args.getString("doc_name");
+            doc_email = args.getString("doc_email");
+            birth_weight = args.getString("birth_weight");
+            dob = args.getString("dob");
+            child_name = args.getString("child_name");
+            gender = args.getString("gender");
+        }
         immunization=view.findViewById(R.id.immunization);bowel_movement=view.findViewById(R.id.bowel_movement);
         fever=view.findViewById(R.id.fever);inception=view.findViewById(R.id.inception);infected_area=view.findViewById(R.id.infected_area);
         intake=view.findViewById(R.id.intake);environment=view.findViewById(R.id.environment);crying=view.findViewById(R.id.crying);

@@ -4,7 +4,7 @@
     android:id="@+id/log"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.test.appoinment1">
+    tools:context="com.example.test.uploadChildCase">
 
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/image"
@@ -28,7 +28,7 @@
         android:layout_below="@+id/iv_back">
 
         <LinearLayout
-            android:id="@+id/next"
+            android:id="@+id/next1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/ll_bottom"
@@ -316,12 +316,11 @@
                 android:paddingBottom="50dp">
 
                 <Button
-                    android:id="@+id/login"
+                    android:id="@+id/next"
                     android:layout_width="@dimen/btn_width"
                     android:layout_height="@dimen/btn_height"
                     android:layout_marginBottom="@dimen/space20"
                     android:background="@drawable/btn_white_selector"
-                    android:onClick="setDate"
                     android:text="Save and Next Page"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"

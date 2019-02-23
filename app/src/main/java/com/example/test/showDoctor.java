@@ -3,12 +3,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 public class showDoctor extends AppCompatActivity {
-    EditText name,phone,email,degree,gender,specialization,exp_yrs,city,clinic,mci;
+    TextView name,phone,email,degree,gender,specialization,exp_yrs,city,clinic,mci;
     ImageView docPic;RatingBar ratingBar;Button choose;
     FirebaseFirestore db;StorageReference imageref;String emailid="";
     public void updateDoctor(objectDoctor doctor){
@@ -79,6 +81,7 @@ public class showDoctor extends AppCompatActivity {
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                     Bundle bundle=new Bundle();
                     bundle.putString("doc_name",name.getText().toString());
                     bundle.putString("doc_email",email.getText().toString());
@@ -86,7 +89,8 @@ public class showDoctor extends AppCompatActivity {
                     appointment.setArguments(bundle);
 
                     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.contentpage, new Appointment()).commit();
+                    ((LinearLayout)findViewById(R.id.contentpage)).removeAllViews();
+                    fragmentManager.beginTransaction().replace(R.id.contentpage, appointment).commit();
 
             }
         });

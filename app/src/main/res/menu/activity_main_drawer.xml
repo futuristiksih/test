@@ -13,11 +13,6 @@
         android:title="CONSULT A DOCTOR"
         android:visible="true" />
         <item
-            android:id="@+id/appointment11"
-            android:enabled="true"
-            android:title="appointement"
-            android:visible="true" />
-        <item
             android:id="@+id/prev_appointments"
             android:title="PREVIOUS APPOINTMENTS" />
         <item

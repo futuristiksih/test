@@ -19,33 +19,38 @@ import android.widget.Spinner;
 
 import java.util.Calendar;
 public class Appointment extends Fragment {
-    EditText doc_name,doc_email,dob,birth_weight,child_name;Button next;RadioGroup genderR;String gender;
-    RadioButton radioButton;
+    EditText doc_name,doc_email,dob,birth_weight,child_name;Button next;RadioGroup genderR;String gender,doc_n,doc_e;
+    RadioButton radioButton; View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.appointment, container, false);
+        view = inflater.inflate(R.layout.appointment, container, false);
         getActivity().setTitle("CHILD DETAILS");
-        doc_name=view.findViewById(R.id.doc_name);doc_name.setEnabled(false);
-        doc_email=view.findViewById(R.id.doc_email);doc_email.setEnabled(false);
-        dob=view.findViewById(R.id.dob);birth_weight=view.findViewById(R.id.birth_weight);
-        genderR = view.findViewById(R.id.gender);child_name=view.findViewById(R.id.name);
 
-        int selected=genderR.getCheckedRadioButtonId();
-        radioButton=view.findViewById(selected);
-        gender=radioButton.getText().toString();
+        Bundle bundle=getArguments();
+        doc_e=bundle.getString("doc_email");
+        doc_n=bundle.getString("doc_name");
+
+        doc_name=view.findViewById(R.id.doc_name);doc_name.setEnabled(false);doc_name.setText(doc_n);
+        doc_email=view.findViewById(R.id.doc_email);doc_email.setEnabled(false);doc_email.setText(doc_e);
+        dob=view.findViewById(R.id.dob);birth_weight=view.findViewById(R.id.birth_weight);
+        genderR = view.findViewById(R.id.gender);child_name=view.findViewById(R.id.child_name);
+
         next=view.findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                ((RelativeLayout)getActivity().findViewById(R.id.log)).removeAllViews();
+            public void onClick(View v) {
+                radioButton=view.findViewById(genderR.getCheckedRadioButtonId());
+                gender=radioButton.getText().toString();
                 Bundle bundle=new Bundle();
                 bundle.putString("doc_name",doc_name.getText().toString().trim());bundle.putString("doc_email",doc_email.getText().toString().trim());
                 bundle.putString("child_name",child_name.getText().toString().trim());bundle.putString("dob",dob.getText().toString().trim());
                 bundle.putString("gender",gender);bundle.putString("birth_weight",birth_weight.getText().toString().trim());
+
                 uploadChildCase upload=new uploadChildCase();
                 upload.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.log, new uploadChildCase()).commit();
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                ((RelativeLayout)getActivity().findViewById(R.id.Log)).removeAllViews();
+                fragmentManager.beginTransaction().replace(R.id.Log,upload).commit();
             }
         });
         return view;

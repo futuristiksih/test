@@ -167,9 +167,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
             menuItem.setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.contentpage, new doclist()).commit();
         }
-        else if (id == R.id.appointment11) {
-            Intent j=new Intent(getApplicationContext(),appoinment1.class);startActivity(j);finish();
-        }
+        
         else if (id == R.id.viewprofile) {
             Intent i=new Intent(getApplicationContext(),parentProfile.class);startActivity(i);finish();
         }

@@ -49,7 +49,7 @@ public class multi_upload extends AppCompatActivity {
     FirebaseFirestore db;public FirebaseAuth mAuth;private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);setContentView(R.layout.multi_upload);
 
         Intent i=getIntent();
         Bundle bundle=i.getBundleExtra("bundle");
