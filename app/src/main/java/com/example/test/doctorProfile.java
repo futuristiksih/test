@@ -55,7 +55,6 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
                 Glide.with(getApplicationContext()).load(uri).into(navPic);
             }
         });
-
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

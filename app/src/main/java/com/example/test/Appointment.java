@@ -1,5 +1,4 @@
 package com.example.test;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,70 +12,42 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import java.util.Calendar;
-
 public class Appointment extends Fragment {
-    Spinner gender;EditText dob,weight,age,medication;String genderType;DatePicker picker;Button next;
-    public void next(View view){
-        Intent i=new Intent(getActivity(),uploadChildCase.class);startActivity(i);getActivity().finish();
-    }
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                genderType="";
-                genderType = adapterView.getItemAtPosition(i).toString();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) { }
-        });
-        picker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dob.setText(getCurrentDate());
-            }
-        });
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                ((ConstraintLayout)getActivity().findViewById(R.id.cl)).removeAllViews();
-                fragmentManager.beginTransaction().replace(R.id.cl, new uploadChildCase()).commit();
-            }
-        });
-
-    }
-    public String getCurrentDate(){
-        return ((picker.getMonth() + 1) + "/") +//month is 0 based
-                picker.getDayOfMonth() + "/" + picker.getYear();
-    }
+    EditText doc_name,doc_email,dob,birth_weight,child_name;Button next;RadioGroup genderR;String gender;
+    RadioButton radioButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.appointment, container, false);
         getActivity().setTitle("CHILD DETAILS");
-        age=view.findViewById(R.id.age);
-        dob=view.findViewById(R.id.dob);dob.setEnabled(false);
-        weight=view.findViewById(R.id.weight);
-        medication=view.findViewById(R.id.medication);
-        gender = view.findViewById(R.id.gender);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),R.array.gender,android.R.layout.simple_spinner_item);
-        gender.setAdapter(adapter);
-        picker=view.findViewById(R.id.dobspin);
-        Calendar c= Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
-        picker.init(year, month, dayOfMonth, new DatePicker.OnDateChangedListener() {
-                    @Override
-                    public void onDateChanged(
-                            DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        dob.setText(dayOfMonth +"/"+monthOfYear + "/" + year);
-                    }
-                });
+        doc_name=view.findViewById(R.id.doc_name);doc_name.setEnabled(false);
+        doc_email=view.findViewById(R.id.doc_email);doc_email.setEnabled(false);
+        dob=view.findViewById(R.id.dob);birth_weight=view.findViewById(R.id.birth_weight);
+        genderR = view.findViewById(R.id.gender);child_name=view.findViewById(R.id.name);
+
+        int selected=genderR.getCheckedRadioButtonId();
+        radioButton=view.findViewById(selected);
+        gender=radioButton.getText().toString();
         next=view.findViewById(R.id.next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                ((RelativeLayout)getActivity().findViewById(R.id.log)).removeAllViews();
+                Bundle bundle=new Bundle();
+                bundle.putString("doc_name",doc_name.getText().toString().trim());bundle.putString("doc_email",doc_email.getText().toString().trim());
+                bundle.putString("child_name",child_name.getText().toString().trim());bundle.putString("dob",dob.getText().toString().trim());
+                bundle.putString("gender",gender);bundle.putString("birth_weight",birth_weight.getText().toString().trim());
+                uploadChildCase upload=new uploadChildCase();
+                upload.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.log, new uploadChildCase()).commit();
+            }
+        });
         return view;
     }
 }

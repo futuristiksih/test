@@ -1,5 +1,4 @@
 package com.example.test;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -22,8 +21,14 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -36,40 +41,35 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
 public class multi_upload extends AppCompatActivity {
-
     private static final int RESULT_LOAD_IMAGE = 1, REQUEST_CAPTURE_IMAGE = 2;
-    private ImageButton mSelectBtn;
-    private RecyclerView mUploadList;
-
+    private ImageButton mSelectBtn;private RecyclerView mUploadList;
     private List<String> fileNameList, fileDoneList; // List to maintain the Recyler view
-    private UploadListAdapter uploadListAdapter;
-
-    private StorageReference mStorage;
-    String imageFilePath;           // image file path for new image created from camera
-
+    private UploadListAdapter uploadListAdapter;private StorageReference mStorage;String imageFilePath;// image file path for new image created from camera
+    FirebaseFirestore db;public FirebaseAuth mAuth;private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);setContentView(R.layout.activity_main);
 
+        Intent i=getIntent();
+        Bundle bundle=i.getBundleExtra("bundle");
+        mAuth=FirebaseAuth.getInstance();
+        db=FirebaseFirestore.getInstance();
+        FirebaseUser user=mAuth.getCurrentUser();
+        db.collection("Email").document("parent "+user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+            }
+        });
         mStorage = FirebaseStorage.getInstance().getReference();
-
-        mSelectBtn = (ImageButton) findViewById(R.id.select_btn);
-        mUploadList = (RecyclerView) findViewById(R.id.upload_list);
-
-        fileNameList = new ArrayList<>();
-        fileDoneList = new ArrayList<>();
-
-
+        mSelectBtn = findViewById(R.id.select_btn);mUploadList =findViewById(R.id.upload_list);
+        fileNameList = new ArrayList<>();fileDoneList = new ArrayList<>();
         uploadListAdapter = new UploadListAdapter(fileNameList, fileDoneList);
-
         //Set the Recycler View adapter
         mUploadList.setLayoutManager(new LinearLayoutManager(this));
         mUploadList.setHasFixedSize(true);
         mUploadList.setAdapter(uploadListAdapter);
-
         //Opening the Dialog box for Camera and Gallery Intent
         mSelectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,25 +77,18 @@ public class multi_upload extends AppCompatActivity {
                 startDialog();
             }
         });
-
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // Activity Result for Gallery intent
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK) {
             if (data.getClipData() != null) {// Return value only when no. of images>1
                 int totalItemsSelected = data.getClipData().getItemCount();
-
-
                 int sz = fileDoneList.size();
                 Log.i("sz:", Integer.toString(sz));
-
                 for (int i = 0; i < totalItemsSelected; i++) {
                     Uri fileUri = data.getClipData().getItemAt(i).getUri();
-
                     String fileName = getFileName(fileUri);
                     fileNameList.add(fileName);
                     fileDoneList.add("uploading");
@@ -203,7 +196,6 @@ public class multi_upload extends AppCompatActivity {
 
         }
     }
-
     //Function to get the filename For the Gallery Intent Result
     public String getFileName(Uri uri){
         String result = null;
@@ -226,7 +218,6 @@ public class multi_upload extends AppCompatActivity {
         }
         return  result;
     }
-
     // Open the Camera Intent
     private void openCameraIntent() {
         Intent pictureIntent = new Intent(
@@ -251,7 +242,6 @@ public class multi_upload extends AppCompatActivity {
             }
         }
     }
-
     // Create the path uri along for the temperory image File
     private File createImageFile() throws IOException {
         String timeStamp =
@@ -269,7 +259,6 @@ public class multi_upload extends AppCompatActivity {
         Log.i("img: ",imageFilePath);
         return image;
     }
-
     // Broadcast the saved camera image to gallery
     private void galleryAddPic() {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
@@ -279,7 +268,6 @@ public class multi_upload extends AppCompatActivity {
         this.sendBroadcast(mediaScanIntent);
         Toast.makeText(this, "Gallery saved", Toast.LENGTH_SHORT).show();
     }
-
     // Open the Dialog box for camera and gallery intent
     public void startDialog() {
         AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(multi_upload.this);

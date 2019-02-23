@@ -80,7 +80,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:hint="Doctor's name"
                 android:inputType="text"
                 android:lines="1"
                 android:text=""
@@ -131,11 +130,10 @@
                 android:layout_marginBottom="@dimen/space5"/>
 
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/child_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:hint="Child's name"
                 android:inputType="text"
                 android:lines="1"
                 android:text=""
@@ -159,11 +157,10 @@
                 android:layout_marginBottom="@dimen/space5"/>
 
             <EditText
-                android:id="@+id/weight"
+                android:id="@+id/birth_weight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:hint="Birth weight"
                 android:inputType="text"
                 android:lines="1"
                 android:text=""
@@ -186,32 +183,34 @@
                 android:textSize="20dp"
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="@dimen/space5"/>
+
             <RadioGroup
-               android:layout_height="wrap_content"
+                android:id="@+id/gender"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp">
 
 
                 <RadioButton
+                    android:id="@+id/male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Male"
-                    android:id="@+id/radioButton"
                     android:buttonTint="@color/window_background"
-                    android:textColor="@android:color/white"
                     android:checked="false"
+                    android:text="Male"
+                    android:textColor="@android:color/white"
                     android:textSize="15dp" />
 
                 <RadioButton
+                    android:id="@+id/female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Female"
-                    android:buttonTint="@color/window_background"
-                    android:textColor="@android:color/white"
-                    android:id="@+id/radioButton2"
                     android:layout_marginLeft="10dp"
+                    android:buttonTint="@color/window_background"
                     android:checked="false"
+                    android:text="Female"
+                    android:textColor="@android:color/white"
                     android:textSize="15dp" />
             </RadioGroup>
 
@@ -236,7 +235,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:hint="Present Weigth"
                 android:inputType="text"
                 android:lines="1"
                 android:onClick="setDate"
@@ -252,12 +250,11 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/login"
+                android:id="@+id/next"
                 android:layout_width="@dimen/btn_width"
                 android:layout_height="@dimen/btn_height"
                 android:layout_marginBottom="@dimen/space20"
                 android:background="@drawable/btn_white_selector"
-                android:onClick="setDate"
                 android:text="Save and Next Page"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
