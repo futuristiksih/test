@@ -1,10 +1,15 @@
 package com.example.test;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,9 +48,13 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("FUTURISTIC");
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+
+        changeStatusBarColor();
         setContentView(R.layout.activity_splash_screen);
-        int SPLASH_TIMEOUT = 2000;db = FirebaseFirestore.getInstance();
+        int SPLASH_TIMEOUT = 4000;db = FirebaseFirestore.getInstance();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -59,5 +68,12 @@ public class SplashScreen extends AppCompatActivity {
                 Intent registerClass = new Intent(getApplicationContext(), login.class);startActivity(registerClass);finish();}
             }
         }, SPLASH_TIMEOUT);
+    }
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
     }
 }

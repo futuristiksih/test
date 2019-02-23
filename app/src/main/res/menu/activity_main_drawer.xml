@@ -8,9 +8,14 @@
             android:id="@+id/viewprofile"
             android:title="VIEW PROFILE" />
         <item
-            android:id="@+id/appointment"
+        android:id="@+id/appointment"
+        android:enabled="true"
+        android:title="CONSULT A DOCTOR"
+        android:visible="true" />
+        <item
+            android:id="@+id/appointment11"
             android:enabled="true"
-            android:title="CONSULT A DOCTOR"
+            android:title="appointement"
             android:visible="true" />
         <item
             android:id="@+id/prev_appointments"

@@ -1,108 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/log"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.test.login">
 
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="312dp"
-        android:layout_height="136dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="199dp"
-        android:layout_marginEnd="49dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
-
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textAutoCorrect|textAutoComplete|textEmailAddress"
-            tools:layout_editor_absoluteX="59dp"
-            tools:layout_editor_absoluteY="205dp" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textAutoCorrect|textPassword|textAutoComplete" />
-
-        <Button
-            android:id="@+id/login"
-            android:layout_width="181dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="128dp"
-            android:layout_marginEnd="158dp"
-            android:background="@drawable/side_nav_bar"
-            android:onClick="signIn"
-            android:text="Sign In"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="196dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/bg" />
+    <ImageView
+        android:id="@+id/iv_back"
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_marginStart="107dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="106dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_menu_gallery"
+        android:layout_marginLeft="@dimen/space20"
+        android:layout_marginTop="@dimen/space40"/>
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forgot">
-
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/space20"
+        android:layout_marginBottom="@dimen/space20">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Not Registered? "
-            android:textColor="@color/design_default_color_primary"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="465dp" />
+            android:text="Dont't have an account? "
+            android:textSize="@dimen/txt14"
+            android:textStyle="normal"
+            android:textColor="@android:color/white"
+            android:gravity="center_horizontal"/>
 
         <TextView
-
             android:id="@+id/signUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="Sign Up"
-            android:textColor="@color/colorAccent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="133dp"
-            tools:layout_editor_absoluteY="465dp" />
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txt14"
+            android:textStyle="bold" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_back"
+        android:layout_above="@id/ll_bottom"
+        android:layout_marginTop="@dimen/space40"
+        android:paddingLeft="@dimen/space20"
+        android:paddingRight="@dimen/space20"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_back"
+            android:layout_marginBottom="@dimen/space40"
+            android:layout_gravity="center_horizontal"
+            android:text="Login"
+            android:textSize="@dimen/txt22"
+            android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/forgot"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:layout_marginStart="212dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="58dp"
-        android:text="Forgot Password?"
-        android:textColor="@android:color/holo_red_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space5"
 
+            android:layout_marginBottom="@dimen/space20">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EMAIL"
+                android:textSize="@dimen/txt10"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="@dimen/space5"/>
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/txt16"
+                android:hint="Email"
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/txt_hint"
+                android:lines="1"
+                android:inputType="textEmailAddress"
+                android:background="@android:color/transparent"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space5"
 
-</android.support.constraint.ConstraintLayout>
+            android:layout_marginBottom="@dimen/space40">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PASSWORD"
+                android:textSize="@dimen/txt10"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="@dimen/space5"/>
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="@dimen/btn_width"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/txt16"
+                android:hint="Password"
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/txt_hint"
+                android:inputType="textPassword"
+                android:lines="1"
+                android:background="@android:color/transparent"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginBottom="@dimen/space20"
+                android:background="@drawable/btn_white_selector"
+                android:text="Login"
+                android:onClick="signIn"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/txt16" />
+
+            <TextView
+                android:id="@+id/forgot"
+                android:layout_width="@dimen/btn_width"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Forgot Password?"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="@dimen/txt14"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
