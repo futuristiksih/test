@@ -18,6 +18,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -27,6 +30,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -38,30 +42,79 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
 public class multi_upload extends AppCompatActivity {
+    String immunization,bowel_movement,fever,inception,infected_area,intake,environment,crying,doc_name,doc_email,dob,birth_weight,child_name,gender,
+            vomit,breast_feed,dehydration;
     private static final int RESULT_LOAD_IMAGE = 1, REQUEST_CAPTURE_IMAGE = 2;
     private ImageButton mSelectBtn;private RecyclerView mUploadList;
     private List<String> fileNameList, fileDoneList; // List to maintain the Recyler view
     private UploadListAdapter uploadListAdapter;private StorageReference mStorage;String imageFilePath;// image file path for new image created from camera
-    FirebaseFirestore db;public FirebaseAuth mAuth;private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    FirebaseFirestore db;private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    String getDate(){
+        Calendar calendar=Calendar.getInstance();
+        SimpleDateFormat sdformat=new SimpleDateFormat("ddMMyyyy");
+        return sdformat.format(calendar.getTime());
+    }
+    public void final_upload(View view){
+        db=FirebaseFirestore.getInstance();final FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        final objectChild Child=new objectChild(child_name,dob,gender,birth_weight);
+
+        final DocumentReference parentReference=db.collection("Email").document("parent "+user.getEmail());
+        parentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                final String count = documentSnapshot.getString("count");
+                final String doc_count=""+(String.valueOf(Integer.parseInt(count)+1));
+                final DocumentReference childReference=parentReference.collection("sent_appointments").document(child_name+" "+doc_email);
+                childReference.set(Child).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        final childDetails child = new childDetails(immunization, bowel_movement, fever, inception, infected_area, intake, environment, crying, vomit, breast_feed, dehydration);
+                        childReference.collection("Dates").document("dp_"+getDate()+"_"+doc_count).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                Map<String,Object> details=new HashMap<>();
+                                details.put("child_details",child);
+                                Map<String, Object> diagnosis = new HashMap<>();
+                                diagnosis.put("diagnosis",details);
+                                childReference.collection("Dates").document(documentSnapshot.getId()).set(diagnosis);
+                                myPatients patients=new myPatients("dp_"+getDate()+"_"+doc_count);
+                                db.collection("Email").document("doctor "+doc_email).collection("received_appointments").document(child_name+" "+user.getEmail()).set(patients).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(getApplicationContext(),"APPOINTMENT REQUEST SENT WITH CHILD'S DETAILS",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+                db.collection("Email").document("parent " + user.getEmail()).update("count", doc_count);
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);setContentView(R.layout.multi_upload);
 
         Intent i=getIntent();
         Bundle bundle=i.getBundleExtra("bundle");
-        mAuth=FirebaseAuth.getInstance();
-        db=FirebaseFirestore.getInstance();
-        FirebaseUser user=mAuth.getCurrentUser();
-        db.collection("Email").document("parent "+user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+        doc_name=bundle.getString("doc_name");doc_email=bundle.getString("doc_email");birth_weight=bundle.getString("birth_weight");
+        child_name=bundle.getString("child_name");dob=bundle.getString("dob");gender=bundle.getString("gender");
 
-            }
-        });
+        breast_feed=bundle.getString("breast_feed");crying=bundle.getString("crying");vomit=bundle.getString("vomit");
+        dehydration=bundle.getString("dehydration");environment=bundle.getString("environment");immunization=bundle.getString("immunization");
+        intake=bundle.getString("intake");bowel_movement=bundle.getString("bowel_movement");fever=bundle.getString("fever");
+        inception=bundle.getString("inception");infected_area=bundle.getString("infected_area");
+
         mStorage = FirebaseStorage.getInstance().getReference();
         mSelectBtn = findViewById(R.id.select_btn);mUploadList =findViewById(R.id.upload_list);
         fileNameList = new ArrayList<>();fileDoneList = new ArrayList<>();

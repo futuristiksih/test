@@ -37,4 +37,12 @@
         android:layout_below="@+id/select_btn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/final_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:onClick="final_upload"
+        android:text="Final Upload" />
 </RelativeLayout>
