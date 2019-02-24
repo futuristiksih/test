@@ -11,6 +11,16 @@
         android:padding="5dp"
         >
 
+    <TextView
+        android:id="@+id/ap_id"
+        android:text="appointment_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="monospace"
+        android:textSize="16sp"
+        />
+
 
             <TextView
                 android:id="@+id/child_name"
