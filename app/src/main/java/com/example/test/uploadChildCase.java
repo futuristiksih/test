@@ -45,12 +45,11 @@ public class uploadChildCase extends Fragment {
                 bundle.putString("doc_name",doc_name);bundle.putString("doc_email",doc_email);bundle.putString("birth_weight",birth_weight);
                 bundle.putString("child_name",child_name);bundle.putString("dob",dob);bundle.putString("gender",gender);
 
-                bundle.putString("breast_feed",breast_feed);
+                bundle.putString("breast_feed",breast_feed);bundle.putString("crying",crying.getText().toString().trim());
                 bundle.putString("vomit",vomit);bundle.putString("dehydration",dehydration);bundle.putString("environment",environment.getText().toString().trim());
                 bundle.putString("immunization",immunization.getText().toString().trim());bundle.putString("intake",intake.getText().toString().trim());
                 bundle.putString("bowel_movement",bowel_movement.getText().toString().trim());bundle.putString("fever",fever.getText().toString().trim());
                 bundle.putString("inception",inception.getText().toString().trim());bundle.putString("infected_area",infected_area.getText().toString().trim());
-                bundle.putString("crying",crying.getText().toString().trim());
                 Intent i=new Intent(getActivity(),multi_upload.class);
                 i.putExtra("bundle",bundle);startActivity(i);
             }
