@@ -51,7 +51,7 @@ import java.util.Map;
 
 public class multi_upload extends AppCompatActivity {
     String immunization,bowel_movement,fever,inception,infected_area,intake,environment,crying,doc_name,doc_email,dob,birth_weight,child_name,gender,
-            vomit,breast_feed,dehydration;
+            vomit,breast_feed,dehydration,img_filename;
     private static final int RESULT_LOAD_IMAGE = 1, REQUEST_CAPTURE_IMAGE = 2;
     private ImageButton mSelectBtn;private RecyclerView mUploadList;
     private List<String> fileNameList, fileDoneList; // List to maintain the Recyler view
@@ -224,7 +224,7 @@ public class multi_upload extends AppCompatActivity {
             final int finalI = (fileDoneList.isEmpty())?0: fileDoneList.size() - 1;
 
 
-            UploadTask uploadTask = mStorage.child("Images").putBytes(byteData);
+            UploadTask uploadTask = mStorage.child("Images/"+img_filename).putBytes(byteData);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
@@ -301,6 +301,7 @@ public class multi_upload extends AppCompatActivity {
                 new SimpleDateFormat("yyyyMMdd_HHmmss",
                         Locale.getDefault()).format(new Date());
         String imageFileName = "IMG_" + timeStamp + "_";
+        img_filename=imageFileName;
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         // File storageDir = Environment.getExternalStorageDirectory();
         File image = File.createTempFile(
