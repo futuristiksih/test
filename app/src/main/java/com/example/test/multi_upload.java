@@ -286,7 +286,7 @@ public class multi_upload extends AppCompatActivity {
             if (photoFile != null) {
                 Log.i("File"," created");
                 Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.android.multiupload.fileprovider", photoFile);
+                        "com.example.android.test.fileprovider", photoFile);
                 Log.i("Photouri",photoURI.toString());
                 pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                         photoURI);
