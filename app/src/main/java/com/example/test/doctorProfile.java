@@ -114,7 +114,8 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);menuItem.setVisible(true);
+        getMenuInflater().inflate(R.menu.main, menu);
+        menuItem=menu.findItem(R.id.editProfile);menuItem.setVisible(true);
         return true;
     }
     @Override
