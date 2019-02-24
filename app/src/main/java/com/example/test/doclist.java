@@ -66,6 +66,5 @@ public class doclist extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.doclist, container, false);getActivity().setTitle("CHOSE A DOCTOR");return view;
-
     }
 }

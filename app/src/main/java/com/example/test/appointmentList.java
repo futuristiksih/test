@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,49 +22,44 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
 public class appointmentList extends Fragment {
-    View view;ArrayList<doclistdesign> doclistdesigns;doclistadapter doclistadapter;ArrayList<String> emails;
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        final FirebaseFirestore db;
+    View view;ArrayList<myPatients> arrayList;appointmentAdapter adapter;ArrayList<String> emails,ids,names;FirebaseFirestore db;
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.doclist, container, false);getActivity().setTitle("CHOOSE A REPORT");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;String email = user.getEmail();
-        ListView listView =  Objects.requireNonNull(getView()).findViewById(R.id.doclist);
-        doclistdesigns = new ArrayList<>();
-        doclistadapter = new doclistadapter(getActivity(),doclistdesigns);
+        ListView listView =  view.findViewById(R.id.doclist);
+        arrayList = new ArrayList<>();
+        adapter = new appointmentAdapter(getActivity(),arrayList);
         db = FirebaseFirestore.getInstance();
-        emails=new ArrayList<String>();
-        db.collection("Email").whereEqualTo("verified",true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        emails= new ArrayList<>();ids=new ArrayList<>();names=new ArrayList<>();
+        db.collection("Email").document("doctor "+user.getEmail()).collection("received_appointments").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.exists()) {
-                            doclistdesigns.add(new doclistdesign(document.get("name").toString(),document.get("degree").toString(),document.get("exp_yrs").toString(),document.get("rating").toString(),document.get("city").toString()));
-                            emails.add(document.get("email").toString());
-                            doclistadapter.notifyDataSetChanged();
-                        }
-                    }
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for(QueryDocumentSnapshot documentSnapshot:queryDocumentSnapshots){
+                    arrayList.add(new myPatients(documentSnapshot.get("name").toString(),documentSnapshot.get("id").toString(),documentSnapshot.get("guardian").toString(),documentSnapshot.get("status").toString(),documentSnapshot.get("date").toString()));
+                    String[] parent_email=documentSnapshot.getId().split(" ");
+                    String email=parent_email[parent_email.length-1];
+                    emails.add(email);adapter.notifyDataSetChanged();
+                    ids.add(documentSnapshot.get("id").toString());names.add(documentSnapshot.get("name").toString());
                 }
             }
         });
-        listView.setAdapter(doclistadapter);
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                //((RelativeLayout)view.findViewById(R.id.doc)).removeAllViews();
-
-                Intent intent=new Intent(getActivity(),showDoctor.class);
-                intent.putExtra("email",emails.get(i));
-                startActivity(intent);
+            public void onItemClick(AdapterView<?> adapterView, View v, int i, long l) {
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                ((RelativeLayout)view.findViewById(R.id.doc)).removeAllViews();
+                Bundle bundle=new Bundle();
+                bundle.putString("email",emails.get(i));bundle.putString("name",names.get(i));bundle.putString("id",ids.get(i));
+                view_details_doctor viewDetailsDoctor=new view_details_doctor();
+                viewDetailsDoctor.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.contentpage, viewDetailsDoctor).commit();
             }
         });
-    }
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.doclist, container, false);getActivity().setTitle("CHOSE A DOCTOR");return view;
+        return view;
 
     }
 }

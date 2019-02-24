@@ -169,8 +169,8 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        //android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        //((ConstraintLayout)findViewById(R.id.profile)).removeAllViews();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        ((ConstraintLayout)findViewById(R.id.profile)).removeAllViews();
         if (id == R.id.viewprofile) {
             Intent i=new Intent(getApplicationContext(),doctorProfile.class);startActivity(i);finish();
         }
@@ -179,7 +179,8 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
             Intent intent=new Intent(getApplicationContext(),login.class);startActivity(intent);finish();
         }
         else if(id==R.id.my_appointments){
-
+            menuItem.setVisible(false);
+            fragmentManager.beginTransaction().replace(R.id.contentpage, new appointmentList()).commit();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

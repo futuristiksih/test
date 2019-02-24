@@ -1,5 +1,4 @@
 package com.example.test;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
@@ -16,18 +15,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 public class DiagnosisDoctorActivity extends AppCompatActivity {
-
     Button addMed, addTest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.diagnosis_doctor);
-
         addMed = findViewById(R.id.addMed);
         addTest = findViewById(R.id.addTest);
-
         addMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,10 +74,7 @@ public class DiagnosisDoctorActivity extends AppCompatActivity {
                 });
                 AlertDialog alertDialog=builder.create();
                 alertDialog.show();
-
             }
         });
-
     }
-
 }

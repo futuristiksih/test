@@ -70,7 +70,7 @@ public class multi_upload extends AppCompatActivity {
         parentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                final String count = documentSnapshot.getString("count");
+                final String count = documentSnapshot.getString("count");final String guardian=documentSnapshot.getString("name");
                 final String doc_count=""+(String.valueOf(Integer.parseInt(count)+1));
                 final DocumentReference childReference=parentReference.collection("sent_appointments").document(child_name+" "+doc_email);
                 childReference.set(Child).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -85,11 +85,12 @@ public class multi_upload extends AppCompatActivity {
                                 Map<String, Object> diagnosis = new HashMap<>();
                                 diagnosis.put("diagnosis",details);
                                 childReference.collection("Dates").document(documentSnapshot.getId()).set(diagnosis);
-                                myPatients patients=new myPatients("dp_"+getDate()+"_"+doc_count);
+                                myPatients patients=new myPatients(child_name,"dp_"+getDate()+"_"+doc_count,guardian,"pending",getDate());
                                 db.collection("Email").document("doctor "+doc_email).collection("received_appointments").document(child_name+" "+user.getEmail()).set(patients).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(getApplicationContext(),"APPOINTMENT REQUEST SENT WITH CHILD'S DETAILS",Toast.LENGTH_LONG).show();
+                                        Intent i=new Intent(getApplicationContext(),parentProfile.class);startActivity(i);finish();
                                     }
                                 });
                             }
