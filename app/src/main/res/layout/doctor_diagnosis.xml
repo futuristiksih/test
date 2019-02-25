@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="60dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dip">
+
+        <LinearLayout
+            android:id="@+id/descr_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/medAddList"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/decr_textvw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:text="Description"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="40sp" />
+
+            <EditText
+                android:id="@+id/descr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:ems="10"
+                android:hint="Type in descripition"
+                android:inputType="textMultiLine"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/medLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/medication_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medication"
+                android:fontFamily="sans-serif"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="40sp" />
+            <ImageButton
+                android:id="@+id/addMed"
+                android:layout_width="wrap_content"
+                android:background="@null"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="7dp"
+                android:src="@mipmap/add"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/medication_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+        <!--<ListView
+            android:id="@+id/medAddList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/medLayout"
+            />-->
+
+
+        <LinearLayout
+            android:id="@+id/testLayout"
+            android:layout_below="@+id/descr_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/testimonal_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Testimonal"
+                android:fontFamily="sans-serif"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="40sp" />
+            <ImageButton
+                android:id="@+id/addTest"
+                android:layout_width="wrap_content"
+                android:background="@null"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="7dp"
+                android:src="@mipmap/add"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/test_layouts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <!--<ListView-->
+            <!--android:id="@+id/testAddList"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+
+    </LinearLayout>
+</ScrollView>

@@ -39,6 +39,7 @@
             android:orientation="vertical"
             android:paddingLeft="@dimen/space20"
             android:paddingRight="@dimen/space20">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -194,10 +195,10 @@
                     android:id="@+id/bowel_movement"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/text_primary"
                     android:inputType="text"
                     android:lines="1"
                     android:text=""
-                    android:backgroundTint="@color/text_primary"
                     android:textColor="@android:color/white"
                     android:textColorHint="@color/txt_hint"
                     android:textSize="@dimen/txt16" />
@@ -454,13 +455,14 @@
                     android:id="@+id/btn_diagnosis"
                     android:layout_width="150dp"
                     android:layout_height="@dimen/btn_height"
+                    android:layout_marginRight="20dp"
                     android:layout_marginBottom="@dimen/space20"
                     android:background="@drawable/btn_white_selector"
                     android:text="Diagnosis"
-                    android:layout_marginRight="20dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt16" />
+
                 <Button
                     android:id="@+id/btn_chat"
                     android:layout_width="150dp"

@@ -25,7 +25,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Objects;
 public class doclist extends Fragment {
-    View view;ArrayList<doclistdesign> doclistdesigns;doclistadapter doclistadapter;ArrayList<String> emails;
+    View view;
+    ArrayList<doclistdesign> doclistdesigns;
+    doclistadapter doclistadapter;
+    ArrayList<String> emails;
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final FirebaseFirestore db;

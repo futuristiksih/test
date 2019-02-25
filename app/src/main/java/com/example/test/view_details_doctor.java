@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,7 +17,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class view_details_doctor extends Fragment {
@@ -70,6 +70,14 @@ public class view_details_doctor extends Fragment {
         diagnosis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle1=new Bundle();
+                bundle1.putString("child_name",child_name);
+                bundle1.putString("parent_email",parent_email);
+                doctorDiagnosis diagnosis=new doctorDiagnosis();
+                diagnosis.setArguments(bundle1);
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                ((RelativeLayout)getActivity().findViewById(R.id.log)).removeAllViews();
+                fragmentManager.beginTransaction().replace(R.id.log,diagnosis).commit();
 
             }
         });
