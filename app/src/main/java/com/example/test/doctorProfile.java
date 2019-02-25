@@ -35,7 +35,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 public class doctorProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    EditText name,phone,email,degree,gender,specialization,exp_yrs,city,clinic,mci;ImageView docPic,navPic;MenuItem menuItem;
+    EditText name,phone,degree,gender,specialization,city,clinic;ImageView docPic,navPic;MenuItem menuItem;
+    TextView email,exp_yrs,mci;
     RatingBar ratingBar;
     public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;TextView navName;FirebaseFirestore db;
     StorageReference imageref;String emailid="";FirebaseUser user;

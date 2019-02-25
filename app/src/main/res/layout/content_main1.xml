@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contentpage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".parentProfile">
 
     <android.support.design.widget.AppBarLayout
@@ -23,224 +24,322 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/profile"
-        android:layout_width="339dp"
-        android:layout_height="553dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="125dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="13dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="360dp">
 
-        <ImageView
-            android:id="@+id/docPic"
-            android:layout_width="104dp"
-            android:layout_height="89dp"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/doc"
-            android:visibility="visible"
-            app:layout_constraintEnd_toStartOf="@+id/ratingBar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:background="@drawable/bg"
+            android:orientation="vertical">
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="25dp"
-            app:layout_constraintBottom_toTopOf="@+id/scrollView3"
-            app:layout_constraintStart_toEndOf="@+id/docPic" />
 
-        <ScrollView
-            android:id="@+id/scrollView3"
-            android:layout_width="277dp"
-            android:layout_height="445dp"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="21dp"
-            android:layout_marginBottom="60dp"
-            android:fillViewport="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/docPic">
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/docPic"
+                android:layout_width="150dp"
+                android:layout_height="134dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="45dp"
+                android:src="@drawable/doc" />
 
             <LinearLayout
-                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:layout_marginBottom="8dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/docPic">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="FULL NAME"
-                    android:textColor="@color/colorAccent" />
+                android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textAutoCorrect|textPersonName|textAutoComplete|textCapWords"
-                    android:selectAllOnFocus="false"
-                    android:singleLine="true" />
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="90dp"
+                    android:background="@android:color/transparent"
+                    android:paddingTop="10dp"
+                    android:text="Dr. Ankia Halder"
+                    android:textColor="#fff"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CONTACT NUMBER"
-                    android:textColor="@color/colorAccent" />
+                    android:layout_marginLeft="5dp"
 
-                <EditText
-                    android:id="@+id/phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textAutoCorrect|textAutoComplete|phone"
-                    android:selectAllOnFocus="false"
-                    android:singleLine="true"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/textView20"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="MCI number"
-                    android:textColor="@color/colorAccent" />
-
-                <EditText
-                    android:id="@+id/mci"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text" />
-
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="YEARS OF EXPERIENCE"
-                    android:textColor="@color/colorAccent" />
-
-                <EditText
-                    android:id="@+id/exp_yrs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="EMAIL ID"
-                    android:textColor="@color/colorAccent" />
-
-                <EditText
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textAutoCorrect|textAutoComplete|textEmailAddress"
-                    android:selectAllOnFocus="false"
-                    android:singleLine="true" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="GENDER"
-                    android:textColor="@color/colorAccent" />
+                    android:paddingTop="10dp"
+                    android:text=","
+                    android:textColor="#fff"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textAutoCorrect|textMultiLine|textAutoComplete"
-                    android:selectAllOnFocus="false"
-                    android:singleLine="true" />
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent"
+                    android:paddingTop="10dp"
+                    android:text="Female"
+                    android:textColor="#fff"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="DEGREE"
-                    android:textColor="@color/colorAccent" />
-
-                <EditText
-                    android:id="@+id/degree"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textLongMessage|textAutoCorrect|textMultiLine|textAutoComplete"
-                    android:selectAllOnFocus="false"
-                    android:singleLine="true" />
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="SPECIALIZATION"
-                    android:textColor="@color/colorAccent" />
-
-                <EditText
-                    android:id="@+id/specialization"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textShortMessage|textAutoCorrect|textCapSentences|textAutoComplete" />
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="CITY"
-                    android:textColor="@color/colorAccent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/city"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text|textCapWords" />
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:text="Kolkata"
+                    android:textColor="#fff"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="match_parent"
+                    android:id="@+id/exp_yrs"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="90dp"
+                    android:text="1"
+                    android:textColor="#fff"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="  Years of experience"
+                    android:textColor="#fff"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@android:style/Widget.DeviceDefault.Light.RatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:stepSize="0.1" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarSize="80dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="25dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="EMAIL ID"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="example@gmail.com"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="25dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="CONTACT NUMBER"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:text="9876541230"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="25dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="MCI number"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mci"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="jdfhsbbfsflfab"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="25dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="DEGREE"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/degree"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:text="MBBS"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="25dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="SPECIALIZATION"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/specialization"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:text="Skin Deseases"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="25dp"
+                android:paddingTop="5dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
                     android:text="HOSPITAL/PERSONAL CLINIC"
-                    android:textColor="@color/colorAccent" />
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/clinic"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text" />
-
-
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:text=" Description of HOSPITAL/PERSONAL CLINIC"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
             </LinearLayout>
-        </ScrollView>
 
-    </android.support.constraint.ConstraintLayout>
 
-</android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
