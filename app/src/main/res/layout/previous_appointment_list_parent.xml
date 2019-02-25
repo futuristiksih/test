@@ -23,6 +23,15 @@
 
 
     <TextView
+        android:id="@+id/doc_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="monospace"
+        android:text="Doctor's Name"
+        android:textSize="16sp" />
+
+    <TextView
         android:id="@+id/child_name"
         android:text="Child Name"
         android:layout_width="match_parent"
@@ -31,15 +40,6 @@
         android:fontFamily="monospace"
         android:textSize="16sp"
         />
-
-    <TextView
-        android:id="@+id/guardian"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:fontFamily="monospace"
-        android:text="Doctor's Name"
-        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/appointment_date"

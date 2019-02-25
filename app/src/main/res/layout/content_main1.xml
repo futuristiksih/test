@@ -25,12 +25,13 @@
     </android.support.design.widget.AppBarLayout>
 
     <RelativeLayout
+        android:id="@+id/profile"
         android:layout_width="match_parent"
-        android:layout_height="360dp">
+        android:layout_height="250dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="330dp"
+            android:layout_height="250dp"
             android:background="@drawable/bg"
             android:orientation="vertical">
 
@@ -38,10 +39,9 @@
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/docPic"
                 android:layout_width="150dp"
-                android:layout_height="134dp"
+                android:layout_height="98dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="45dp"
-                android:src="@drawable/doc" />
+                android:layout_marginTop="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,13 +50,13 @@
 
                 <EditText
                     android:id="@+id/name"
+                    style="@style/Widget.AppCompat.EditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="90dp"
                     android:background="@android:color/transparent"
                     android:paddingTop="10dp"
-                    android:text="Dr. Ankia Halder"
                     android:textColor="#fff"
                     android:textSize="21sp"
                     android:textStyle="bold" />
@@ -74,12 +74,12 @@
 
                 <EditText
                     android:id="@+id/gender"
+                    style="@style/Widget.AppCompat.EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:background="@android:color/transparent"
                     android:paddingTop="10dp"
-                    android:text="Female"
                     android:textColor="#fff"
                     android:textSize="21sp"
                     android:textStyle="bold" />
@@ -96,7 +96,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@android:color/transparent"
-                    android:text="Kolkata"
                     android:textColor="#fff"
                     android:textSize="21sp"
                     android:textStyle="bold" />
@@ -113,7 +112,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="90dp"
-                    android:text="1"
                     android:textColor="#fff"
                     android:textSize="21sp"
                     android:textStyle="bold" />
@@ -131,7 +129,7 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
-                style="@android:style/Widget.DeviceDefault.Light.RatingBar"
+                style="@android:style/Widget.Material.Light.RatingBar.Indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -142,12 +140,12 @@
     </RelativeLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scrollbarSize="80dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
@@ -177,7 +175,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="example@gmail.com"
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -207,7 +204,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="9876541230"
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -237,7 +233,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="jdfhsbbfsflfab"
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -269,7 +264,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="MBBS"
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -301,7 +295,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="Skin Deseases"
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -333,7 +326,6 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
-                    android:text=" Description of HOSPITAL/PERSONAL CLINIC"
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </LinearLayout>

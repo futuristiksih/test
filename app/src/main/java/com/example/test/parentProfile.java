@@ -9,6 +9,8 @@ import android.support.v7.view.menu.ActionMenuItem;
 import android.text.Editable;
 import android.text.TextWatcher;
 import com.bumptech.glide.Glide;
+
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -34,9 +36,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.mikhaellopez.circularimageview.CircularImageView;
+
 public class parentProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    EditText name,phone,email,address;ImageView parentPic,navPic;String emailid;
-    FirebaseFirestore db;StorageReference imageref;FirebaseUser user;MenuItem menuItem;
+    EditText name,phone,email,address;
+    CircularImageView parentPic,navPic;String emailid;
+    FirebaseFirestore db;private StorageReference imageref;FirebaseUser user;MenuItem menuItem;
     public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;TextView navName;
 
     public void updateParent(objectParent parent){
@@ -48,6 +53,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
         imageref.child(emailid).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
+                Log.i("image","yes");
                 Glide.with(getApplicationContext()).load(uri).into(parentPic);
                 Glide.with(getApplicationContext()).load(uri).into(navPic);
             }
@@ -70,7 +76,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
         phone=findViewById(R.id.phone);phone.setEnabled(false);
         email=findViewById(R.id.email);email.setEnabled(false);
         address=findViewById(R.id.address);address.setEnabled(false);
-        parentPic=findViewById(R.id.docPic);parentPic.setEnabled(false);
+        parentPic=findViewById(R.id.parentPic);parentPic.setEnabled(false);
 
         imageref = FirebaseStorage.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -172,7 +178,8 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
             Intent i=new Intent(getApplicationContext(),parentProfile.class);startActivity(i);finish();
         }
         else if(id==R.id.prev_appointments){
-
+            menuItem.setVisible(false);
+            fragmentManager.beginTransaction().replace(R.id.contentpage, new previous_appointment_list()).commit();
         }
         else if (id == R.id.signout) {
             FirebaseAuth.getInstance().signOut();

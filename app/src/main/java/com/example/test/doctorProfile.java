@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,10 +35,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.mikhaellopez.circularimageview.CircularImageView;
+
 public class doctorProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    EditText name,phone,degree,gender,specialization,city,clinic;ImageView docPic,navPic;MenuItem menuItem;
-    TextView email,exp_yrs,mci;
-    RatingBar ratingBar;
+    EditText name,phone,degree,gender,specialization,city,clinic;
+    CircularImageView docPic,navPic;MenuItem menuItem;TextView email,exp_yrs,mci;RatingBar ratingBar;
     public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;TextView navName;FirebaseFirestore db;
     StorageReference imageref;String emailid="";FirebaseUser user;
     public void updateDoctor(objectDoctor doctor){
@@ -47,10 +49,11 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
         final NavigationView navigationView = findViewById(R.id.nav_view);navigationView.setNavigationItemSelectedListener(this);
         final View hView =  navigationView.getHeaderView(0);
         navName= hView.findViewById(R.id.navName);navName.setText(name.getText().toString());
-        navPic=hView.findViewById(R.id.navPic);
+        navPic=hView.findViewById(R.id.navPic);Log.i("inage","yes");
         imageref.child(emailid).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
+                Log.i("image","yes");
                 Glide.with(getApplicationContext()).load(uri).into(docPic);
                 Glide.with(getApplicationContext()).load(uri).into(navPic);
             }
@@ -171,7 +174,7 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        ((ConstraintLayout)findViewById(R.id.profile)).removeAllViews();
+        ((LinearLayout)findViewById(R.id.contentpage)).removeAllViews();
         if (id == R.id.viewprofile) {
             Intent i=new Intent(getApplicationContext(),doctorProfile.class);startActivity(i);finish();
         }

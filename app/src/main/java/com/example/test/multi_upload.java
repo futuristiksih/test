@@ -48,7 +48,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
 public class multi_upload extends AppCompatActivity {
     String immunization,bowel_movement,fever,inception,infected_area,intake,environment,crying,doc_name,doc_email,dob,birth_weight,child_name,gender,
             vomit,breast_feed,dehydration,img_filename;
@@ -328,7 +327,6 @@ public class multi_upload extends AppCompatActivity {
         AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(multi_upload.this);
         myAlertDialog.setTitle("Upload Pictures Option");
         myAlertDialog.setMessage("How do you want to set your picture?");
-
         myAlertDialog.setPositiveButton("Gallery",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {

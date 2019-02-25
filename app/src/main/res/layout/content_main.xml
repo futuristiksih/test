@@ -32,16 +32,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar">
 
-        <ImageView
-            android:id="@+id/docPic"
-            android:layout_width="138dp"
-            android:layout_height="108dp"
-            android:layout_marginStart="140dp"
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/parentPic"
+            android:layout_width="798dp"
+            android:layout_height="0dp"
             android:layout_marginEnd="133dp"
             android:src="@drawable/parent"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
