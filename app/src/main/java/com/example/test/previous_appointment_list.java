@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -20,28 +21,40 @@ import java.util.ArrayList;
 
 public class previous_appointment_list extends Fragment {
     View view;
-    ArrayList<myDoctors> arrayList;previousappointmentAdapter adapter;ArrayList<String> emails,ids,names;
+    ArrayList<myDoctors> arrayList;previousappointmentAdapter adapter;ArrayList<String> doc_emails,ids,names;String doc_name;
     FirebaseFirestore db;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.doclist, container, false);getActivity().setTitle("CHOOSE A REPORT");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        assert user != null;String email = user.getEmail();
-        ListView listView =  view.findViewById(R.id.doclist);
-        arrayList = new ArrayList<>();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;final String email = user.getEmail();
+        ListView listView =  view.findViewById(R.id.doclist);arrayList = new ArrayList<>();
         adapter = new previousappointmentAdapter(getActivity(),arrayList);
         db = FirebaseFirestore.getInstance();
-        emails= new ArrayList<>();ids=new ArrayList<>();names=new ArrayList<>();
-
+        doc_emails= new ArrayList<>();ids=new ArrayList<>();names=new ArrayList<>();
         db.collection("Email").document("parent "+user.getEmail()).collection("sent_appointments").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for(QueryDocumentSnapshot documentSnapshot:queryDocumentSnapshots){
-                    arrayList.add(new myDoctors(documentSnapshot.get("name").toString(),documentSnapshot.get("id").toString(),documentSnapshot.get("guardian").toString(),documentSnapshot.get("status").toString(),documentSnapshot.get("date").toString()));
-                    String[] parent_email=documentSnapshot.getId().split(" ");
-                    String email=parent_email[parent_email.length-1];
-                    emails.add(email);adapter.notifyDataSetChanged();
-                    ids.add(documentSnapshot.get("id").toString());names.add(documentSnapshot.get("name").toString());
+                    String[] doc=documentSnapshot.getId().split(" ");
+                    final String doc_email=doc[doc.length-1];
+                    final String child_name=documentSnapshot.get("name").toString();
+                    db.collection("Email").document("doctor "+doc_email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            doc_name=documentSnapshot.get("name").toString();
+                            db.collection("Email").document("doctor "+doc_email).collection("received_appointments").document(child_name+" "+user.getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    if(documentSnapshot.exists()){
+                                    arrayList.add(new myDoctors(child_name,documentSnapshot.get("id").toString(),doc_name,documentSnapshot.get("status").toString(),documentSnapshot.get("date").toString()));
+                                    doc_emails.add(doc_email);ids.add(documentSnapshot.get("id").toString());names.add(child_name);
+                                    adapter.notifyDataSetChanged();
+                                    }
+                                }
+                            });
+                        }
+                    });
                 }
             }
         });
@@ -52,10 +65,10 @@ public class previous_appointment_list extends Fragment {
                 android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 ((RelativeLayout)view.findViewById(R.id.doc)).removeAllViews();
                 Bundle bundle=new Bundle();
-                bundle.putString("email",emails.get(i));bundle.putString("name",names.get(i));bundle.putString("id",ids.get(i));
-                view_details_doctor viewDetailsDoctor=new view_details_doctor();
-                viewDetailsDoctor.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.contentpage, viewDetailsDoctor).commit();
+                bundle.putString("email",doc_emails.get(i));bundle.putString("name",names.get(i));bundle.putString("id",ids.get(i));
+                view_details_parent details_parent=new view_details_parent();
+                details_parent.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.contentpage, details_parent).commit();
             }
         });
     return view;
