@@ -59,7 +59,7 @@ public class parent extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         name=view.findViewById(R.id.name);email=view.findViewById(R.id.email);pass=view.findViewById(R.id.pass);
         address=view.findViewById(R.id.address);phone=view.findViewById(R.id.phone);checkPassword=view.findViewById(R.id.checkPassword);
-        imageView=view.findViewById(R.id.image);uploadpic=view.findViewById(R.id.uploadpic);signup=view.findViewById(R.id.signup);
+        imageView=view.findViewById(R.id.imageView);uploadpic=view.findViewById(R.id.uploadpic);signup=view.findViewById(R.id.signup);
         final FragmentActivity activity=getActivity();
         name.addTextChangedListener(new TextWatcher() {
             int k=0;

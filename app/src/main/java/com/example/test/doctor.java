@@ -59,7 +59,7 @@ public class doctor extends Fragment {
         mAuth=FirebaseAuth.getInstance();
         name=view.findViewById(R.id.name);email=view.findViewById(R.id.email);pass=view.findViewById(R.id.pass);genderR=view.findViewById(R.id.gender);
         degree=view.findViewById(R.id.degree);phone=view.findViewById(R.id.phone);checkPassword=view.findViewById(R.id.checkPassword);
-        imageView=view.findViewById(R.id.image);uploadpic=view.findViewById(R.id.uploadpic);signup=view.findViewById(R.id.signup);
+        imageView=view.findViewById(R.id.imageView);uploadpic=view.findViewById(R.id.uploadpic);signup=view.findViewById(R.id.signup);
         specialization=view.findViewById(R.id.specialization);mci=view.findViewById(R.id.mci);exp_yrs=view.findViewById(R.id.exp_yrs);
         final FragmentActivity activity=getActivity();city=view.findViewById(R.id.city);
         clinic =view.findViewById(R.id.clinic);
