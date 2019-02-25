@@ -28,7 +28,6 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".login"
-            android:fitsSystemWindows="true"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
@@ -37,6 +36,9 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".showDoctor"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".register"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".multi_upload"

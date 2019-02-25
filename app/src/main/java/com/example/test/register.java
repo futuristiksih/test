@@ -1,6 +1,7 @@
 package com.example.test;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -9,63 +10,52 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-public class register extends Fragment {
-    private AppBarLayout appBar;
-    private TabLayout tabs;
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        View view = inflater.inflate(R.layout.register, container, false);
-        getActivity().setTitle("REGISTER");
-        //assert container != null;
-        //View contenedor = (View)container.getParent();
-        appBar = view.findViewById(R.id.appbar);
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
-        tabs = new TabLayout(getActivity());
-        tabs.setTabTextColors(Color.parseColor("#000000"), Color.parseColor("#000000"));
-        appBar.addView(tabs);
-
-        ViewPager viewPager = view.findViewById(R.id.pager);
-        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
-        tabs.setupWithViewPager(viewPager);
-        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-        return view;
-    }
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        appBar.removeView(tabs);
-    }
-    public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-        ViewPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
+public class register extends AppCompatActivity {
+    Button parent,doctor;
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
         }
-        String[] tabnames = {"REGISTER AS PARENT", "REGISTER AS DOCTOR"};
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0: return new parent();
-                case 1: return new doctor();
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+        changeStatusBarColor();
+        setContentView(R.layout.register);
+        parent=findViewById(R.id.reg_parent);doctor=findViewById(R.id.reg_doctor);
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                ((RelativeLayout)findViewById(R.id.Log)).removeAllViews();
+                fragmentManager.beginTransaction().replace(R.id.Log,new parent()).commit();
             }
-            return null;
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return tabnames[position];
-        }
+        });
+        doctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                ((RelativeLayout)findViewById(R.id.Log)).removeAllViews();
+                fragmentManager.beginTransaction().replace(R.id.Log,new doctor()).commit();
+            }
+        });
     }
 }
 

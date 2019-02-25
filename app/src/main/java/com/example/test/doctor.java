@@ -18,6 +18,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -39,9 +41,10 @@ import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 public class doctor extends Fragment {
-    EditText name, email, pass,phone,city,checkPassword,degree,specialization,mci,exp_yrs, clinic;ImageView imageView;Button goBack,signup,uploadpic;Spinner gender;
+    EditText name, email, pass,phone,city,checkPassword,degree,specialization,mci,exp_yrs, clinic;ImageView imageView;Button signup,uploadpic;
+    RadioGroup genderR;RadioButton radioButton;String gender;
     View view;FirebaseFirestore db;private FirebaseAuth mAuth;private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-    public static final int RESULT_LOAD_IMAGE = 1;Uri Image;String gender_type="";
+    public static final int RESULT_LOAD_IMAGE = 1;Uri Image;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -53,8 +56,8 @@ public class doctor extends Fragment {
     @Nullable @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, Bundle savedInstanceState) {
         view= inflater.inflate(R.layout.doctor,container,false);
-        mAuth=FirebaseAuth.getInstance();goBack=view.findViewById(R.id.goBack);
-        name=view.findViewById(R.id.name);email=view.findViewById(R.id.email);pass=view.findViewById(R.id.password);gender=view.findViewById(R.id.gender);
+        mAuth=FirebaseAuth.getInstance();
+        name=view.findViewById(R.id.name);email=view.findViewById(R.id.email);pass=view.findViewById(R.id.pass);genderR=view.findViewById(R.id.gender);
         degree=view.findViewById(R.id.degree);phone=view.findViewById(R.id.phone);checkPassword=view.findViewById(R.id.checkPassword);
         imageView=view.findViewById(R.id.image);uploadpic=view.findViewById(R.id.uploadpic);signup=view.findViewById(R.id.signup);
         specialization=view.findViewById(R.id.specialization);mci=view.findViewById(R.id.mci);exp_yrs=view.findViewById(R.id.exp_yrs);
@@ -144,17 +147,8 @@ public class doctor extends Fragment {
                 else if (!checkPassword.getText().toString().equals(pass.getText().toString())) checkPassword.setError("RE-TYPED WRONG PASSWORD");
             }
         });
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.gender, android.R.layout.simple_spinner_item);
-        gender.setAdapter(adapter);
-        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                gender_type = adapterView.getItemAtPosition(i).toString();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
+        radioButton=view.findViewById(genderR.getCheckedRadioButtonId());
+        gender=radioButton.getText().toString();
         mci.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -205,7 +199,7 @@ public class doctor extends Fragment {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (name.getError() == null && degree.getError() == null && phone.getError() == null && email.getError() == null && pass.getError() == null && checkPassword.getError() == null&&Image!=null&& !gender_type.equals("")&&mci.getError()==null&&exp_yrs.getError()==null&&city.getError()==null) {
+                if (name.getError() == null && degree.getError() == null && phone.getError() == null && email.getError() == null && pass.getError() == null && checkPassword.getError() == null&&Image!=null&& !gender.equals("")&&mci.getError()==null&&exp_yrs.getError()==null&&city.getError()==null) {
                     mAuth.createUserWithEmailAndPassword(email.getText().toString().trim(), pass.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -222,7 +216,7 @@ public class doctor extends Fragment {
                             }
                             else{
                                     db = FirebaseFirestore.getInstance();
-                                    objectDoctor current = new objectDoctor(name.getText().toString().trim(), phone.getText().toString().trim(), email.getText().toString().trim(),degree.getText().toString().trim(),gender_type, clinic.getText().toString(),mci.getText().toString(),specialization.getText().toString(),city.getText().toString(),exp_yrs.getText().toString(),"0",false);
+                                    objectDoctor current = new objectDoctor(name.getText().toString().trim(), phone.getText().toString().trim(), email.getText().toString().trim(),degree.getText().toString().trim(),gender, clinic.getText().toString(),mci.getText().toString(),specialization.getText().toString(),city.getText().toString(),exp_yrs.getText().toString(),"0",false);
                                     db.collection("Email").document("doctor "+email.getText().toString().trim()).set(current)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -263,12 +257,6 @@ public class doctor extends Fragment {
                     });
                 }
                 else Toast.makeText(getActivity(), "INCOMPLETE PROFILE DETAILS", Toast.LENGTH_LONG).show();
-            }
-        });
-        goBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i=new Intent(getActivity(),login.class);startActivity(i);activity.finish();
             }
         });
         return view;

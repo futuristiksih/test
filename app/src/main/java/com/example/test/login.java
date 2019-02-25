@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -13,6 +15,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,6 +37,13 @@ import java.util.Objects;
 public class login extends AppCompatActivity {
     private FirebaseAuth mAuth;final Context context=this;
     private EditText email, password;FirebaseFirestore db;String userEmail="",userPass="";TextView forgot;
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
     public void getUser(String userEmail){
         db.collection("Email").whereEqualTo("email", userEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -99,7 +110,12 @@ public class login extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);setContentView(R.layout.login);
+        super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+        changeStatusBarColor();
+        setContentView(R.layout.login);
         email =  findViewById(R.id.email);password = findViewById(R.id.password);
         setTitle("LOGIN");db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -153,12 +169,10 @@ public class login extends AppCompatActivity {
 
         TextView mSignUp = findViewById(R.id.signUp);
         mSignUp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-                        ((RelativeLayout)findViewById(R.id.log)).removeAllViews();
-                        fragmentManager.beginTransaction().replace(R.id.log, new register()).commit();
-                    }
-                });
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(),register.class);startActivity(intent);
+            }
+        });
     }
 }

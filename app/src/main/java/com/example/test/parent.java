@@ -40,7 +40,7 @@ import java.util.Objects;
 import static android.app.Activity.RESULT_OK;
 
 public class parent extends Fragment {
-    EditText name, email, pass, address,phone,checkPassword;ImageView imageView;Button signup,uploadpic,goBack;
+    EditText name, email, pass, address,phone,checkPassword;ImageView imageView;Button signup,uploadpic;
     View view;
     FirebaseFirestore db;public FirebaseAuth mAuth;private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;int k=0;
@@ -56,8 +56,8 @@ public class parent extends Fragment {
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, Bundle savedInstanceState) {
         view= inflater.inflate(R.layout.parent,container,false);
-        mAuth = FirebaseAuth.getInstance();goBack=view.findViewById(R.id.goBack);
-        name=view.findViewById(R.id.name);email=view.findViewById(R.id.email);pass=view.findViewById(R.id.password);
+        mAuth = FirebaseAuth.getInstance();
+        name=view.findViewById(R.id.name);email=view.findViewById(R.id.email);pass=view.findViewById(R.id.pass);
         address=view.findViewById(R.id.address);phone=view.findViewById(R.id.phone);checkPassword=view.findViewById(R.id.checkPassword);
         imageView=view.findViewById(R.id.image);uploadpic=view.findViewById(R.id.uploadpic);signup=view.findViewById(R.id.signup);
         final FragmentActivity activity=getActivity();
@@ -209,12 +209,7 @@ public class parent extends Fragment {
                 else Toast.makeText(getActivity(), "INCOMPLETE PROFILE DETAILS", Toast.LENGTH_LONG).show();
             }
         });
-        goBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i=new Intent(getActivity(),login.class);startActivity(i);activity.finish();
-            }
-        });
+
         return view;
     }
 }
