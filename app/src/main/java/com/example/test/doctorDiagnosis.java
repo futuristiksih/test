@@ -5,16 +5,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,11 +38,21 @@ public class doctorDiagnosis extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.doctor_diagnosis, container, false);
         getActivity().setTitle("Prescription");
+
+        final LinearLayout rootMed =view.findViewById(R.id.medication_layout);
+        rootMed.setOrientation(LinearLayout.VERTICAL);
+
+        final LinearLayout rootTest = (LinearLayout) view.findViewById(R.id.test_layouts);
+        rootTest.setOrientation(LinearLayout.VERTICAL);
+
         ListView medList,testList;
         descr_text = view.findViewById(R.id.descr);addMed=view.findViewById(R.id.addMed);addTest = view.findViewById(R.id.addTest);
         medArray = new ArrayList<>();testArray = new ArrayList<>();
         Bundle bundle=getArguments();parent_email=bundle.getString("parent_email");
         child_name=bundle.getString("child_name");
+
+        // Dialog box for testimonal addition
+
         addMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,15 +67,11 @@ public class doctorDiagnosis extends Fragment {
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        final objectMedicine medicine = new objectMedicine(medName.getText().toString(),
-//                                Integer.parseInt(weeks.getText().toString()),
-//                                Integer.parseInt(doses.getText().toString()),
-//                                condition.getText().toString());
-//                        medArray.add(medicine);
-                        LinearLayout root =view.findViewById(R.id.medication_layout);
-                        root.setOrientation(LinearLayout.VERTICAL);
+
                         View child = getLayoutInflater().inflate(R.layout.list_item_med,null);
-                        root.addView(child);
+                        rootMed.addView(child);
+                        child.setOnClickListener(onClickListener);
+
                         TextView med = child.findViewById(R.id.medName),
                                 doses = child.findViewById(R.id.doses),
                                 conditions = child.findViewById(R.id.conditions),
@@ -91,6 +101,11 @@ public class doctorDiagnosis extends Fragment {
                 AlertDialog alertDialog=builder.create();alertDialog.show();
             }
         });
+
+
+
+
+        // Dialog box for testimonal addition
         addTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,12 +117,11 @@ public class doctorDiagnosis extends Fragment {
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final objectTest objTest = new objectTest(test.getText().toString());
-                        testArray.add(objTest);
-                        LinearLayout root = (LinearLayout) view.findViewById(R.id.test_layouts);
-                        root.setOrientation(LinearLayout.VERTICAL);
                         View child = getLayoutInflater().inflate(R.layout.prompts_test,null);
-                        root.addView(child);
+                        rootTest.addView(child);
+
+                        child.setOnClickListener(onClickListener2);
+
                         TextView testVw = child.findViewById(R.id.test);
                         testVw.setText(test.getText().toString());
                     }
@@ -122,6 +136,93 @@ public class doctorDiagnosis extends Fragment {
                 alertDialog.show();
             }
         });
+
+
+
         return view;
     }
+
+    //OnClickListener for test linearlayout childs
+    View.OnClickListener onClickListener2 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            final View child = (LinearLayout)v;
+
+            LayoutInflater li = LayoutInflater.from(getActivity());
+            View promptsView = li.inflate(R.layout.activity_test, null);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setView(promptsView);
+            final EditText test =promptsView.findViewById(R.id.edit_test);
+
+            TextView testvv = child.findViewById(R.id.test);
+
+            test.setText(testvv.getText().toString());
+
+            builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    TextView testVw = child.findViewById(R.id.test);
+                    testVw.setText(test.getText().toString());
+
+                }
+            });
+            builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ((LinearLayout)child.getParent()).removeView(child);
+                }
+            });
+            AlertDialog alertDialog=builder.create();alertDialog.show();
+        }
+    };
+
+    //OnClickListener for medication linearlayout childs
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            final View child = (LinearLayout)v;
+            LayoutInflater li = LayoutInflater.from(getActivity());
+            View promptsView = li.inflate(R.layout.activity_med, null);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setView(promptsView);
+            final EditText medName =promptsView.findViewById(R.id.edit_med);
+            final EditText week =promptsView.findViewById(R.id.edit_week);
+            final EditText dose = promptsView.findViewById(R.id.edit_dose);
+            final EditText condition = promptsView.findViewById(R.id.edit_condition);
+
+            TextView med = child.findViewById(R.id.medName),
+                    doses = child.findViewById(R.id.doses),
+                    conditions = child.findViewById(R.id.conditions),
+                    weeks = child.findViewById(R.id.weeks);
+            medName.setText(med.getText().toString().substring(10));
+            week.setText(weeks.getText().toString().substring(9));
+            dose.setText(doses.getText().toString().substring(9));
+            condition.setText(conditions.getText().toString().substring(11));
+
+            builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    TextView med = child.findViewById(R.id.medName),
+                            doses = child.findViewById(R.id.doses),
+                            conditions = child.findViewById(R.id.conditions),
+                            weeks = child.findViewById(R.id.weeks);
+                    med.setText("Medicine: "+medName.getText().toString());
+                    doses.setText("Dose(s): "+dose.getText().toString());
+                    weeks.setText("Week(s): "+week.getText().toString());
+                    conditions.setText("Condition: "+condition.getText().toString());
+                }
+            });
+            builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ((LinearLayout)child.getParent()).removeView(child);
+                }
+            });
+            AlertDialog alertDialog=builder.create();alertDialog.show();
+        }
+    };
 }
