@@ -17,7 +17,6 @@
             android:id="@+id/descr_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/medAddList"
             android:orientation="vertical">
 
             <TextView
@@ -54,7 +53,8 @@
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/medication_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="6"
                 android:layout_height="wrap_content"
                 android:text="Medication"
                 android:fontFamily="sans-serif"
@@ -62,17 +62,15 @@
                 android:layout_marginLeft="5dp"
                 android:paddingLeft="7dp"
                 android:paddingRight="7dp"
-                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="40sp" />
             <ImageButton
                 android:id="@+id/addMed"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:background="@null"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="7dp"
+                android:paddingRight="5dip"
                 android:src="@mipmap/add"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
@@ -85,12 +83,6 @@
             android:orientation="vertical">
 
         </LinearLayout>
-        <!--<ListView
-            android:id="@+id/medAddList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/medLayout"
-            />-->
 
 
         <LinearLayout
@@ -101,7 +93,8 @@
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/testimonal_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="6"
                 android:layout_height="wrap_content"
                 android:text="Testimonal"
                 android:fontFamily="sans-serif"
@@ -109,17 +102,15 @@
                 android:layout_marginLeft="5dp"
                 android:paddingLeft="7dp"
                 android:paddingRight="7dp"
-                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="40sp" />
             <ImageButton
                 android:id="@+id/addTest"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingRight="5dip"
                 android:background="@null"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="7dp"
                 android:src="@mipmap/add"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
@@ -133,11 +124,5 @@
             android:orientation="vertical">
 
         </LinearLayout>
-
-        <!--<ListView-->
-            <!--android:id="@+id/testAddList"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-
     </LinearLayout>
 </ScrollView>
