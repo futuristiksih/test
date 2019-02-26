@@ -167,12 +167,11 @@ public class parent extends Fragment {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                StorageReference imgeref = mStorageRef.child(email.getText().toString());
+                                                StorageReference imgeref = mStorageRef.child(email.getText().toString()+".jpg");
                                                 if (selectedImage != null) {
                                                     imgeref.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                                         @Override
                                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                            Log.i("image", "uploaded");
                                                         }
                                                     });
                                                 }

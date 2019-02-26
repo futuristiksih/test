@@ -221,7 +221,7 @@ public class doctor extends Fragment {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    StorageReference imgeref = mStorageRef.child(email.getText().toString());
+                                    StorageReference imgeref = mStorageRef.child(email.getText().toString()+".jpg");
                                     imgeref.putFile(Image).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                             @Override
                                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

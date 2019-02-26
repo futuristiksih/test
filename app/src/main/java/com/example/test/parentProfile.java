@@ -38,6 +38,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 public class parentProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,17 +46,16 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
     CircularImageView parentPic,navPic;String emailid;
     FirebaseFirestore db;private StorageReference imageref;FirebaseUser user;MenuItem menuItem;
     public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;TextView navName;
-
+    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     public void updateParent(objectParent parent){
         name.setText(parent.getName());email.setText(parent.getEmail());address.setText(parent.getAddress());phone.setText(parent.getPhone());
         final NavigationView navigationView = findViewById(R.id.nav_view);navigationView.setNavigationItemSelectedListener(this);
         final View hView =  navigationView.getHeaderView(0);
         navName= hView.findViewById(R.id.navName);navName.setText(name.getText().toString());
         navPic=hView.findViewById(R.id.navPic);
-        imageref.child(emailid).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        imageref.child(emailid+".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Log.i("image","yes");
                 Glide.with(getApplicationContext()).load(uri).into(parentPic);
                 Glide.with(getApplicationContext()).load(uri).into(navPic);
             }
@@ -157,6 +157,14 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()){
                             db.collection("Email").document("parent "+user.getEmail()).update("name",name.getText().toString().trim(),"address",address.getText().toString().trim(),"phone",phone.getText().toString().trim());
+                            if(selectedImage!=null){
+                                imageref = mStorageRef.child(email.getText().toString()+".jpg");
+                            imageref.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                }
+                            });
+                            }
                         }
 
                     }

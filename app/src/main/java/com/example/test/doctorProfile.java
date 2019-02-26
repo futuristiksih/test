@@ -36,6 +36,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 public class doctorProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,6 +44,7 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
     CircularImageView docPic,navPic;MenuItem menuItem;TextView email,exp_yrs,mci;RatingBar ratingBar;
     public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;TextView navName;FirebaseFirestore db;
     StorageReference imageref;String emailid="";FirebaseUser user;
+    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     public void updateDoctor(objectDoctor doctor){
         name.setText(doctor.getName());email.setText(doctor.getEmail());degree.setText(doctor.getDegree());phone.setText(doctor.getPhone());exp_yrs.setText(doctor.getExp_yrs());
         gender.setText(doctor.getGender());specialization.setText(doctor.getSpecialization());clinic.setText(doctor.getClinic());city.setText(doctor.getCity());mci.setText(doctor.getMci());
@@ -50,11 +52,10 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
         final NavigationView navigationView = findViewById(R.id.nav_view);navigationView.setNavigationItemSelectedListener(this);
         final View hView =  navigationView.getHeaderView(0);
         navName= hView.findViewById(R.id.navName);navName.setText(name.getText().toString());
-        navPic=hView.findViewById(R.id.navPic);Log.i("inage","yes");
-        imageref.child(emailid).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        navPic=hView.findViewById(R.id.navPic);
+        imageref.child(emailid+".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Log.i("image","yes");
                 Glide.with(getApplicationContext()).load(uri).into(docPic);
                 Glide.with(getApplicationContext()).load(uri).into(navPic);
             }
@@ -163,6 +164,14 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
                         if(task.isSuccessful()){
                             db.collection("Email").document("doctor "+user.getEmail()).update("name",name.getText().toString().trim(),"specialization",specialization.getText().toString().trim(),"phone",phone.getText().toString().trim(),"city",city.getText().toString().trim(),"clinic",clinic.getText().toString().trim());
                             db.collection("Email").document("doctor "+user.getEmail()).update("degree",degree.getText().toString().trim(),"mci",mci.getText().toString().trim(),"exp_yrs",exp_yrs.getText().toString().trim(),"gender",gender.getText().toString().trim());
+                            if(selectedImage!=null){
+                            imageref = mStorageRef.child(email.getText().toString()+".jpg");
+                            imageref.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                }
+                            });
+                            }
                         }
 
                     }
