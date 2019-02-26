@@ -25,18 +25,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Objects;
 public class doclist extends Fragment {
-    View view;
-    ArrayList<doclistdesign> doclistdesigns;
-    doclistadapter doclistadapter;
-    ArrayList<String> emails;
+    View view;ArrayList<doclistdesign> doclistdesigns;
+    doclistadapter doclistadapter;ArrayList<String> emails;
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final FirebaseFirestore db;
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseFirestore db;FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;String email = user.getEmail();
         ListView listView =  Objects.requireNonNull(getView()).findViewById(R.id.doclist);
-        doclistdesigns = new ArrayList<>();
-        doclistadapter = new doclistadapter(getActivity(),doclistdesigns);
+        doclistdesigns = new ArrayList<>();doclistadapter = new doclistadapter(getActivity(),doclistdesigns);
         db = FirebaseFirestore.getInstance();
         emails=new ArrayList<String>();
         db.collection("Email").whereEqualTo("verified",true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -59,7 +55,6 @@ public class doclist extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 //((RelativeLayout)view.findViewById(R.id.doc)).removeAllViews();
-
                 Intent intent=new Intent(getActivity(),showDoctor.class);
                 intent.putExtra("email",emails.get(i));
                 startActivity(intent);

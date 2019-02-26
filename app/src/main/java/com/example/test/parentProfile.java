@@ -22,6 +22,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +41,7 @@ import com.google.firebase.storage.StorageReference;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 public class parentProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    EditText name,phone,email,address;
+    TextView email,address,name,phone;
     CircularImageView parentPic,navPic;String emailid;
     FirebaseFirestore db;private StorageReference imageref;FirebaseUser user;MenuItem menuItem;
     public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;TextView navName;
@@ -168,7 +170,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        ((ConstraintLayout)findViewById(R.id.profile)).removeAllViews();
+        ((LinearLayout)findViewById(R.id.contentpage)).removeAllViews();
         if (id == R.id.appointment) {
             menuItem.setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.contentpage, new doclist()).commit();

@@ -1,5 +1,4 @@
 package com.example.test;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
@@ -25,38 +24,21 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-
 public class doctorDiagnosis extends Fragment {
     EditText descr_text;
-
     ImageButton addMed, addTest;
 //    FirebaseFirestore db;
     String parent_email,child_name;
-    ArrayList<objectMedicine> medArray;
-    ArrayList<objectTest> testArray;
-
-
-
+    ArrayList<objectMedicine> medArray;ArrayList<objectTest> testArray;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.doctor_diagnosis, container, false);
         getActivity().setTitle("Prescription");
         ListView medList,testList;
-
-        descr_text = view.findViewById(R.id.descr);
-
-        addMed= (ImageButton)view.findViewById(R.id.addMed);
-        addTest = (ImageButton)view.findViewById(R.id.addTest);
-
-        medArray = new ArrayList<>();
-
-        testArray = new ArrayList<>();
-
+        descr_text = view.findViewById(R.id.descr);addMed=view.findViewById(R.id.addMed);addTest = view.findViewById(R.id.addTest);
+        medArray = new ArrayList<>();testArray = new ArrayList<>();
         Bundle bundle=getArguments();parent_email=bundle.getString("parent_email");
         child_name=bundle.getString("child_name");
-
-
         addMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +50,6 @@ public class doctorDiagnosis extends Fragment {
                 final EditText week =promptsView.findViewById(R.id.edit_week);
                 final EditText dose = promptsView.findViewById(R.id.edit_dose);
                 final EditText condition = promptsView.findViewById(R.id.edit_condition);
-
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -77,7 +58,7 @@ public class doctorDiagnosis extends Fragment {
 //                                Integer.parseInt(doses.getText().toString()),
 //                                condition.getText().toString());
 //                        medArray.add(medicine);
-                        LinearLayout root = (LinearLayout) view.findViewById(R.id.medication_layout);
+                        LinearLayout root =view.findViewById(R.id.medication_layout);
                         root.setOrientation(LinearLayout.VERTICAL);
                         View child = getLayoutInflater().inflate(R.layout.list_item_med,null);
                         root.addView(child);
@@ -107,13 +88,9 @@ public class doctorDiagnosis extends Fragment {
                         dialog.cancel();
                     }
                 });
-                AlertDialog alertDialog=builder.create();
-                alertDialog.show();
-
+                AlertDialog alertDialog=builder.create();alertDialog.show();
             }
         });
-
-
         addTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +99,6 @@ public class doctorDiagnosis extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setView(promptsView);
                 final EditText test =promptsView.findViewById(R.id.edit_test);
-
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -134,10 +110,6 @@ public class doctorDiagnosis extends Fragment {
                         root.addView(child);
                         TextView testVw = child.findViewById(R.id.test);
                         testVw.setText(test.getText().toString());
-
-
-
-
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -148,11 +120,8 @@ public class doctorDiagnosis extends Fragment {
                 });
                 AlertDialog alertDialog=builder.create();
                 alertDialog.show();
-
             }
         });
-
         return view;
     }
-
 }

@@ -235,24 +235,24 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_button"
-                android:layout_width="wrap_content"
-                android:layout_height="52dp"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp">
 
                 <Button
                     android:id="@+id/next"
                     android:layout_width="@dimen/btn_width"
                     android:layout_height="@dimen/btn_height"
-                    android:layout_marginBottom="@dimen/space20"
+                    android:layout_marginBottom="30dp"
                     android:background="@drawable/btn_white_selector"
                     android:text="Save and Next Page"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/txt16" />
-
-
+                    android:textSize="@dimen/txt16"
+                    android:layout_gravity="center"/>
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
