@@ -69,6 +69,7 @@ public class view_details_parent extends Fragment {
                 startActivity(chatIntent);
             }
         });
+        
         diagnosis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
