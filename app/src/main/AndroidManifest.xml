@@ -27,6 +27,11 @@
             android:label="MY PROFILE"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".ChatActivity"
+            android:label="MY PROFILE"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
             android:name=".login"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

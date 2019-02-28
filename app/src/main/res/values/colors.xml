@@ -4,7 +4,8 @@
     <color name="solid_red">#fff00000</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#93A1FA</color>
-    <color name="colorAccent">#FF4081</color>
+
+<color name="colorAccent">#945456</color>
     <color name="text_primary">#000000</color>
     <color name="text_secondary">#000000</color>
     <color name="window_background">#FFFFFF</color>

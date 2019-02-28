@@ -1,4 +1,5 @@
 package com.example.test;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
 public class view_details_parent extends Fragment {
-    FirebaseFirestore db;String doc_email,child_name,id;RadioButton male,female;Button chat,diagnosis;
+    FirebaseFirestore db;String doc_email,doc_uid,child_name,id;RadioButton male,female;Button chat,diagnosis;
     EditText immunization,bowel_movement,fever,inception,infected_area,intake,environment,crying,name,dob,birth_weight;CheckBox breast_feedC,vomitC,dehydrationC;
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_details_doctor, container, false);getActivity().setTitle("REPORT DETAILS");
@@ -62,7 +63,10 @@ public class view_details_parent extends Fragment {
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
+                chatIntent.putExtra("user_id","ZWvTV9b4oZeSmgkgyx1lpKbZpLN2");
+                chatIntent.putExtra("user_name", doc_email);
+                startActivity(chatIntent);
             }
         });
         diagnosis.setOnClickListener(new View.OnClickListener() {
