@@ -1,10 +1,13 @@
 package com.example.test;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.view.menu.ActionMenuItem;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,6 +43,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.mikhaellopez.circularimageview.CircularImageView;
+
+import java.io.File;
+import java.io.IOException;
 
 public class parentProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     TextView email,address,name,phone;
@@ -128,6 +134,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
             if(item.getTitle()=="EDIT PROFILE"){
                 item.setTitle("SAVE CHANGES");
                 name.setEnabled(true);address.setEnabled(true);phone.setEnabled(true);parentPic.setEnabled(true);
+
                 parentPic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

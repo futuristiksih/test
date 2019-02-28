@@ -52,10 +52,13 @@ public class multi_upload extends AppCompatActivity {
     String immunization,bowel_movement,fever,inception,infected_area,intake,environment,crying,doc_name,doc_email,dob,birth_weight,child_name,gender,
             vomit,breast_feed,dehydration,img_filename;
     private static final int RESULT_LOAD_IMAGE = 1, REQUEST_CAPTURE_IMAGE = 2;
-    private ImageButton mSelectBtn;private RecyclerView mUploadList;
+    private ImageButton mSelectBtn;
+    private RecyclerView mUploadList;
     private List<String> fileNameList, fileDoneList; // List to maintain the Recyler view
-    private UploadListAdapter uploadListAdapter;private StorageReference mStorage;String imageFilePath;// image file path for new image created from camera
-    FirebaseFirestore db;private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    private UploadListAdapter uploadListAdapter;
+    private StorageReference mStorage;String imageFilePath;// image file path for new image created from camera
+    FirebaseFirestore db;
+    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     String getDate(){
         Calendar calendar=Calendar.getInstance();
         SimpleDateFormat sdformat=new SimpleDateFormat("ddMMyyyy");
@@ -65,11 +68,12 @@ public class multi_upload extends AppCompatActivity {
         db=FirebaseFirestore.getInstance();final FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         final objectChild Child=new objectChild(child_name,dob,gender,birth_weight);
 
-        final DocumentReference parentReference=db.collection("Email").document("parent "+user.getEmail());
+        final DocumentReference parentReference = db.collection("Email").document("parent "+user.getEmail());
         parentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                final String count = documentSnapshot.getString("count");final String guardian=documentSnapshot.getString("name");
+                final String count = documentSnapshot.getString("count");
+                final String guardian = documentSnapshot.getString("name");
                 final String doc_count=""+(String.valueOf(Integer.parseInt(count)+1));
                 final DocumentReference childReference=parentReference.collection("sent_appointments").document(child_name+" "+doc_email);
                 childReference.set(Child).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -107,8 +111,12 @@ public class multi_upload extends AppCompatActivity {
 
         Intent i=getIntent();
         Bundle bundle=i.getBundleExtra("bundle");
-        doc_name=bundle.getString("doc_name");doc_email=bundle.getString("doc_email");birth_weight=bundle.getString("birth_weight");
-        child_name=bundle.getString("child_name");dob=bundle.getString("dob");gender=bundle.getString("gender");
+        doc_name=bundle.getString("doc_name");
+        doc_email=bundle.getString("doc_email");
+        birth_weight=bundle.getString("birth_weight");
+        child_name=bundle.getString("child_name");
+        dob=bundle.getString("dob");
+        gender=bundle.getString("gender");
 
         breast_feed=bundle.getString("breast_feed");crying=bundle.getString("crying");vomit=bundle.getString("vomit");
         dehydration=bundle.getString("dehydration");environment=bundle.getString("environment");immunization=bundle.getString("immunization");
@@ -119,6 +127,7 @@ public class multi_upload extends AppCompatActivity {
         mSelectBtn = findViewById(R.id.select_btn);mUploadList =findViewById(R.id.upload_list);
         fileNameList = new ArrayList<>();fileDoneList = new ArrayList<>();
         uploadListAdapter = new UploadListAdapter(fileNameList, fileDoneList);
+
         //Set the Recycler View adapter
         mUploadList.setLayoutManager(new LinearLayoutManager(this));
         mUploadList.setHasFixedSize(true);
@@ -142,12 +151,12 @@ public class multi_upload extends AppCompatActivity {
                 Log.i("sz:", Integer.toString(sz));
                 for (int i = 0; i < totalItemsSelected; i++) {
                     Uri fileUri = data.getClipData().getItemAt(i).getUri();
-                    String fileName = getFileName(fileUri);
+                    final String fileName = getFileName(fileUri);
                     fileNameList.add(fileName);
                     fileDoneList.add("uploading");
                     uploadListAdapter.notifyDataSetChanged();
 
-                    StorageReference fileToUpload = mStorage.child("Images").child(fileName);
+                    final StorageReference fileToUpload = mStorage.child("Untag_images").child(fileName);
 
                     final int finalI = (fileDoneList.isEmpty()) ? i : i + sz;
 //                    Log.i("finalI: ", Integer.toString(finalI));
@@ -155,11 +164,16 @@ public class multi_upload extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
+//                            Task<Uri> downloadUrl = fileToUpload.getDownloadUrl();
+//                            //creating the upload object to store uploaded image details
+//                            Upload upload = new Upload(fileName, downloadUrl.toString());
+//
+//                            //adding an upload to firebase database
+//                            String uploadId = mDatabase.push().getKey();
+//                            mDatabase.child(uploadId).setValue(upload);
+
                             fileDoneList.remove(finalI);
                             fileDoneList.add(finalI, "done");
-//                            Log.i("Sucess",":");
-//                            Log.i("fileDoneList:", Integer.toString(fileDoneList.size()));
-//                            Log.i("fileNameList: ",Integer.toString(fileNameList.size()));
                             uploadListAdapter.notifyDataSetChanged();
 
                         }
@@ -180,11 +194,9 @@ public class multi_upload extends AppCompatActivity {
                     fileNameList.add(fileName);
                     fileDoneList.add("uploading");
 
-//                    Log.i("fileDoneList:", Integer.toString(fileDoneList.size()));
-//                    Log.i("fileNameList: ", Integer.toString(fileNameList.size()));
                     uploadListAdapter.notifyDataSetChanged();
 
-                    StorageReference fileToUpload = mStorage.child("Images").child(fileName);
+                    StorageReference fileToUpload = mStorage.child("Untag_images").child(fileName);
 
                     final int finalI = (fileDoneList.isEmpty()) ? i : i + fileDoneList.size() - 1;
                     Log.i("finalI: ", Integer.toString(finalI));
@@ -208,11 +220,10 @@ public class multi_upload extends AppCompatActivity {
         else if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode == RESULT_OK) {
 
             BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 3;
             Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath, options);
 
 
-            fileNameList.add(imageFilePath);
+            fileNameList.add(img_filename);
             fileDoneList.add("uploading");
             uploadListAdapter.notifyDataSetChanged();
 
@@ -224,7 +235,7 @@ public class multi_upload extends AppCompatActivity {
             final int finalI = (fileDoneList.isEmpty())?0: fileDoneList.size() - 1;
 
 
-            UploadTask uploadTask = mStorage.child("Images/"+img_filename).putBytes(byteData);
+            UploadTask uploadTask = mStorage.child("Upload_images/"+img_filename).putBytes(byteData);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
@@ -298,7 +309,7 @@ public class multi_upload extends AppCompatActivity {
     // Create the path uri along for the temperory image File
     private File createImageFile() throws IOException {
         String timeStamp =
-                new SimpleDateFormat("yyyyMMdd_HHmmss",
+                new SimpleDateFormat("yyyyMMdd",
                         Locale.getDefault()).format(new Date());
         String imageFileName = "IMG_" + timeStamp + "_";
         img_filename=imageFileName;
@@ -320,7 +331,7 @@ public class multi_upload extends AppCompatActivity {
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
-        Toast.makeText(this, "Gallery saved", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Gallery saved", Toast.LENGTH_SHORT).show();
     }
     // Open the Dialog box for camera and gallery intent
     public void startDialog() {

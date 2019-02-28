@@ -36,7 +36,7 @@ public class view_details_doctor extends Fragment {
         intake.setEnabled(false);environment.setEnabled(false);crying.setEnabled(false);breast_feedC.setEnabled(false);vomitC.setEnabled(false);dehydrationC.setEnabled(false);
         dob.setEnabled(false);birth_weight.setEnabled(false);name.setEnabled(false);male.setEnabled(false);female.setEnabled(false);
 
-        Bundle bundle=getArguments();parent_email=bundle.getString("email");child_name=bundle.getString("name");id=bundle.getString("id");
+        final Bundle bundle=getArguments();parent_email=bundle.getString("email");child_name=bundle.getString("name");id=bundle.getString("id");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         final String email = user.getEmail();db=FirebaseFirestore.getInstance();
@@ -73,11 +73,13 @@ public class view_details_doctor extends Fragment {
                 Bundle bundle1=new Bundle();
                 bundle1.putString("child_name",child_name);
                 bundle1.putString("parent_email",parent_email);
-                doctorDiagnosis diagnosis=new doctorDiagnosis();
-                diagnosis.setArguments(bundle1);
+                annotateImage img = new annotateImage();
+                img.setArguments(bundle1);
+//                doctorDiagnosis diagnosis=new doctorDiagnosis();
+//                diagnosis.setArguments(bundle1);
                 android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 ((RelativeLayout)getActivity().findViewById(R.id.log)).removeAllViews();
-                fragmentManager.beginTransaction().replace(R.id.log,diagnosis).commit();
+//                fragmentManager.beginTransaction().replace(R.id.log,diagnosis).commit();
 
             }
         });
