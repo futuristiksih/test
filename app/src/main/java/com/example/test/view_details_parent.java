@@ -64,7 +64,7 @@ public class view_details_parent extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
-                chatIntent.putExtra("user_id","ZWvTV9b4oZeSmgkgyx1lpKbZpLN2");
+                chatIntent.putExtra("user_id","ZWvTV9b4oZeSmgkgyx1lpKbZpLN2");//doctor uid
                 chatIntent.putExtra("user_name", doc_email);
                 startActivity(chatIntent);
             }

@@ -77,7 +77,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                String name = "pawan";
+                String name = "pawan";//current user name
 
 
                 viewHolder.displayName.setText(name);
