@@ -10,11 +10,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="310dp">
+        android:layout_height="350dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="305dp"
+            android:layout_height="350dp"
             android:background="@drawable/bg"
             android:orientation="vertical">
 
@@ -107,13 +107,13 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
-                style="@android:style/Widget.DeviceDefault.Light.RatingBar"
+                android:theme="@style/RatingBar" 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:stepSize="0.1" />
+                android:stepSize="0.5" />
         </LinearLayout>
     </RelativeLayout>
 
