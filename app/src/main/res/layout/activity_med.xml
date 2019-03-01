@@ -14,7 +14,7 @@
 
         <!-- Label -->
         <TextView
-            android:text="Medicine Name"
+            android:text="@string/MedicineName"
             style="@style/CategoryStyle" />
 
         <!-- Input fields -->
@@ -41,7 +41,7 @@
 
         <!-- Label -->
         <TextView
-            android:text="Week (s)"
+            android:text="@string/Weeks"
             style="@style/CategoryStyle" />
 
         <!-- Input fields -->
@@ -70,7 +70,7 @@
 
         <!-- Label -->
         <TextView
-            android:text="Dose (s)"
+            android:text="@string/Doses"
             style="@style/CategoryStyle" />
 
         <!-- Input fields -->
@@ -99,7 +99,7 @@
 
         <!-- Label -->
         <TextView
-            android:text="Condition (s)"
+            android:text="@string/Conditions"
             style="@style/CategoryStyle" />
 
         <!-- Input fields -->

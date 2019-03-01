@@ -119,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="  Years of experience"
+                    android:text="@string/ye"
                     android:textColor="#fff"
                     android:textSize="21sp"
                     android:textStyle="bold" />
@@ -163,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="EMAIL ID"
+                    android:text="@string/EMAILID"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -192,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="CONTACT NUMBER"
+                    android:text="@string/CONTACTNUMBER"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -221,7 +221,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="MCI number"
+                    android:text="@string/MCInumber"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -251,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="DEGREE"
+                    android:text="@string/DEGREE"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -282,7 +282,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="SPECIALIZATION"
+                    android:text="@string/SPECIALIZATION"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -313,7 +313,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="HOSPITAL/PERSONAL CLINIC"
+                    android:text="@string/CLINIC"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 

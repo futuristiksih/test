@@ -27,7 +27,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="6"
             android:fontFamily="monospace"
-            android:text="Filenaeme.type"
+            android:text="@string/Filename"
             android:textSize="16sp" />
 
         <ImageView

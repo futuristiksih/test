@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
 
-        android:text="appointment_id"
+        android:text="@string/appointment_id"
         android:textSize="16sp" />
 
 
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
 
-        android:text="Child Name"
+        android:text="@string/ChildName"
         android:textSize="16sp" />
 
     <TextView
@@ -36,12 +36,12 @@
         android:layout_height="wrap_content"
 
         android:fontFamily="monospace"
-        android:text="Guardian Name"
+        android:text="@string/GuardianName"
         android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/appointment_date"
-                android:text="Date"
+                android:text="@string/Date"
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
 
             <TextView
                 android:id="@+id/status"
-                android:text="status"
+                android:text="@string/status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"

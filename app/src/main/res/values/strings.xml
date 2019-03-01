@@ -7,6 +7,91 @@
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="action_save">Save</string>
+    <string name="MedicineName">Medicine Name</string>
+    <string name="Weeks">Week (s)</string>
+    <string name="Doses">Dose (s)</string>
+    <string name="Conditions">Condition (s)</string>
+    <string name="demo">See a demo of the app</string>
+    <string name="neoped">Diagnosis of Neonatal and pediatric</string>
+    <string name="TestName">Test Name</string>
+    <string name="GoBack">Go Back</string>
+    <string name="details">Fill Up the details</string>
+    <string name="doctorname">Doctor\'s Name</string>
+    <string name="doctoremail">Doctor\'s Email</string>
+    <string name="childname">Child\'s Name</string>
+    <string name="birthweight">Birth Weight(in Kg)</string>
+    <string name="Gender">Gender</string>
+    <string name="Male">Male</string>
+    <string name="Female">Female</string>
+    <string name="DOB">Date Of Birth</string>
+    <string name="savenext">Save and Next Page</string>
+    <string name="appointment_id">appointment_id</string>
+    <string name="ChildName">Child Name</string>
+    <string name="GuardianName">Guardian Name</string>
+    <string name="Date">Date</string>
+    <string name="status">status</string>
+    <string name="NAME">NAME</string>
+    <string name="EMAILID">EMAIL ID</string>
+    <string name="CONTACTNUMBER">CONTACT NUMBER</string>
+    <string name="ADDRESS">ADDRESS</string>
+    <string name="ye">Years of experience</string>
+    <string name="MCInumber">MCI number</string>
+    <string name="DEGREE">DEGREE</string>
+    <string name="SPECIALIZATION">SPECIALIZATION</string>
+    <string name="CLINIC">HOSPITAL/PERSONAL CLINIC</string>
+    <string name="NothingHere">NothingHere</string>
+    <string name="Name">Name</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="reenter">Re-Enter Password</string>
+    <string name="Degree">Degree</string>
+    <string name="phn">Phone number</string>
+    <string name="Specialization">Specialization</string>
+    <string name="City">City</string>
+    <string name="mci">MCI Registration Number</string>
+    <string name="ey">Experience in years</string>
+    <string name="pc">Personal Clinic/Hospital</string>
+    <string name="up">Upload Picture</string>
+    <string name="ca">Create Account</string>
+    <string name="Description">Description</string>
+    <string name="Medication">Medication</string>
+    <string name="Testimonal">Testimonal</string>
+    <string name="name">name</string>
+    <string name="profession">profession</string>
+    <string name="experience_year">experience_year</string>
+    <string name="DiseaseTag">Disease Tag</string>
+    <string name="Filename">Filename.type</string>
+    <string name="da">Donot have an account?</string>
+    <string name="SignUp">Sign Up</string>
+    <string name="Login">Login</string>
+    <string name="EMAIL">EMAIL</string>
+    <string name="PASSWORD">PASSWORD</string>
+
+    <string name="fp">Forgot Password?</string>
+    <string name="mu">Multiple File Upload</string>
+    <string name="fu">Final Upload</string>
+    <string name="Address">Address</string>
+
+    <string name="rc">Request a password change link</string>
+    <string name="pa">Register as Parent</string>
+    <string name="dr">Register as Doctor</string>
+    <string name="CHOOSE">CHOOSE</string>
+    <string name="du">Fill Up the details</string>
+    <string name="BowelMovement">Bowel Movement</string>
+    <string name="Breastfeed">Breast feed</string>
+    <string name="Vomit">Vomit</string>
+    <string name="Dehydration">Dehydration</string>
+    <string name="Fever">Fever</string>
+    <string name="Immunisation">Immunisation</string>
+    <string name="Inception">Inception</string>
+    <string name="InfectedArea">Infected Area</string>
+    <string name="Intake">Intake</string>
+    <string name="Environment">Environment</string>
+    <string name="Crying">Crying</string>
+    <string name="Diagnosis">Diagnosis</string>
+    <string name="Chat">Chat</string>
+
+
 
 
 </resources>

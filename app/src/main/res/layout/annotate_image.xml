@@ -28,6 +28,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="600dp"
         android:background="@drawable/bg_btn_white_pressed"
-        android:text="Go Back" />
+        android:text="@string/GoBack" />
 
     </RelativeLayout>
