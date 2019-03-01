@@ -1,5 +1,4 @@
 package com.example.test;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -21,7 +20,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
-
 public class SplashScreen extends AppCompatActivity {
     private FirebaseAuth mAuth;String userEmail;FirebaseFirestore db;
     public void getUser(String userEmail){

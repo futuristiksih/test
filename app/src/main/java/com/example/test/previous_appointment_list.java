@@ -18,7 +18,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-
 public class previous_appointment_list extends Fragment {
     View view;
     ArrayList<myDoctors> arrayList;previousappointmentAdapter adapter;ArrayList<String> doc_emails,ids,names;String doc_name;
