@@ -324,7 +324,6 @@ public class ChatActivity extends AppCompatActivity {
     private void loadMessages() {
 
         DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserId).child(mChatUser);
-
         Query messageQuery = messageRef.limitToLast(mCurrentPage * TOTAL_ITEMS_TO_LOAD);
 
 
