@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="white">#ffffff</color>
+    <color name="solid_red">#fff00000</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#93A1FA</color>
-    <color name="colorAccent">#FF4081</color>
+
+<color name="colorAccent">#945456</color>
     <color name="text_primary">#000000</color>
     <color name="text_secondary">#000000</color>
     <color name="window_background">#FFFFFF</color>
@@ -10,6 +13,8 @@
     <color name="black_overlay">#66000000</color>
     <color name="purple_trans">#66872C76</color>
     <color name="yellow">#FFF895</color>
+    <color name="goldenyellow">#FFDF00</color>
     <color name="green">#39ac39</color>
+
     <color name="txt_hint">#33FFFFFF</color>
 </resources>

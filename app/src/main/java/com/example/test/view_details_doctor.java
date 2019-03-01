@@ -1,4 +1,5 @@
 package com.example.test;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,13 +15,14 @@ import android.widget.RelativeLayout;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.core.UserWriteRecord;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
 
 public class view_details_doctor extends Fragment {
-    FirebaseFirestore db;String parent_email,child_name,id;RadioButton male,female;Button chat,diagnosis;
+    FirebaseFirestore db;String parent_email,parent_uid,child_name,id;RadioButton male,female;Button chat,diagnosis;
     EditText immunization,bowel_movement,fever,inception,infected_area,intake,environment,crying,name,dob,birth_weight;CheckBox breast_feedC,vomitC,dehydrationC;
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_details_doctor, container, false);getActivity().setTitle("REPORT DETAILS");
@@ -36,8 +38,9 @@ public class view_details_doctor extends Fragment {
         intake.setEnabled(false);environment.setEnabled(false);crying.setEnabled(false);breast_feedC.setEnabled(false);vomitC.setEnabled(false);dehydrationC.setEnabled(false);
         dob.setEnabled(false);birth_weight.setEnabled(false);name.setEnabled(false);male.setEnabled(false);female.setEnabled(false);
 
-        Bundle bundle=getArguments();parent_email=bundle.getString("email");child_name=bundle.getString("name");id=bundle.getString("id");
+        final Bundle bundle=getArguments();parent_email=bundle.getString("email");child_name=bundle.getString("name");id=bundle.getString("id");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         assert user != null;
         final String email = user.getEmail();db=FirebaseFirestore.getInstance();
         db.collection("Email").document("parent "+parent_email).collection("sent_appointments").document(child_name+" "+email).collection("Dates").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -64,6 +67,12 @@ public class view_details_doctor extends Fragment {
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
+                //Parent UID
+                chatIntent.putExtra("user_id","14qspZCJ5AePbYkdja071GgC6pK2");
+                chatIntent.putExtra("user_name", parent_email);
+                startActivity(chatIntent);
+
 
             }
         });
@@ -73,11 +82,13 @@ public class view_details_doctor extends Fragment {
                 Bundle bundle1=new Bundle();
                 bundle1.putString("child_name",child_name);
                 bundle1.putString("parent_email",parent_email);
-                doctorDiagnosis diagnosis=new doctorDiagnosis();
-                diagnosis.setArguments(bundle1);
+                annotateImage img = new annotateImage();
+                img.setArguments(bundle1);
+//                doctorDiagnosis diagnosis=new doctorDiagnosis();
+//                diagnosis.setArguments(bundle1);
                 android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 ((RelativeLayout)getActivity().findViewById(R.id.log)).removeAllViews();
-                fragmentManager.beginTransaction().replace(R.id.log,diagnosis).commit();
+//                fragmentManager.beginTransaction().replace(R.id.log,diagnosis).commit();
 
             }
         });

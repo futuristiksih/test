@@ -15,6 +15,8 @@
         <item
             android:id="@+id/prev_appointments"
             android:title="PREVIOUS APPOINTMENTS" />
+
+
         <item
             android:id="@+id/signout"
             android:title="SIGN OUT" />

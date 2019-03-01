@@ -16,9 +16,9 @@
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/navPic"
-        android:layout_width="wrap_content"
-        android:layout_height="94dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="left" />
 
     <TextView
         android:id="@+id/navName"
