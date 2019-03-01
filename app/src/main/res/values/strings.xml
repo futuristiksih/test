@@ -45,7 +45,7 @@
     <string name="Password">Password</string>
     <string name="reenter">Re-Enter Password</string>
     <string name="Degree">Degree</string>
-    <string name="phn">Phone number</string>
+    <string name="phn">Phone number</string> 
     <string name="Specialization">Specialization</string>
     <string name="City">City</string>
     <string name="mci">MCI Registration Number</string>
