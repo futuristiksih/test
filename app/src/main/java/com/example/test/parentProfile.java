@@ -1,10 +1,16 @@
 package com.example.test;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.view.menu.ActionMenuItem;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +26,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,17 +44,81 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class parentProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     TextView email,address,name,phone;
-    CircularImageView parentPic,navPic;String emailid;
+    CircularImageView parentPic,navPic;String emailid;String imageFilePath,imageFileName;
     FirebaseFirestore db;private StorageReference imageref;FirebaseUser user;MenuItem menuItem;
-    public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;TextView navName;
+    public static final int RESULT_LOAD_IMAGE = 1,REQUEST_CAPTURE_IMAGE = 2;;Uri selectedImage;TextView navName;
     private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    private File createImageFile() throws IOException {
+        imageFileName = "parentPic"+email.getText().toString();
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);// File storageDir = Environment.getExternalStorageDirectory();
+        File image = File.createTempFile(imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        imageFilePath = image.getAbsolutePath();
+        return image;
+    }
+    private void openCameraIntent() {
+        Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(pictureIntent.resolveActivity(getPackageManager()) != null){
+            //Create a file to store the image
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            if (photoFile != null) {
+                Log.i("File"," created");
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.example.android.test.fileprovider", photoFile);
+                Log.i("Photouri",photoURI.toString());
+                pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        photoURI);
+                startActivityForResult(pictureIntent,
+                        REQUEST_CAPTURE_IMAGE);
+            }
+        }
+    }
+    public void startDialog() {
+        AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(parentProfile.this);
+        myAlertDialog.setTitle("Upload Picture Option");
+        myAlertDialog.setMessage("How do you want to set your picture?");
+        myAlertDialog.setPositiveButton("Gallery",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent i=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    }
+                });
+        myAlertDialog.setNegativeButton("Camera",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        openCameraIntent();
+                    }
+                });
+        myAlertDialog.show();
+    }
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
     public void updateParent(objectParent parent){
         name.setText(parent.getName());email.setText(parent.getEmail());address.setText(parent.getAddress());phone.setText(parent.getPhone());
         final NavigationView navigationView = findViewById(R.id.nav_view);navigationView.setNavigationItemSelectedListener(this);
@@ -69,7 +141,11 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+        changeStatusBarColor();setContentView(R.layout.activity_main);
         Toolbar toolbar =findViewById(R.id.toolbar);setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -85,7 +161,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
         assert user != null;
         emailid = user.getEmail();
         db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("Email").document("parent "+emailid);
+        final DocumentReference docRef = db.collection("Email").document("parent "+emailid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -93,6 +169,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
                     DocumentSnapshot document = task.getResult();
                     assert document != null;
                     if (document.exists()) {
+                        String uid=user.getUid();docRef.update("uid",uid);
                         objectParent parent = document.toObject(objectParent.class);updateParent(parent);
                     }
                     else {
@@ -131,8 +208,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
                 parentPic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent i=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(i,RESULT_LOAD_IMAGE);
+                       startDialog();
                     }
                 });
 

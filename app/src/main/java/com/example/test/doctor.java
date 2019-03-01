@@ -40,7 +40,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
-public class doctor extends Fragment {
+public class doctor extends Fragment{
     EditText name, email, pass,phone,city,checkPassword,degree,specialization,mci,exp_yrs, clinic;ImageView imageView;Button signup,uploadpic;
     RadioGroup genderR;RadioButton radioButton;String gender;
     View view;FirebaseFirestore db;private FirebaseAuth mAuth;private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -216,7 +216,7 @@ public class doctor extends Fragment {
                             }
                             else{
                                     db = FirebaseFirestore.getInstance();
-                                    objectDoctor current = new objectDoctor(name.getText().toString().trim(), phone.getText().toString().trim(), email.getText().toString().trim(),degree.getText().toString().trim(),gender, clinic.getText().toString(),mci.getText().toString(),specialization.getText().toString(),city.getText().toString(),exp_yrs.getText().toString(),"0",false);
+                                    objectDoctor current = new objectDoctor(name.getText().toString().trim(), phone.getText().toString().trim(), email.getText().toString().trim(),degree.getText().toString().trim(),gender, clinic.getText().toString(),mci.getText().toString(),specialization.getText().toString(),city.getText().toString(),exp_yrs.getText().toString(),"0",false,"0");
                                     db.collection("Email").document("doctor "+email.getText().toString().trim()).set(current)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
