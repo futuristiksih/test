@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.core.UserWriteRecord;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -27,7 +26,6 @@ import java.util.Map;
 
 public class view_details_doctor extends Fragment {
     FirebaseFirestore db;String parent_email,parent_uid,child_name,id;RadioButton male,female;Button chat,diagnosis;
-    ArrayList<CharSequence> filenames;
     EditText immunization,bowel_movement,fever,inception,infected_area,intake,environment,crying,name,dob,birth_weight;CheckBox breast_feedC,vomitC,dehydrationC;
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_details_doctor, container, false);getActivity().setTitle("REPORT DETAILS");
@@ -38,7 +36,6 @@ public class view_details_doctor extends Fragment {
         dob=view.findViewById(R.id.dob);birth_weight=view.findViewById(R.id.birth_weight);name=view.findViewById(R.id.child_name);
         male=view.findViewById(R.id.male);female=view.findViewById(R.id.female);
         chat=view.findViewById(R.id.btn_chat);diagnosis=view.findViewById(R.id.btn_diagnosis);
-        filenames=new ArrayList<>();
 
         immunization.setEnabled(false);bowel_movement.setEnabled(false);fever.setEnabled(false);inception.setEnabled(false);infected_area.setEnabled(false);
         intake.setEnabled(false);environment.setEnabled(false);crying.setEnabled(false);breast_feedC.setEnabled(false);vomitC.setEnabled(false);dehydrationC.setEnabled(false);
@@ -78,15 +75,7 @@ public class view_details_doctor extends Fragment {
                 parent_uid=documentSnapshot.get("uid").toString();
             }
         });
-        db.collection("Email").document("parent "+parent_email).collection("sent_appointments").document(child_name+" "+email).collection("Dates")
-                .document(""+id).collection("Untag_images").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for(QueryDocumentSnapshot doc:queryDocumentSnapshots){
-                    filenames.add(doc.getString("filename"));
-                }
-            }
-        });
+
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,7 +91,8 @@ public class view_details_doctor extends Fragment {
                 Bundle bundle1=new Bundle();
                 bundle1.putString("child_name",child_name);
                 bundle1.putString("parent_email",parent_email);
-                bundle1.putCharSequenceArrayList("filenames",filenames);
+                bundle1.putString("id",id);
+
 
                 annotateImage img = new annotateImage();
                 img.setArguments(bundle1);
