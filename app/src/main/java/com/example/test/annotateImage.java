@@ -5,7 +5,11 @@ import android.provider.SyncStateContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -39,21 +43,22 @@ public class annotateImage extends Fragment {
     private ProgressDialog progressDialog;
     //list to hold all the uploaded images
     private List<Upload> uploads;
-    String child_name,parent_email,id;
+    String child_name, parent_email, id;
     ArrayList<String> filenames;
     FirebaseFirestore db;
     FirebaseUser user;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.annotate_image, container, false);
         getActivity().setTitle("Annotate Image");
-        db=FirebaseFirestore.getInstance();
-        Bundle bundle=getArguments();
-        child_name=bundle.getString("child_name");
-        parent_email=bundle.getString("parent_email");
-        id=bundle.getString("id");
-        filenames=new ArrayList<>();
-        user=FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+        Bundle bundle = getArguments();
+        child_name = bundle.getString("child_name");
+        parent_email = bundle.getString("parent_email");
+        id = bundle.getString("id");
+        filenames = new ArrayList<>();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -66,16 +71,16 @@ public class annotateImage extends Fragment {
 
 
         db.collection("Email")
-                .document("parent "+parent_email)
+                .document("parent " + parent_email)
                 .collection("sent_appointments")
-                .document(child_name+" "+user.getEmail())
+                .document(child_name + " " + user.getEmail())
                 .collection("Dates")
-                .document(""+id).collection("Untag_images").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                .document("" + id).collection("Untag_images").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
                 progressDialog.dismiss();
-                for(QueryDocumentSnapshot doc:queryDocumentSnapshots){
+                for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                     filenames.add(doc.getString("filename"));
                 }
                 adapter = new ImageAdapter(getActivity(), filenames);
@@ -85,5 +90,21 @@ public class annotateImage extends Fragment {
 
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_diagnosis, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_save) {
+            Log.i("print","anything");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
