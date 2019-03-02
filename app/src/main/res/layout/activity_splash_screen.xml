@@ -9,13 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/bg" />
+
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="77.87dp"
-        android:layout_height="77dp"
-        android:src="@drawable/ic_menu_gallery"
+        android:layout_width="112sp"
+        android:layout_height="112sp"
+        android:layout_marginLeft="@dimen/space40"
         android:layout_marginTop="@dimen/btn_height"
-        android:layout_marginLeft="@dimen/space40"/>
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo512" />
     <LinearLayout
         android:id="@+id/ll_bottom"
         android:orientation="vertical"

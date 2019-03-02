@@ -57,4 +57,9 @@
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
     </style>
 
+    <style name="choosebuttontheme" parent="Theme.AppCompat.Light.NoActionBar">\
+    <item name="colorButtonNormal">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
+    </style>
+
 </resources>

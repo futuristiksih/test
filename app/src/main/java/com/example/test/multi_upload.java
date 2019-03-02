@@ -52,9 +52,9 @@ public class multi_upload extends AppCompatActivity {
     String immunization,bowel_movement,fever,inception,infected_area,intake,environment,crying,doc_name,doc_email,dob,birth_weight,child_name,gender,
             vomit,breast_feed,dehydration,img_filename;
     private static final int RESULT_LOAD_IMAGE = 1, REQUEST_CAPTURE_IMAGE = 2;
-    private ImageButton mSelectBtn;
+    private Button mSelectBtn;
     private RecyclerView mUploadList;
-    private List<String> fileNameList, fileDoneList; // List to maintain the Recyler view
+    private List<String> fileNameList, fileDoneList,fileUrlList; // List to maintain the Recyler view
     private UploadListAdapter uploadListAdapter;
     private StorageReference mStorage;String imageFilePath;// image file path for new image created from camera
     FirebaseFirestore db;
@@ -82,16 +82,37 @@ public class multi_upload extends AppCompatActivity {
                         final childDetails child = new childDetails(immunization, bowel_movement, fever, inception, infected_area, intake, environment, crying, vomit, breast_feed, dehydration);
                         childReference.collection("Dates").document("dp_"+getDate()+"_"+doc_count).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            public void onSuccess(final DocumentSnapshot documentSnapshot) {
                                 Map<String,Object> details=new HashMap<>();
                                 details.put("child_details",child);
                                 Map<String, Object> diagnosis = new HashMap<>();
                                 diagnosis.put("diagnosis",details);
                                 childReference.collection("Dates").document(documentSnapshot.getId()).set(diagnosis);
+                                for(int i = 0;i < fileNameList.size();i++){
+                                    Map<String,Object> n = new HashMap<>();
+                                    n.put("filename",fileNameList.get(i));
+                                    childReference.collection("Dates").document(documentSnapshot.getId())
+                                            .collection("Untag_images").document(""+i).set(n)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(multi_upload.this, "Done", Toast.LENGTH_SHORT).show();
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(multi_upload.this, "Not Done", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
+
+                                }
                                 myPatients patients=new myPatients(child_name,"dp_"+getDate()+"_"+doc_count,guardian,"pending",getDate());
                                 db.collection("Email").document("doctor "+doc_email).collection("received_appointments").document(child_name+" "+user.getEmail()).set(patients).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
+
                                         Toast.makeText(getApplicationContext(),"APPOINTMENT REQUEST SENT WITH CHILD'S DETAILS",Toast.LENGTH_LONG).show();
                                         Intent i=new Intent(getApplicationContext(),parentProfile.class);startActivity(i);finish();
                                     }
@@ -125,7 +146,7 @@ public class multi_upload extends AppCompatActivity {
 
         mStorage = FirebaseStorage.getInstance().getReference();
         mSelectBtn = findViewById(R.id.select_btn);mUploadList =findViewById(R.id.upload_list);
-        fileNameList = new ArrayList<>();fileDoneList = new ArrayList<>();
+        fileNameList = new ArrayList<>();fileDoneList = new ArrayList<>();fileUrlList = new ArrayList<>();
         uploadListAdapter = new UploadListAdapter(fileNameList, fileDoneList);
 
         //Set the Recycler View adapter
@@ -178,6 +199,7 @@ public class multi_upload extends AppCompatActivity {
 
                         }
                     });
+
                     //Toast.makeText(this, "Uploaded "+totalItemsSelected+" files Sucessfully", Toast.LENGTH_SHORT).show();
                 }
                 //Toast.makeText(this, "Selected Multiple Files", Toast.LENGTH_SHORT).show();
@@ -223,19 +245,20 @@ public class multi_upload extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath, options);
 
 
-            fileNameList.add(img_filename);
+            String fn = img_filename+".jpeg";
+            fileNameList.add(fn);
             fileDoneList.add("uploading");
             uploadListAdapter.notifyDataSetChanged();
 
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
             byte[] byteData = baos.toByteArray();
 
             final int finalI = (fileDoneList.isEmpty())?0: fileDoneList.size() - 1;
 
 
-            UploadTask uploadTask = mStorage.child("Upload_images/"+img_filename).putBytes(byteData);
+            UploadTask uploadTask = mStorage.child("Untag_images/"+fn).putBytes(byteData);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
@@ -309,9 +332,9 @@ public class multi_upload extends AppCompatActivity {
     // Create the path uri along for the temperory image File
     private File createImageFile() throws IOException {
         String timeStamp =
-                new SimpleDateFormat("yyyyMMdd",
+                new SimpleDateFormat("yyyyMMdd_hhmmss",
                         Locale.getDefault()).format(new Date());
-        String imageFileName = "IMG_" + timeStamp + "_";
+        String imageFileName = "IMG_" + timeStamp;
         img_filename=imageFileName;
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         // File storageDir = Environment.getExternalStorageDirectory();

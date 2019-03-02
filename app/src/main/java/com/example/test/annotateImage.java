@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,8 @@ public class annotateImage extends Fragment {
 
     //progress dialog
     private ProgressDialog progressDialog;
+
+    FirebaseFirestore db;
 
     //list to hold all the uploaded images
     private List<Upload> uploads;
@@ -52,7 +55,8 @@ public class annotateImage extends Fragment {
         //displaying progress dialog while fetching images
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
-        mDatabase = FirebaseDatabase.getInstance().getReference("upload_images");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("Untag_images");
 
         //adding an event listener to fetch values
         mDatabase.addValueEventListener(new ValueEventListener() {
