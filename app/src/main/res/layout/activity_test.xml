@@ -14,7 +14,7 @@
 
         <!-- Label -->
         <TextView
-            android:text="Test Name"
+            android:text="@string/TestName"
             style="@style/CategoryStyle" />
 
         <!-- Input fields -->

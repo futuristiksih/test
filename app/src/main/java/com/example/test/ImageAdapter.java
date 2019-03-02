@@ -34,6 +34,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
         holder.textViewName.setText(upload.getName());
 
+
         Glide.with(context).load(upload.getUrl()).into(holder.imageView);
     }
 

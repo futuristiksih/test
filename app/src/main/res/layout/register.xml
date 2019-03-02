@@ -21,7 +21,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
         android:background="@drawable/bg_btn_white_pressed"
-        android:text="Register as Parent" />
+        android:text="@string/pa" />
 
     <Button
         android:id="@+id/reg_doctor"
@@ -30,6 +30,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="300dp"
         android:background="@drawable/bg_btn_white_pressed"
-        android:text="Register as Doctor" />
+        android:text="@string/dr" />
 
 </RelativeLayout>

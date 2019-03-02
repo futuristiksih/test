@@ -18,7 +18,7 @@
         android:id="@+id/iv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fill Up the details"
+        android:text="@string/du"
 
         android:layout_marginLeft="150dp"
         android:layout_marginTop="@dimen/space40"/>
@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="Bowel Movement"
+                    android:text="@string/BowelMovement"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -81,7 +81,7 @@
                     android:id="@+id/breast_feed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Breast feed" />
+                    android:text="@string/Breastfeed" />
 
                 <CheckBox
                     android:id="@+id/vomit"
@@ -92,7 +92,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="14dp"
                     android:layout_marginRight="14dp"
-                    android:text="Vomit" />
+                    android:text="@string/Vomit" />
 
                 <CheckBox
                     android:id="@+id/dehydration"
@@ -103,7 +103,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="14dp"
                     android:layout_marginRight="14dp"
-                    android:text="Dehydration" />
+                    android:text="@string/Dehydration" />
             </LinearLayout>
 
             <LinearLayout
@@ -118,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="Fever"
+                    android:text="@string/Fever"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -147,7 +147,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="Immunisation"
+                    android:text="@string/Immunisation"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -175,7 +175,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="Inception"
+                    android:text="@string/Inception"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -204,7 +204,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="Infected Area"
+                    android:text="@string/InfectedArea"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -233,7 +233,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="Intake"
+                    android:text="@string/Intake"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -262,7 +262,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="Environment"
+                    android:text="@string/Environment"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -291,7 +291,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="Crying"
+                    android:text="@string/Crying"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -322,7 +322,7 @@
                     android:layout_height="@dimen/btn_height"
                     android:layout_marginBottom="@dimen/space20"
                     android:background="@drawable/btn_white_selector"
-                    android:text="Save and Next Page"
+                    android:text="@string/savenext"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt16" />

@@ -9,13 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/bg" />
+
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="77.87dp"
-        android:layout_height="77dp"
-        android:src="@drawable/ic_menu_gallery"
+        android:layout_width="112sp"
+        android:layout_height="112sp"
+        android:layout_marginLeft="@dimen/space40"
         android:layout_marginTop="@dimen/btn_height"
-        android:layout_marginLeft="@dimen/space40"/>
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo512" />
     <LinearLayout
         android:id="@+id/ll_bottom"
         android:orientation="vertical"
@@ -28,7 +30,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="See a demo of the app"
+            android:text="@string/demo"
             android:textSize="@dimen/txt14"
             android:textStyle="normal"
             android:textColor="@android:color/white"
@@ -41,7 +43,7 @@
         android:layout_above="@id/ll_bottom"
         android:layout_below="@id/iv_logo"
         android:layout_margin="@dimen/space40"
-        android:text="Diagnosis of Neonatal and pediatric"
+        android:text="@string/neoped"
         android:textColor="@android:color/white"
         android:textSize="@dimen/txt30"
         android:textStyle="bold" />
