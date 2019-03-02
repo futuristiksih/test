@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,7 +65,13 @@ public class view_details_parent extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
-                chatIntent.putExtra("user_id","ZWvTV9b4oZeSmgkgyx1lpKbZpLN2");//doctor uid
+                db.collection("Email").document("doctor "+doc_email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        doc_uid=documentSnapshot.get("uid").toString();
+                    }
+                });
+                chatIntent.putExtra("user_id",doc_uid);//doctor uid
                 chatIntent.putExtra("user_name", doc_email);
                 startActivity(chatIntent);
             }
@@ -73,7 +80,14 @@ public class view_details_parent extends Fragment {
         diagnosis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Bundle bundle1=new Bundle();
+                bundle1.putString("child_name",child_name);
+                bundle1.putString("doc_email",doc_email);
+                annotateImage img = new annotateImage();
+                img.setArguments(bundle1);
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                ((RelativeLayout)getActivity().findViewById(R.id.log)).removeAllViews();
+                fragmentManager.beginTransaction().replace(R.id.log,img).commit();
             }
         });
         return view;

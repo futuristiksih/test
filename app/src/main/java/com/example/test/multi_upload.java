@@ -64,6 +64,7 @@ public class multi_upload extends AppCompatActivity {
         SimpleDateFormat sdformat=new SimpleDateFormat("ddMMyyyy");
         return sdformat.format(calendar.getTime());
     }
+
     public void final_upload(View view){
         db=FirebaseFirestore.getInstance();final FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         final objectChild Child=new objectChild(child_name,dob,gender,birth_weight);
