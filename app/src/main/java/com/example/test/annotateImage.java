@@ -52,6 +52,8 @@ public class annotateImage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.annotate_image, container, false);
         getActivity().setTitle("Annotate Image");
+        setHasOptionsMenu(true);
+
         db = FirebaseFirestore.getInstance();
         Bundle bundle = getArguments();
         child_name = bundle.getString("child_name");
