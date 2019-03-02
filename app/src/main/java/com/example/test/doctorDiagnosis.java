@@ -58,8 +58,11 @@ public class doctorDiagnosis extends Fragment {
 
         ListView medList,testList;
         descr_text = view.findViewById(R.id.descr);addMed=view.findViewById(R.id.addMed);addTest = view.findViewById(R.id.addTest);
-        Bundle bundle=getArguments();parent_email=bundle.getString("parent_email");
+        Bundle bundle=getArguments();
+        parent_email=bundle.getString("parent_email");
         child_name=bundle.getString("child_name");
+        Log.i("e",parent_email);
+        Log.i("e",child_name);
 
         // Dialog box for testimonal addition
         addMed.setOnClickListener(new View.OnClickListener() {
@@ -304,7 +307,8 @@ public class doctorDiagnosis extends Fragment {
 
             EditText descr = view.findViewById(R.id.descr);
             Map<String,Object> description = new HashMap<>();
-            description.put("description",description);
+
+            description.put("description",descr.getText().toString());
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             assert user != null;
             String email = user.getEmail();
