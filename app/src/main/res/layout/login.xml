@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dont't have an account? "
+            android:text="@string/da"
             android:textSize="@dimen/txt14"
             android:textStyle="normal"
             android:textColor="@android:color/white"
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Sign Up"
+            android:text="@string/SignUp"
             android:textColor="@android:color/white"
             android:textSize="@dimen/txt14"
             android:textStyle="bold" />
@@ -69,7 +69,7 @@
             android:layout_below="@id/iv_back"
             android:layout_marginBottom="@dimen/space40"
             android:layout_gravity="center_horizontal"
-            android:text="Login"
+            android:text="@string/SignUp"
             android:textSize="@dimen/txt22"
             android:textColor="@android:color/white" />
 
@@ -83,7 +83,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EMAIL"
+                android:text="@string/EMAIL"
                 android:textSize="@dimen/txt10"
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="@dimen/space5"/>
@@ -110,7 +110,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PASSWORD"
+                android:text="@string/PASSWORD"
                 android:textSize="@dimen/txt10"
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="@dimen/space5"/>
@@ -139,7 +139,7 @@
                 android:layout_height="@dimen/btn_height"
                 android:layout_marginBottom="@dimen/space20"
                 android:background="@drawable/btn_white_selector"
-                android:text="Login"
+                android:text="@string/Login"
                 android:onClick="signIn"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
@@ -150,7 +150,7 @@
                 android:layout_width="@dimen/btn_width"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Forgot Password?"
+                android:text="@string/fp"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="@dimen/txt14"
                 android:textStyle="normal" />

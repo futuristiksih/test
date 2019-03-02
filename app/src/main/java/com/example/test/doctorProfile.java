@@ -1,6 +1,8 @@
 package com.example.test;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -17,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,6 +37,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -45,6 +49,13 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
     public static final int RESULT_LOAD_IMAGE = 1;Uri selectedImage;TextView navName;FirebaseFirestore db;
     StorageReference imageref;String emailid="";FirebaseUser user;
     private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
     public void updateDoctor(objectDoctor doctor){
         name.setText(doctor.getName());email.setText(doctor.getEmail());degree.setText(doctor.getDegree());phone.setText(doctor.getPhone());exp_yrs.setText(doctor.getExp_yrs());
         gender.setText(doctor.getGender());specialization.setText(doctor.getSpecialization());clinic.setText(doctor.getClinic());city.setText(doctor.getCity());mci.setText(doctor.getMci());
@@ -70,6 +81,10 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+        changeStatusBarColor();
         setContentView(R.layout.activity_main1);
 
         Toolbar toolbar =findViewById(R.id.toolbar);setSupportActionBar(toolbar);
@@ -90,7 +105,7 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
         user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null) emailid = user.getEmail();
         db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("Email").document("doctor "+emailid);
+        final DocumentReference docRef = db.collection("Email").document("doctor "+emailid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -98,6 +113,7 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
                     DocumentSnapshot document = task.getResult();
                     assert document != null;
                     if (document.exists()) {
+                        String uid=user.getUid();docRef.update("uid",uid);
                         objectDoctor doctor = document.toObject(objectDoctor.class);updateDoctor(doctor);
                     }
                     else {

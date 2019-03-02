@@ -28,7 +28,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="8"
             android:fontFamily="sans-serif-black"
-            android:text="Disease Tag"
+            android:text="@string/DiseaseTag"
             android:textSize="20sp" />
 
     </LinearLayout>

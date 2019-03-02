@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="See a demo of the app"
+            android:text="@string/demo"
             android:textSize="@dimen/txt14"
             android:textStyle="normal"
             android:textColor="@android:color/white"
@@ -43,7 +43,7 @@
         android:layout_above="@id/ll_bottom"
         android:layout_below="@id/iv_logo"
         android:layout_margin="@dimen/space40"
-        android:text="Diagnosis of Neonatal and pediatric"
+        android:text="@string/neoped"
         android:textColor="@android:color/white"
         android:textSize="@dimen/txt30"
         android:textStyle="bold" />

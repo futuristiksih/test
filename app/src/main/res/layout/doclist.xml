@@ -36,7 +36,7 @@
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif-medium"
             android:paddingTop="16dp"
-            android:text="NothingHere"
+            android:text="@string/NothingHere"
             android:textAppearance="?android:textAppearanceMedium"/>
 
     </RelativeLayout>

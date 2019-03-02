@@ -10,11 +10,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="310dp">
+        android:layout_height="350dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="305dp"
+            android:layout_height="350dp"
             android:background="@drawable/bg"
             android:orientation="vertical">
 
@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="  Years of experience"
+                    android:text="@string/ye"
                     android:textColor="#fff"
                     android:textSize="21sp"
                     android:textStyle="bold" />
@@ -107,13 +107,13 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
-                style="@android:style/Widget.DeviceDefault.Light.RatingBar"
+                android:theme="@style/RatingBar" 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:stepSize="0.1" />
+                android:stepSize="0.5" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -143,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="EMAIL ID"
+                    android:text="@string/EMAILID"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -172,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="CONTACT NUMBER"
+                    android:text="@string/CONTACTNUMBER"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -201,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="MCI number"
+                    android:text="@string/MCInumber"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -231,7 +231,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="DEGREE"
+                    android:text="@string/DEGREE"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -262,7 +262,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="SPECIALIZATION"
+                    android:text="@string/SPECIALIZATION"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -293,7 +293,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="HOSPITAL/PERSONAL CLINIC"
+                    android:text="@string/CLINIC"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -314,7 +314,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="CHOOSE" />
+                android:text="@string/CHOOSE" />
         </LinearLayout>
     </ScrollView>
 
