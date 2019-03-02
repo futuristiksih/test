@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/Name"
+                    android:text="Name"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -73,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/Email"
+                    android:text="Email"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -103,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/Password"
+                    android:text="Password"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -132,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/reenter"
+                    android:text="Re-Enter Password"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -161,7 +161,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/DOB"
+                    android:text="Date Of Birth"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -190,7 +190,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/Gender"
+                    android:text="Gender"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -208,7 +208,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/window_background"
                         android:checked="true"
-                        android:text="@string/Male"
+                        android:text="Male"
                         android:textColor="@android:color/white"
                         android:textSize="15dp" />
 
@@ -219,7 +219,7 @@
                         android:layout_marginLeft="10dp"
                         android:buttonTint="@color/window_background"
                         android:checked="false"
-                        android:text="@string/Female"
+                        android:text="Female"
                         android:textColor="@android:color/white"
                         android:textSize="15dp" />
                 </RadioGroup>
@@ -238,7 +238,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/Degree"
+                    android:text="Degree"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -267,7 +267,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/phn"
+                    android:text="Phone number"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -295,7 +295,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/Specialization"
+                    android:text="Specialization"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -324,7 +324,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/City"
+                    android:text="City"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -353,7 +353,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/mci"
+                    android:text="MCI Registration Number"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -382,7 +382,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/ey"
+                    android:text="Experience in years"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -411,7 +411,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/pc"
+                    android:text="Personal Clinic/Hospital"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -438,13 +438,12 @@
                     android:layout_width="163dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_btn_white_pressed"
-                    android:text="@string/up" />
+                    android:text="Upload Picture" />
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="132dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent" />
+                    android:layout_width="155dp"
+                    android:layout_height="50dp" />
 
             </LinearLayout>
 
@@ -461,7 +460,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space20"
                     android:background="@drawable/bg_btn_white"
-                    android:text="@string/ca"
+                    android:text="Create Account"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt16" />

@@ -93,7 +93,6 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
         drawer.addDrawerListener(toggle);toggle.syncState();
         NavigationView navigationView = findViewById(R.id.nav_view);navigationView.setNavigationItemSelectedListener(this);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
         name=findViewById(R.id.name);name.setEnabled(false);phone=findViewById(R.id.phone);phone.setEnabled(false);
         email=findViewById(R.id.email);email.setEnabled(false);degree=findViewById(R.id.degree);degree.setEnabled(false);
         gender =findViewById(R.id.gender);gender.setEnabled(false);clinic=findViewById(R.id.clinic);clinic.setEnabled(false);
@@ -214,6 +213,7 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
             menuItem.setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.contentpage, new appointmentList()).commit();
         }
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

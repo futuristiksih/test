@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/Name"
+                    android:text="Name"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -73,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/Email"
+                    android:text="Email"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -103,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/Password"
+                    android:text="Password"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -132,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/reenter"
+                    android:text="Re-Enter Password"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -161,7 +161,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/Address"
+                    android:text="Address"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -190,7 +190,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space5"
-                    android:text="@string/phn"
+                    android:text="Phone number"
                     android:textColor="@android:color/white"
                     android:textSize="20dp" />
 
@@ -217,13 +217,12 @@
                     android:layout_width="163dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_btn_white_pressed"
-                    android:text="@string/up" />
+                    android:text="Upload Picture" />
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="132dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent" />
+                    android:layout_width="147dp"
+                    android:layout_height="50dp" />
 
             </LinearLayout>
 
@@ -240,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space20"
                     android:background="@drawable/bg_btn_white"
-                    android:text="@string/ca"
+                    android:text="Create Account"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt16" />
