@@ -43,6 +43,8 @@ public class annotateImage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.annotate_image, container, false);
         getActivity().setTitle("Annotate Image");
+
+        db=FirebaseFirestore.getInstance();
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -56,7 +58,7 @@ public class annotateImage extends Fragment {
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("Untag_images");
+//        mDatabase = FirebaseDatabase.getInstance().getReference("Untag_images");
 
         //adding an event listener to fetch values
         mDatabase.addValueEventListener(new ValueEventListener() {
