@@ -3,6 +3,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -23,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -311,7 +313,12 @@ public class doctorDiagnosis extends Fragment {
                     .document("doctor " + user.getEmail())
                     .collection("received_appointments")
                     .document(child_name + " " + parent_email)
-                    .set(description, SetOptions.merge());
+                    .set(description, SetOptions.merge()).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.i("i","hoini");
+                }
+            });
             Toast.makeText(getActivity(), "File Uploaded Successfully", Toast.LENGTH_SHORT).show();
             return true;
         }

@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,19 +26,25 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 public class annotateImage extends Fragment {
     //recyclerview objectprivate
     RecyclerView recyclerView;
     //adapter objectprivate
-    RecyclerView.Adapter adapter;
+    ImageAdapter adapter;
     //database reference
     private DatabaseReference mDatabase;
     //progress dialog
@@ -91,6 +99,8 @@ public class annotateImage extends Fragment {
         });
 
 
+
+
         return view;
     }
 
@@ -105,6 +115,45 @@ public class annotateImage extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_save) {
             Log.i("print","anything");
+            final CollectionReference path = db.collection("Email")
+                    .document("parent " + parent_email)
+                    .collection("sent_appointments")
+                    .document(child_name + " " + user.getEmail())
+                    .collection("Dates")
+                    .document("" + id).collection("Untag_images");
+
+            path.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                    int i=0;
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        Map<String,Object> tag = new HashMap<>();
+                        tag.put("tag",adapter.getItem(i));
+                        i++;
+                        String id = doc.getId();
+                        path.document(id).set(tag, SetOptions.merge());
+                    }
+                }
+            });
+
+            for(int i=0;i<adapter.getItemCount();i++){
+                String msg = (String) adapter.getItem(i);
+                Log.i("msg",msg);
+            }
+            Bundle bundle1=new Bundle();
+            bundle1.putString("child_name",child_name);
+            bundle1.putString("parent_email",parent_email);
+
+
+            doctorDiagnosis dg = new doctorDiagnosis();
+            dg.setArguments(bundle1);
+            android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            ((RelativeLayout)getActivity().findViewById(R.id.log)).removeAllViews();
+            fragmentManager.beginTransaction().replace(R.id.log,dg).commit();
+
+
             return true;
         }
         return super.onOptionsItemSelected(item);

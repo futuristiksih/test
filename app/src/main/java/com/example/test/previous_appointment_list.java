@@ -20,22 +20,28 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 public class previous_appointment_list extends Fragment {
     View view;
-    ArrayList<myDoctors> arrayList;previousappointmentAdapter adapter;ArrayList<String> doc_emails,ids,names;String doc_name;
+    ArrayList<myDoctors> arrayList;
+    previousappointmentAdapter adapter;
+    ArrayList<String> doc_emails,ids,names;
+    String doc_name;
     FirebaseFirestore db;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.doclist, container, false);getActivity().setTitle("CHOOSE A REPORT");
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;final String email = user.getEmail();
-        ListView listView =  view.findViewById(R.id.doclist);arrayList = new ArrayList<>();
+        ListView listView =  view.findViewById(R.id.doclist);
+        arrayList = new ArrayList<>();
         adapter = new previousappointmentAdapter(getActivity(),arrayList);
         db = FirebaseFirestore.getInstance();
-        doc_emails= new ArrayList<>();ids=new ArrayList<>();names=new ArrayList<>();
+        doc_emails= new ArrayList<>();ids=new ArrayList<>();
+        names=new ArrayList<>();
         db.collection("Email").document("parent "+user.getEmail()).collection("sent_appointments").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for(QueryDocumentSnapshot documentSnapshot:queryDocumentSnapshots){
                     String[] doc=documentSnapshot.getId().split(" ");
+
                     final String doc_email=doc[doc.length-1];
                     final String child_name=documentSnapshot.get("name").toString();
                     db.collection("Email").document("doctor "+doc_email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -46,9 +52,11 @@ public class previous_appointment_list extends Fragment {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     if(documentSnapshot.exists()){
-                                    arrayList.add(new myDoctors(child_name,documentSnapshot.get("id").toString(),doc_name,documentSnapshot.get("status").toString(),documentSnapshot.get("date").toString()));
-                                    doc_emails.add(doc_email);ids.add(documentSnapshot.get("id").toString());names.add(child_name);
-                                    adapter.notifyDataSetChanged();
+                                        arrayList.add(new myDoctors(child_name,documentSnapshot.get("id").toString(),doc_name,documentSnapshot.get("status").toString(),documentSnapshot.get("date").toString()));
+                                        doc_emails.add(doc_email);
+                                        ids.add(documentSnapshot.get("id").toString());
+                                        names.add(child_name);
+                                        adapter.notifyDataSetChanged();
                                     }
                                 }
                             });

@@ -31,7 +31,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     private StorageReference mStorageRef;
     private Context context;
-    private ArrayList<String> uploads;
+    private ArrayList<String> uploads,tagList;
 
 
     //    private List<Upload> uploads;
@@ -46,6 +46,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_image, parent, false);
 
+        tagList = new ArrayList<String>();
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
         ViewHolder viewHolder = new ViewHolder(v);
@@ -54,7 +55,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final ViewHolder h = holder;
         final String upload = uploads.get(position);
 
@@ -82,15 +83,19 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 builder.setView(promptsView);
                 final AutoCompleteTextView textView = (AutoCompleteTextView)promptsView.findViewById(R.id.autoCompleteTextView);
 
+                //textView.setText(holder.textViewName.getText().toString());
+
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        String s = textView.getText().toString();
+                        tagList.add(position,s);
                         h.textViewName.setText(textView.getText());
 
                     }
                 });
-                builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
@@ -102,10 +107,15 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     }
 
+
+    public String getItem(int position) {
+        return tagList.get(position);
+    }
     @Override
     public int getItemCount() {
         return uploads.size();
     }
+
 
     class ViewHolder extends RecyclerView.ViewHolder  {
 
