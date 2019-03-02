@@ -64,12 +64,18 @@ public class view_details_doctor extends Fragment {
                 if(details.getDehydration().equals("true"))dehydrationC.setChecked(true);
             }
         });
+        db.collection("Email").document("parent "+parent_email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                parent_uid=documentSnapshot.get("uid").toString();
+            }
+        });
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
                 //Parent UID
-                chatIntent.putExtra("user_id","14qspZCJ5AePbYkdja071GgC6pK2");
+                chatIntent.putExtra("user_id",parent_uid);
                 chatIntent.putExtra("user_name", parent_email);
                 startActivity(chatIntent);
 
