@@ -51,7 +51,7 @@ public class SplashScreen extends AppCompatActivity {
         }
         changeStatusBarColor();
         setContentView(R.layout.activity_splash_screen);
-        int SPLASH_TIMEOUT = 4000;db = FirebaseFirestore.getInstance();
+        int SPLASH_TIMEOUT = 3000;db = FirebaseFirestore.getInstance();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

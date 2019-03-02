@@ -2,6 +2,7 @@ package com.example.test;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ public class previous_appointment_list extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.doclist, container, false);getActivity().setTitle("CHOOSE A REPORT");
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        assert user != null;final String email = user.getEmail();
+        assert user != null;
         ListView listView =  view.findViewById(R.id.doclist);arrayList = new ArrayList<>();
         adapter = new previousappointmentAdapter(getActivity(),arrayList);
         db = FirebaseFirestore.getInstance();
@@ -46,6 +47,7 @@ public class previous_appointment_list extends Fragment {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     if(documentSnapshot.exists()){
+                                        Log.i("name",doc_name);
                                     arrayList.add(new myDoctors(child_name,documentSnapshot.get("id").toString(),doc_name,documentSnapshot.get("status").toString(),documentSnapshot.get("date").toString()));
                                     doc_emails.add(doc_email);ids.add(documentSnapshot.get("id").toString());names.add(child_name);
                                     adapter.notifyDataSetChanged();

@@ -30,11 +30,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/demo"
-            android:textSize="@dimen/txt14"
-            android:textStyle="normal"
+            android:gravity="center_horizontal"
             android:textColor="@android:color/white"
-            android:gravity="center_horizontal"/>
+            android:textSize="@dimen/txt14"
+            android:textStyle="normal" />
     </LinearLayout>
 
     <TextView
@@ -42,8 +41,11 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/ll_bottom"
         android:layout_below="@id/iv_logo"
-        android:layout_margin="@dimen/space40"
-        android:text="@string/neoped"
+        android:layout_marginStart="@dimen/space40"
+        android:layout_marginTop="@dimen/space40"
+        android:layout_marginEnd="@dimen/space40"
+        android:layout_marginBottom="@dimen/space40"
+        android:text="DIAGNOSIS OF NEONATAL AND PAEDIATRIC SKIN DISEASES"
         android:textColor="@android:color/white"
         android:textSize="@dimen/txt30"
         android:textStyle="bold" />

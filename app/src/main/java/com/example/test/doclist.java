@@ -34,13 +34,13 @@ public class doclist extends Fragment {
         ListView listView =  Objects.requireNonNull(getView()).findViewById(R.id.doclist);
         doclistdesigns = new ArrayList<>();doclistadapter = new doclistadapter(getActivity(),doclistdesigns);
         db = FirebaseFirestore.getInstance();
-        emails=new ArrayList<String>();
+        emails=new ArrayList<>();
         db.collection("Email").whereEqualTo("verified",true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.exists()) {
+                        if (document.exists()&&Integer.parseInt(document.get("count").toString())<5) {
                             doclistdesigns.add(new doclistdesign(document.get("name").toString(),document.get("degree").toString(),document.get("exp_yrs").toString(),document.get("rating").toString(),document.get("city").toString()));
                             emails.add(document.get("email").toString());
                             doclistadapter.notifyDataSetChanged();
@@ -63,6 +63,6 @@ public class doclist extends Fragment {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.doclist, container, false);getActivity().setTitle("CHOSE A DOCTOR");return view;
+        view = inflater.inflate(R.layout.doclist, container, false);getActivity().setTitle("CHOOSE A DOCTOR");return view;
     }
 }

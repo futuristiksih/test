@@ -257,7 +257,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
         ((LinearLayout)findViewById(R.id.contentpage)).removeAllViews();
         if (id == R.id.appointment) {
             menuItem.setVisible(false);
-            fragmentManager.beginTransaction().replace(R.id.contentpage, new doclist()).commit();
+            fragmentManager.beginTransaction().replace(R.id.contentpage, new suggestions()).commit();
         }
         
         else if (id == R.id.viewprofile) {

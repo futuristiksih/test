@@ -58,7 +58,6 @@ public class multi_upload extends AppCompatActivity {
     private UploadListAdapter uploadListAdapter;
     private StorageReference mStorage;String imageFilePath;// image file path for new image created from camera
     FirebaseFirestore db;
-    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     String getDate(){
         Calendar calendar=Calendar.getInstance();
         SimpleDateFormat sdformat=new SimpleDateFormat("ddMMyyyy");
