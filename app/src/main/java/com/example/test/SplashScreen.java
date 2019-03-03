@@ -1,5 +1,10 @@
 package com.example.test;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,9 +24,70 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Locale;
 import java.util.Objects;
 public class SplashScreen extends AppCompatActivity {
-    private FirebaseAuth mAuth;String userEmail;FirebaseFirestore db;
+    private FirebaseAuth mAuth;String userEmail;FirebaseFirestore db;int SPLASH_TIMEOUT = 4000;
+    private void setLocale(String lang) {
+        Locale locale =new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config =new Configuration();
+        config.locale=locale;
+        getBaseContext().getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor =getSharedPreferences("settings",MODE_PRIVATE).edit();
+        editor.putString("My_Lang",lang);
+        editor.apply();
+
+    }
+    public void loadLocale(){
+        SharedPreferences prefs=getSharedPreferences("settings", Activity.MODE_PRIVATE);
+        String language=prefs.getString("My_Lang"," ");
+        setLocale(language);
+    }
+    private void showChangeLanguageDialog() {
+        final String[] listItems ={"हिंदी","తెలుగు","English"};
+        AlertDialog.Builder mBuilder=new AlertDialog.Builder(SplashScreen.this);
+        mBuilder.setTitle("choose language");
+        mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(which==0){
+                    setLocale("hi");
+                    recreate();
+                }
+                else if(which==1){
+                    setLocale("te");
+                    recreate();
+                }
+
+                else if(which==2){
+                    setLocale("en");
+                    recreate();
+                }
+
+            }
+        })
+        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAuth = FirebaseAuth.getInstance();
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        if(user!=null){
+                            if (user.isEmailVerified()) {
+                                userEmail=user.getEmail();getUser(userEmail);
+                            }}
+                        else{
+                            Intent registerClass = new Intent(getApplicationContext(), login.class);startActivity(registerClass);finish();}
+                    }
+                }, SPLASH_TIMEOUT);
+            }
+        });
+        AlertDialog mDialog=mBuilder.create();
+        mDialog.show();
+    }
     public void getUser(String userEmail){
         db.collection("Email").whereEqualTo("email", userEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -51,20 +117,9 @@ public class SplashScreen extends AppCompatActivity {
         }
         changeStatusBarColor();
         setContentView(R.layout.activity_splash_screen);
-        int SPLASH_TIMEOUT = 3000;db = FirebaseFirestore.getInstance();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mAuth = FirebaseAuth.getInstance();
-                FirebaseUser user = mAuth.getCurrentUser();
-                if(user!=null){
-                    if (user.isEmailVerified()) {
-                        userEmail=user.getEmail();getUser(userEmail);
-                    }}
-                    else{
-                Intent registerClass = new Intent(getApplicationContext(), login.class);startActivity(registerClass);finish();}
-            }
-        }, SPLASH_TIMEOUT);
+        db = FirebaseFirestore.getInstance();
+        loadLocale();
+        showChangeLanguageDialog();
     }
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
