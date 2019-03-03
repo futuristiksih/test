@@ -33,6 +33,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -105,18 +106,22 @@ public class multi_upload extends AppCompatActivity {
                                                     Toast.makeText(multi_upload.this, "Not Done", Toast.LENGTH_SHORT).show();
                                                 }
                                             });
-
-
                                 }
                                 myPatients patients=new myPatients(child_name,"dp_"+getDate()+"_"+doc_count,guardian,"pending",getDate());
-                                db.collection("Email").document("doctor "+doc_email).collection("received_appointments").document(child_name+" "+user.getEmail()).set(patients).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                myDetails det=new myDetails("dp_"+getDate()+"_"+doc_count,doc_name,"pending",getDate());
+                                db.collection("Email").document("doctor "+doc_email).collection("received_appointments").document(child_name+" "+user.getEmail()).set(det).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-
                                         Toast.makeText(getApplicationContext(),"APPOINTMENT REQUEST SENT WITH CHILD'S DETAILS",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                childReference.set(det, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
                                         Intent i=new Intent(getApplicationContext(),parentProfile.class);startActivity(i);finish();
                                     }
                                 });
+
                             }
                         });
                     }

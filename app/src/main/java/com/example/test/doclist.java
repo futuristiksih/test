@@ -56,15 +56,14 @@ public class doclist extends Fragment {
                             HashMap<String,Object> av = (HashMap<String, Object>) document.get("available");
                             for ( String key : av.keySet() ) {
                                 if(key.equals(weekDay)){
-                                    String timeStamp =
-                                            new SimpleDateFormat("hh",
-                                                    Locale.getDefault()).format(new Date());
+                                    String timeStamp = new SimpleDateFormat("HH",Locale.getDefault()).format(new Date());
                                     int t = Integer.parseInt(timeStamp);
                                     HashMap<String,Object> w = (HashMap<String,Object>)av.get(key);
                                     String st = w.get("start").toString().split(":")[0];
                                     int s = Integer.parseInt(st);
                                     String end = w.get("end").toString().split(":")[0];
                                     int e = Integer.parseInt(end);
+                                    Log.i("n",s+" "+t+" "+e);
                                     if(s<=t&&t<=e){
                                         doclistdesigns.add(new doclistdesign(document.get("name").toString(),document.get("degree").toString(),document.get("exp_yrs").toString(),document.get("rating").toString(),document.get("city").toString()));
                                         emails.add(document.get("email").toString());
