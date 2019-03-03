@@ -82,7 +82,7 @@ public class view_details_doctor extends Fragment {
                 Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
                 chatIntent.putExtra("user_id","14qspZCJ5AePbYkdja071GgC6pK2");
                 chatIntent.putExtra("user_name", parent_email);
-                startActivity(chatIntent);
+                startActivity(chatIntent);getActivity().finish();
             }
         });
         diagnosis.setOnClickListener(new View.OnClickListener() {

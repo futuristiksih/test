@@ -9,15 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/bg" />
-
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="112sp"
-        android:layout_height="112sp"
-        android:layout_marginLeft="@dimen/space40"
-        android:layout_marginTop="@dimen/btn_height"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/logo512" />
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/logo144"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="59dp"/>
     <LinearLayout
         android:id="@+id/ll_bottom"
         android:orientation="vertical"
@@ -25,27 +23,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:padding="@dimen/space20"
-        android:gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/txt14"
-            android:textStyle="normal" />
-    </LinearLayout>
+        android:gravity="center_horizontal"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/ll_bottom"
         android:layout_below="@id/iv_logo"
-        android:layout_marginStart="@dimen/space40"
-        android:layout_marginTop="@dimen/space40"
-        android:layout_marginEnd="@dimen/space40"
-        android:layout_marginBottom="@dimen/space40"
-        android:text="DIAGNOSIS OF NEONATAL AND PAEDIATRIC SKIN DISEASES"
+        android:layout_margin="@dimen/space40"
+        android:text="@string/neoped"
         android:textColor="@android:color/white"
         android:textSize="@dimen/txt30"
         android:textStyle="bold" />
