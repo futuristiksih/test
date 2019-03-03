@@ -26,9 +26,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.mikhaellopez.circularimageview.CircularImageView;
+
 public class showDoctor extends AppCompatActivity {
     TextView name,phone,email,degree,gender,specialization,exp_yrs,city,clinic,mci;
-    ImageView docPic;RatingBar ratingBar;Button choose;
+    CircularImageView docPic;RatingBar ratingBar;Button choose;
     FirebaseFirestore db;StorageReference imageref;String emailid="";
     public void updateDoctor(objectDoctor doctor){
         name.setText(doctor.getName());email.setText(doctor.getEmail());degree.setText(doctor.getDegree());phone.setText(doctor.getPhone());exp_yrs.setText(doctor.getExp_yrs());
@@ -40,7 +42,6 @@ public class showDoctor extends AppCompatActivity {
                 Glide.with(getApplicationContext()).load(uri).into(docPic);
             }
         });
-
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,6 @@ public class showDoctor extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    assert document != null;
                     if (document.exists()) {
                         objectDoctor doctor = document.toObject(objectDoctor.class);updateDoctor(doctor);
                     }
@@ -81,7 +81,6 @@ public class showDoctor extends AppCompatActivity {
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                     Bundle bundle=new Bundle();
                     bundle.putString("doc_name",name.getText().toString());
                     bundle.putString("doc_email",email.getText().toString());

@@ -1,8 +1,5 @@
 package com.example.test;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,33 +9,25 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class doctorDiagnosis extends Fragment {
+public class parentDiagnosis extends Fragment {
     EditText descr_text;
     ImageButton addMed, addTest;
     FirebaseFirestore db;
@@ -47,7 +36,7 @@ public class doctorDiagnosis extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.doctor_diagnosis, container, false);
+        view = inflater.inflate(R.layout.parent_diagnosis, container, false);
         setHasOptionsMenu(true);
         getActivity().setTitle("Prescription");
 
@@ -306,7 +295,7 @@ public class doctorDiagnosis extends Fragment {
 
             EditText descr = view.findViewById(R.id.descr);
             Map<String,Object> description = new HashMap<>();
-            description.put("status","check");
+
             description.put("description",descr.getText().toString());
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             assert user != null;
@@ -323,7 +312,6 @@ public class doctorDiagnosis extends Fragment {
                 }
             });
             Toast.makeText(getActivity(), "File Uploaded Successfully", Toast.LENGTH_SHORT).show();
-            Intent i=new Intent(getActivity(),doctorProfile.class);startActivity(i);getActivity().finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -54,7 +54,7 @@ public class annotateImage extends Fragment {
     String child_name, parent_email, id;
     ArrayList<String> filenames;
     FirebaseFirestore db;
-    FirebaseUser user;
+    FirebaseUser user;Bundle bundle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class annotateImage extends Fragment {
         setHasOptionsMenu(true);
 
         db = FirebaseFirestore.getInstance();
-        Bundle bundle = getArguments();
+        bundle = getArguments();
         child_name = bundle.getString("child_name");
         parent_email = bundle.getString("parent_email");
         id = bundle.getString("id");
@@ -142,13 +142,9 @@ public class annotateImage extends Fragment {
                 String msg = (String) adapter.getItem(i);
                 Log.i("msg",msg);
             }
-            Bundle bundle1=new Bundle();
-            bundle1.putString("child_name",child_name);
-            bundle1.putString("parent_email",parent_email);
-
 
             doctorDiagnosis dg = new doctorDiagnosis();
-            dg.setArguments(bundle1);
+            dg.setArguments(bundle);
             android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             ((RelativeLayout)getActivity().findViewById(R.id.log)).removeAllViews();
             fragmentManager.beginTransaction().replace(R.id.log,dg).commit();

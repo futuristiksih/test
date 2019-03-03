@@ -109,7 +109,7 @@ public class multi_upload extends AppCompatActivity {
                                 }
                                 myPatients patients=new myPatients(child_name,"dp_"+getDate()+"_"+doc_count,guardian,"pending",getDate());
                                 myDetails det=new myDetails("dp_"+getDate()+"_"+doc_count,doc_name,"pending",getDate());
-                                db.collection("Email").document("doctor "+doc_email).collection("received_appointments").document(child_name+" "+user.getEmail()).set(det).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                db.collection("Email").document("doctor "+doc_email).collection("received_appointments").document(child_name+" "+user.getEmail()).set(patients).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(getApplicationContext(),"APPOINTMENT REQUEST SENT WITH CHILD'S DETAILS",Toast.LENGTH_LONG).show();

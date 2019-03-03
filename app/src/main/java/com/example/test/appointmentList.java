@@ -29,7 +29,6 @@ public class appointmentList extends Fragment {
         view = inflater.inflate(R.layout.doclist, container, false);getActivity().setTitle("CHOOSE A REPORT");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
-        String email = user.getEmail();
         ListView listView =  view.findViewById(R.id.doclist);
         arrayList = new ArrayList<>();
         adapter = new appointmentAdapter(getActivity(),arrayList);
