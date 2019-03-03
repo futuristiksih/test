@@ -27,6 +27,7 @@
     <string name="savenext">Save and Next Page</string>
     <string name="appointment_id">appointment_id</string>
     <string name="ChildName">Child Name</string>
+    <string name="camera_error" translatable="false">This device doesn\'t support Camera2 API.</string>
     <string name="GuardianName">Guardian Name</string>
     <string name="Date">Date</string>
     <string name="status">status</string>
@@ -43,6 +44,7 @@
     <string name="Name">Name</string>
     <string name="Email">Email</string>
     <string name="Password">Password</string>
+
 
 
     <string name="reenter">Re-Enter Password</string>

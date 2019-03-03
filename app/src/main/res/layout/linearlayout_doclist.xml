@@ -58,7 +58,7 @@
                 android:textSize="16sp"
                 />
     <TextView
-        android:id="@+id/ava"
+        android:id="@+id/available"
         android:text="Available"
         android:layout_width="match_parent"
         android:textAlignment="center"

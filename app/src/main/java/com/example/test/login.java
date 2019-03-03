@@ -21,21 +21,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class login extends AppCompatActivity {
     private FirebaseAuth mAuth;final Context context=this;
     private EditText email, password;FirebaseFirestore db;String userEmail="",userPass="";TextView forgot;
+    private FirebaseFirestore mFirestore;
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -52,9 +58,12 @@ public class login extends AppCompatActivity {
                         if (document.exists()) {
                             String temp = document.getId().split(" ")[0];
                             if (temp.equals("parent")) {
+
+
                                 Intent i = new Intent(getApplicationContext(), parentProfile.class);startActivity(i);finish();
                             }
                             else {
+
                                 Intent i = new Intent(getApplicationContext(), doctorProfile.class);startActivity(i);finish();
                             }
                         }
@@ -65,6 +74,7 @@ public class login extends AppCompatActivity {
         });
     }
     public void signIn(View view) {
+        mFirestore = FirebaseFirestore.getInstance();
         if (TextUtils.isEmpty(email.getText())) email.setError("EMPTY EMAIL ADDRESS FIELD");
         else if(TextUtils.isEmpty(password.getText())) password.setError("EMPTY PASSWORD FIELD");
         else {
@@ -99,6 +109,8 @@ public class login extends AppCompatActivity {
                             });
                         }
                         else{
+
+
                             Toast.makeText(login.this,"SUCCESSFUL SIGN-IN AND EMAIL VERIFICATION", Toast.LENGTH_LONG).show();
                             userEmail=email.getText().toString().trim();getUser(userEmail);
                         }

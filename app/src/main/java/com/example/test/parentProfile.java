@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.FileProvider;
@@ -15,6 +16,7 @@ import android.support.v7.view.menu.ActionMenuItem;
 import android.text.Editable;
 import android.text.TextWatcher;
 import com.bumptech.glide.Glide;
+import android.support.v4.app.FragmentActivity;
 
 import android.util.Log;
 import android.view.View;
@@ -53,11 +55,13 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 public class parentProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     TextView email,address,name,phone;
+    public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
     CircularImageView parentPic,navPic;String emailid;String imageFilePath,imageFileName;
     FirebaseFirestore db;private StorageReference imageref;FirebaseUser user;MenuItem menuItem;
     public static final int RESULT_LOAD_IMAGE = 1,REQUEST_CAPTURE_IMAGE = 2;;Uri selectedImage;TextView navName;
@@ -137,6 +141,46 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==RESULT_LOAD_IMAGE && resultCode==RESULT_OK && data!=null ){
             selectedImage=data.getData();parentPic.setImageURI(selectedImage);navPic.setImageURI(selectedImage);
+        }
+        if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Fill the list view with the strings the recognizer thought it
+            // could have heard
+            ArrayList matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+            // matches is the result of voice input. It is a list of what the
+            // user possibly said.
+            // Using an if statement for the keyword you want to use allows the
+            // use of any activity if keywords match
+            // it is possible to set up multiple keywords to use the same
+            // activity so more than one word will allow the user
+            // to use the activity (makes it so the user doesn't have to
+            // memorize words from a list)
+            // to use an activity from the voice input information simply use
+            // the following format;
+            // if (matches.contains("keyword here") { startActivity(new
+            // Intent("name.of.manifest.ACTIVITY")
+
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            ((LinearLayout)findViewById(R.id.contentpage)).removeAllViews();
+            if (matches.contains("book an appointment")) {
+                menuItem.setVisible(false);
+                fragmentManager.beginTransaction().replace(R.id.contentpage, new suggestions()).commit();
+            }
+            else if (matches.contains("view profile")) {
+                Intent i=new Intent(getApplicationContext(),parentProfile.class);startActivity(i);finish();
+            }
+
+            else if (matches.contains("previous appoinment")) {
+                menuItem.setVisible(false);
+                fragmentManager.beginTransaction().replace(R.id.contentpage, new previous_appointment_list()).commit();
+            }
+            else if (matches.contains("sign out")) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent=new Intent(getApplicationContext(),login.class);startActivity(intent);finish();
+            }
+            else{
+                Intent i=new Intent(getApplicationContext(),parentProfile.class);startActivity(i);finish();
+            }
         }
     }
     @Override
@@ -263,6 +307,17 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
         else if (id == R.id.viewprofile) {
             Intent i=new Intent(getApplicationContext(),parentProfile.class);startActivity(i);finish();
         }
+        else if (id == R.id.ml_nav) {
+            Intent i=new Intent(getApplicationContext(),ml.class);startActivity(i);finish();
+        }
+        else if (id == R.id.voice) {
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                    "Speech recognition demo");
+            startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
+        }
         else if(id==R.id.prev_appointments){
             menuItem.setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.contentpage, new previous_appointment_list()).commit();
@@ -275,4 +330,5 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
