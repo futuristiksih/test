@@ -17,7 +17,7 @@
         android:id="@+id/iv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_menu_gallery"
+        android:src="@drawable/logo72"
         android:layout_marginLeft="@dimen/space20"
         android:layout_marginTop="@dimen/space40"/>
     <LinearLayout
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/EMAIL"
-                android:textSize="@dimen/txt10"
+                android:textSize="20sp"
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="@dimen/space5"/>
             <EditText
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/PASSWORD"
-                android:textSize="@dimen/txt10"
+                android:textSize="20sp"
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="@dimen/space5"/>
             <EditText

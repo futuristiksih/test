@@ -6,17 +6,13 @@
     <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings" translatable="false">Settings</string>
-    <string-array name="gender">
-        <item>Male</item>
-        <item>Female</item>
-    </string-array>
     <string name="action_save">Save</string>
     <string name="MedicineName">Medicine Name</string>
     <string name="Weeks">Week (s)</string>
     <string name="Doses">Dose (s)</string>
     <string name="Conditions">Condition (s)</string>
     <string name="demo">See a demo of the app</string>
-    <string name="neoped">Diagnosis of Neonatal and pediatric</string>
+    <string name="neoped">Diagnosis of Neonatal and paediatric Dermatological Problems</string>
     <string name="TestName">Test Name</string>
     <string name="GoBack">Go Back</string>
     <string name="details">Fill Up the details</string>
@@ -48,7 +44,7 @@
     <string name="Email">Email</string>
     <string name="Password">Password</string>
 
-    
+
     <string name="reenter">Re-Enter Password</string>
     <string name="Degree">Degree</string>
     <string name="phn">Phone number</string>
@@ -88,7 +84,7 @@
     <string name="Vomit">Vomit</string>
     <string name="Dehydration">Dehydration</string>
     <string name="Fever">Fever</string>
-    <string name="Immunisation">Immunisation</string>
+    <string name="Immunisation">Last Vaccination</string>
     <string name="Inception">Inception</string>
     <string name="InfectedArea">Infected Area</string>
     <string name="Intake">Intake</string>
@@ -96,6 +92,33 @@
     <string name="Crying">Crying</string>
     <string name="Diagnosis">Diagnosis</string>
     <string name="Chat">Chat</string>
+    <string-array name="BowelMovement">
+        <item>Regular</item>
+        <item>Irregular</item>
+        <item>Abnormalities</item>
+    </string-array>
+    <string-array name="Crying">
+        <item>normal</item>
+        <item>abnormal</item>
+        <item>crying due to pain</item>
+    </string-array>
+    <string-array name="Immunisation">
+        <item>BCG,OPV(0),HepB BirthDose</item>
+        <item>OPV1,Penta1(DPT+HepB+HiB)</item>
+        <item>OPV2,Penta2(DPT+HepB+HiB)</item>
+        <item>OPV3,Penta3(DPT+HepB+HiB)</item>
+        <item>IPV</item>
+        <item>MMR-1,MR/MEASELS</item>
+        <item>JE VACCINE-1</item>
+        <item>MMR-1</item>
+        <item>OPV BOOSTER</item>
+        <item>DPT 1ST BOOSTER</item>
+        <item>JE VACCINE-2</item>
+        <item>DPT 2ND BOOSTER</item>
+        <item>TT1</item>
+        <item>TT2</item>
+    </string-array>
+
 
 
 

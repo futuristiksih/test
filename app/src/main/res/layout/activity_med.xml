@@ -14,6 +14,7 @@
 
         <!-- Label -->
         <TextView
+
             android:text="@string/MedicineName"
             style="@style/CategoryStyle" />
 
