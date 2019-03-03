@@ -12,14 +12,18 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
         android:src="@drawable/bg" />
+
     <ImageView
         android:id="@+id/iv_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo72"
+        android:layout_width="112sp"
+        android:layout_height="112sp"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/space20"
-        android:layout_marginTop="@dimen/space40"/>
+        android:layout_marginTop="@dimen/space40"
+        android:src="@drawable/logo512" />
     <LinearLayout
         android:id="@+id/ll_bottom"
         android:layout_width="wrap_content"
@@ -80,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/EMAIL"
-                android:textSize="20sp"
+                android:textSize="@dimen/txt10"
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="@dimen/space5"/>
             <EditText
@@ -107,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/PASSWORD"
-                android:textSize="20sp"
+                android:textSize="@dimen/txt10"
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="@dimen/space5"/>
             <EditText

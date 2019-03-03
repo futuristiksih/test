@@ -2,10 +2,12 @@ package com.example.test;
 
 public class objectDoctor {
     private String name,uid, phone,email,degree,gender,mci,specialization,clinic,city,exp_yrs,rating;boolean verified;
+    int count;
     objectDoctor(){}
-         objectDoctor(String name, String phone, String email, String degree,String gender,String clinic,String mci,String specialization,String city,String exp_yrs,String rating,boolean verified,String uid){
+         objectDoctor(String name, String phone, String email, String degree,String gender,String clinic,String mci,String specialization,String city,String exp_yrs,String rating,boolean verified,String uid,int count){
          this.name=name;this.phone =phone;this.degree=degree;this.email=email;this.clinic=clinic;this.city=city;this.exp_yrs=exp_yrs;
          this.gender=gender;this.mci=mci;this.specialization=specialization;this.rating=rating;this.verified=verified;this.uid=uid;
+         this.count=count;
          }
     public String getName(){ return name; }
     String getDegree(){ return degree; }
@@ -20,4 +22,5 @@ public class objectDoctor {
     public String getRating(){ return rating; }
     public boolean getVerified(){ return verified; }
     public String getUid(){return uid;}
+    public int getCount(){ return count; }
 }

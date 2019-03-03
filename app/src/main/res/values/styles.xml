@@ -63,4 +63,9 @@
         <item name="colorControlActivated">@color/goldenyellow</item>
     </style>
 
+    <style name="choosebuttontheme" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorControlHighlight">#008000</item>
+        <item name="colorButtonNormal">#4b0082</item>
+    </style>
+
 </resources>

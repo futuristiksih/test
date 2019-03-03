@@ -32,11 +32,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
@@ -44,6 +47,7 @@ public class doctor extends Fragment{
     EditText name, email, pass,phone,city,checkPassword,degree,specialization,mci,exp_yrs, clinic;ImageView imageView;Button signup,uploadpic;
     RadioGroup genderR;RadioButton radioButton;String gender;
     View view;FirebaseFirestore db;private FirebaseAuth mAuth;private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    EditText mstart,mend,tustart,tuend,wstart,wend,thstart,thend,fstart,fend,sastart,saend,sustart,suend;
     public static final int RESULT_LOAD_IMAGE = 1;Uri Image;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -63,6 +67,14 @@ public class doctor extends Fragment{
         specialization=view.findViewById(R.id.specialization);mci=view.findViewById(R.id.mci);exp_yrs=view.findViewById(R.id.exp_yrs);
         final FragmentActivity activity=getActivity();city=view.findViewById(R.id.city);
         clinic =view.findViewById(R.id.clinic);
+
+        mstart=view.findViewById(R.id.mon_start);
+        mend=view.findViewById(R.id.mon_end);tustart=view.findViewById(R.id.tue_start);tuend=view.findViewById(R.id.tue_end);
+        wstart=view.findViewById(R.id.wed_start);wend=view.findViewById(R.id.wed_end);
+        thstart=view.findViewById(R.id.thur_start);thend=view.findViewById(R.id.thur_end);fstart=view.findViewById(R.id.fri_start);
+        fend=view.findViewById(R.id.fri_end);sastart=view.findViewById(R.id.sat_start);
+        saend=view.findViewById(R.id.sat_end);
+        sustart=view.findViewById(R.id.sun_start);suend=view.findViewById(R.id.sun_end);
 
         name.addTextChangedListener(new TextWatcher() {
             int k=0;
@@ -216,7 +228,7 @@ public class doctor extends Fragment{
                             }
                             else{
                                     db = FirebaseFirestore.getInstance();
-                                    objectDoctor current = new objectDoctor(name.getText().toString().trim(), phone.getText().toString().trim(), email.getText().toString().trim(),degree.getText().toString().trim(),gender, clinic.getText().toString(),mci.getText().toString(),specialization.getText().toString(),city.getText().toString(),exp_yrs.getText().toString(),"0",false,"0");
+                                    objectDoctor current = new objectDoctor(name.getText().toString().trim(), phone.getText().toString().trim(), email.getText().toString().trim(),degree.getText().toString().trim(),gender, clinic.getText().toString(),mci.getText().toString(),specialization.getText().toString(),city.getText().toString(),exp_yrs.getText().toString(),"0",false,"0",0);
                                     db.collection("Email").document("doctor "+email.getText().toString().trim()).set(current)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -241,6 +253,59 @@ public class doctor extends Fragment{
                                                     }
                                                 });
                                             }
+                                        }
+                                    });
+
+                                    HashMap<String,Object> map1=new HashMap<>();
+                                    HashMap<String,Object> map=new HashMap<>();
+                                    if(!mstart.getText().toString().equals("00:00") && !mend.getText().toString().equals("00:00")){
+                                        HashMap<String,Object> m = new HashMap<>();
+                                        m.put("start",mstart.getText().toString());
+                                        m.put("end",mend.getText().toString());
+                                        m.put("day","Monday");
+                                        map.put("Monday",m);
+                                    }
+                                    if(!tustart.getText().toString().equals("00:00") && !tuend.getText().toString().equals("00:00")){
+                                        HashMap<String,Object> m = new HashMap<>();
+                                        m.put("start",tustart.getText().toString());
+                                        m.put("end",tuend.getText().toString());
+                                        map.put("Tuesday",m);
+                                    }
+                                    if(!wstart.getText().toString().equals("00:00") && !wend.getText().toString().equals("00:00")){
+                                        HashMap<String,Object> m = new HashMap<>();
+                                        m.put("start",wstart.getText().toString());
+                                        m.put("end",wend.getText().toString());
+                                        map.put("Wednesday",m);
+                                    }
+                                    if(!thstart.getText().toString().equals("00:00") && !thend.getText().toString().equals("00:00")){
+                                        HashMap<String,Object> m = new HashMap<>();
+                                        m.put("start",thstart.getText().toString());
+                                        m.put("end",thend.getText().toString());
+                                        map.put("Thursday",m);
+                                    }
+                                    if(!fstart.getText().toString().equals("00:00") && !fend.getText().toString().equals("00:00")){
+                                        HashMap<String,Object> m = new HashMap<>();
+                                        m.put("start",fstart.getText().toString());
+                                        m.put("end",fend.getText().toString());
+                                        map.put("Friday",m);
+                                    }
+                                    if(!sastart.getText().toString().equals("00:00") && !saend.getText().toString().equals("00:00")){
+                                        HashMap<String,Object> m = new HashMap<>();
+                                        m.put("start",sastart.getText().toString());
+                                        m.put("end",saend.getText().toString());
+                                        map.put("Saturday",m);
+                                    }
+                                    if(!sustart.getText().toString().equals("00:00") && !suend.getText().toString().equals("00:00")){
+                                        HashMap<String,Object> m = new HashMap<>();
+                                        m.put("start",sustart.getText().toString());
+                                        m.put("end",suend.getText().toString());
+                                        map.put("Sunday",m);
+                                    }
+                                    map1.put("available",map);
+                                    db.collection("Email").document("doctor "+email.getText().toString().trim()).set(map1, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(getActivity(),"DATA UPLOADED",Toast.LENGTH_LONG).show();
                                         }
                                     });
                                     Intent intent = new Intent(activity,login.class);startActivity(intent);activity.finish();
