@@ -1,6 +1,7 @@
 package com.example.test;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -307,7 +308,7 @@ public class doctorDiagnosis extends Fragment {
 
             EditText descr = view.findViewById(R.id.descr);
             Map<String,Object> description = new HashMap<>();
-
+            description.put("status","check");
             description.put("description",descr.getText().toString());
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             assert user != null;
@@ -324,6 +325,7 @@ public class doctorDiagnosis extends Fragment {
                 }
             });
             Toast.makeText(getActivity(), "File Uploaded Successfully", Toast.LENGTH_SHORT).show();
+            Intent i=new Intent(getActivity(),doctorProfile.class);startActivity(i);getActivity().finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

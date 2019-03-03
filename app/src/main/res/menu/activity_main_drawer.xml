@@ -8,6 +8,9 @@
             android:id="@+id/viewprofile"
             android:title="VIEW PROFILE" />
         <item
+            android:id="@+id/ml_nav"
+            android:title="Pre-Analyser" />
+        <item
             android:id="@+id/appointment"
             android:enabled="true"
             android:title="CREATE A BOOKING"
@@ -15,6 +18,9 @@
         <item
             android:id="@+id/prev_appointments"
             android:title="PREVIOUS APPOINTMENTS" />
+        <item
+            android:id="@+id/voice"
+            android:title="voice commands" />
 
 
         <item
