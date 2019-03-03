@@ -71,7 +71,7 @@ public class view_details_parent extends Fragment {
                         doc_uid=documentSnapshot.get("uid").toString();
                     }
                 });
-                chatIntent.putExtra("user_id",doc_uid);//doctor uid
+                chatIntent.putExtra("user_id","ZWvTV9b4oZeSmgkgyx1lpKbZpLN2");//doctor uid
                 chatIntent.putExtra("user_name", doc_email);
                 startActivity(chatIntent);
             }

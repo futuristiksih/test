@@ -22,7 +22,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.Objects;
 public class doclist extends Fragment {
     View view;ArrayList<doclistdesign> doclistdesigns;
@@ -39,11 +44,35 @@ public class doclist extends Fragment {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
+                    String weekDay;
+                    SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+
+                    Calendar calendar = Calendar.getInstance();
+                    weekDay = dayFormat.format(calendar.getTime());
+
                     for (QueryDocumentSnapshot document : task.getResult()) {
+
                         if (document.exists()&&Integer.parseInt(document.get("count").toString())<5) {
-                            doclistdesigns.add(new doclistdesign(document.get("name").toString(),document.get("degree").toString(),document.get("exp_yrs").toString(),document.get("rating").toString(),document.get("city").toString()));
-                            emails.add(document.get("email").toString());
-                            doclistadapter.notifyDataSetChanged();
+                            HashMap<String,Object> av = (HashMap<String, Object>) document.get("available");
+                            for ( String key : av.keySet() ) {
+                                if(key.equals(weekDay)){
+                                    String timeStamp =
+                                            new SimpleDateFormat("hh",
+                                                    Locale.getDefault()).format(new Date());
+                                    int t = Integer.parseInt(timeStamp);
+                                    HashMap<String,Object> w = (HashMap<String,Object>)av.get(key);
+                                    String st = w.get("start").toString().split(":")[0];
+                                    int s = Integer.parseInt(st);
+                                    String end = w.get("end").toString().split(":")[0];
+                                    int e = Integer.parseInt(end);
+                                    if(s<=t&&t<=e){
+                                        doclistdesigns.add(new doclistdesign(document.get("name").toString(),document.get("degree").toString(),document.get("exp_yrs").toString(),document.get("rating").toString(),document.get("city").toString()));
+                                        emails.add(document.get("email").toString());
+                                        doclistadapter.notifyDataSetChanged();
+                                    }
+
+                                }
+                            }
                         }
                     }
                 }
