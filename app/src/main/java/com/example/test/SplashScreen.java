@@ -27,7 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.Locale;
 import java.util.Objects;
 public class SplashScreen extends AppCompatActivity {
-    private FirebaseAuth mAuth;String userEmail;FirebaseFirestore db;int SPLASH_TIMEOUT = 4000;
+    private FirebaseAuth mAuth;String userEmail;FirebaseFirestore db;int SPLASH_TIMEOUT = 1000;
     private void setLocale(String lang) {
         Locale locale =new Locale(lang);
         Locale.setDefault(locale);
