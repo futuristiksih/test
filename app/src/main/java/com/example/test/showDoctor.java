@@ -51,8 +51,7 @@ public class showDoctor extends AppCompatActivity {
         gender =findViewById(R.id.gender);gender.setEnabled(false);clinic=findViewById(R.id.clinic);clinic.setEnabled(false);
         specialization=findViewById(R.id.specialization);specialization.setEnabled(false);exp_yrs=findViewById(R.id.exp_yrs);exp_yrs.setEnabled(false);
         city=findViewById(R.id.city);city.setEnabled(false);mci=findViewById(R.id.mci);mci.setEnabled(false);ratingBar=findViewById(R.id.ratingBar);ratingBar.setEnabled(false);
-        docPic=findViewById(R.id.docPic);docPic.setEnabled(false);
-        choose=findViewById(R.id.choose);
+        docPic=findViewById(R.id.docPic);docPic.setEnabled(false);choose=findViewById(R.id.choose);
 
         final Intent intent=getIntent();
         emailid=intent.getStringExtra("email");
