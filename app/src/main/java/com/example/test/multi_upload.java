@@ -1,6 +1,8 @@
 package com.example.test;
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +24,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,6 +44,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,9 +56,10 @@ import java.util.Map;
 public class multi_upload extends AppCompatActivity {
     String immunization,bowel_movement,fever,inception,infected_area,intake,environment,crying,doc_name,doc_email,dob,birth_weight,child_name,gender,
             vomit,breast_feed,dehydration,img_filename;
-    private static final int RESULT_LOAD_IMAGE = 1, REQUEST_CAPTURE_IMAGE = 2;
+    private static final int RESULT_LOAD_IMAGE = 1, REQUEST_CAPTURE_IMAGE = 2, CAMERA_RESULT= 3;
     private Button mSelectBtn;
     private RecyclerView mUploadList;
+    private ProgressBar mMessageProgress;
     private List<String> fileNameList, fileDoneList,fileUrlList; // List to maintain the Recyler view
     private UploadListAdapter uploadListAdapter;
     private StorageReference mStorage;String imageFilePath;// image file path for new image created from camera
@@ -66,6 +71,7 @@ public class multi_upload extends AppCompatActivity {
     }
 
     public void final_upload(View view){
+        mMessageProgress.setVisibility(View.VISIBLE);
         db=FirebaseFirestore.getInstance();final FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         final objectChild Child=new objectChild(child_name,dob,gender,birth_weight);
 
@@ -119,6 +125,7 @@ public class multi_upload extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Intent i=new Intent(getApplicationContext(),parentProfile.class);startActivity(i);finish();
+                                        mMessageProgress.setVisibility(View.INVISIBLE);
                                     }
                                 });
 
@@ -126,6 +133,23 @@ public class multi_upload extends AppCompatActivity {
                         });
                     }
                 });
+                Map<String,Object> notificationMessage = new HashMap<>();
+                notificationMessage.put("message",child_name+" requested appointment.");
+                notificationMessage.put("from","parent "+user.getEmail());
+                db.collection("Email/"+"doctor "+doc_email+"/Notifications").document(child_name+"_"+getDate()).set(notificationMessage)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(multi_upload.this, "Notification Sent.", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(multi_upload.this, "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
                 db.collection("Email").document("parent " + user.getEmail()).update("count", doc_count);
             }
         });
@@ -134,6 +158,8 @@ public class multi_upload extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);setContentView(R.layout.multi_upload);
+
+        mMessageProgress = findViewById(R.id.messageProgress);
 
         Intent i=getIntent();
         Bundle bundle=i.getBundleExtra("bundle");
@@ -185,18 +211,9 @@ public class multi_upload extends AppCompatActivity {
                     final StorageReference fileToUpload = mStorage.child("Untag_images").child(fileName);
 
                     final int finalI = (fileDoneList.isEmpty()) ? i : i + sz;
-//                    Log.i("finalI: ", Integer.toString(finalI));
                     fileToUpload.putFile(fileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-//                            Task<Uri> downloadUrl = fileToUpload.getDownloadUrl();
-//                            //creating the upload object to store uploaded image details
-//                            Upload upload = new Upload(fileName, downloadUrl.toString());
-//
-//                            //adding an upload to firebase database
-//                            String uploadId = mDatabase.push().getKey();
-//                            mDatabase.child(uploadId).setValue(upload);
 
                             fileDoneList.remove(finalI);
                             fileDoneList.add(finalI, "done");
@@ -205,10 +222,9 @@ public class multi_upload extends AppCompatActivity {
                         }
                     });
 
-                    //Toast.makeText(this, "Uploaded "+totalItemsSelected+" files Sucessfully", Toast.LENGTH_SHORT).show();
                 }
-                //Toast.makeText(this, "Selected Multiple Files", Toast.LENGTH_SHORT).show();
-            } else if (data.getData() != null)//Selected one images
+            }
+            else if (data.getData() != null)//Selected one images
             {
 
                 int totalItemsSelected = 1;
@@ -243,14 +259,17 @@ public class multi_upload extends AppCompatActivity {
                 }
             }
         }
-        // Activity Result for Camera Intent
-        else if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode == RESULT_OK) {
 
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath, options);
+        else if(requestCode == CAMERA_RESULT && resultCode == RESULT_OK){
 
 
-            String fn = img_filename+".jpeg";
+            Bundle extras = data.getExtras();
+            Bitmap bitmap = (Bitmap) extras.get("data");
+            String timeStamp =
+                    new SimpleDateFormat("yyyyMMdd_hhmmss",
+                            Locale.getDefault()).format(new Date());
+            String imageFileName = "IMG_" + timeStamp;
+            String fn = imageFileName+".jpeg";
             fileNameList.add(fn);
             fileDoneList.add("uploading");
             uploadListAdapter.notifyDataSetChanged();
@@ -284,8 +303,6 @@ public class multi_upload extends AppCompatActivity {
                 }
             });
 
-            galleryAddPic();
-
         }
     }
     //Function to get the filename For the Gallery Intent Result
@@ -310,57 +327,9 @@ public class multi_upload extends AppCompatActivity {
         }
         return  result;
     }
-    // Open the Camera Intent
-    private void openCameraIntent() {
-        Intent pictureIntent = new Intent(
-                MediaStore.ACTION_IMAGE_CAPTURE);
-        if(pictureIntent.resolveActivity(getPackageManager()) != null){
-            //Create a file to store the image
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-            }
-            if (photoFile != null) {
-                Log.i("File"," created");
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.android.test.fileprovider", photoFile);
-                Log.i("Photouri",photoURI.toString());
-                pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                        photoURI);
-                startActivityForResult(pictureIntent,
-                        REQUEST_CAPTURE_IMAGE);
-            }
-        }
-    }
-    // Create the path uri along for the temperory image File
-    private File createImageFile() throws IOException {
-        String timeStamp =
-                new SimpleDateFormat("yyyyMMdd_hhmmss",
-                        Locale.getDefault()).format(new Date());
-        String imageFileName = "IMG_" + timeStamp;
-        img_filename=imageFileName;
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        // File storageDir = Environment.getExternalStorageDirectory();
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-        imageFilePath = image.getAbsolutePath();
-        Log.i("img: ",imageFilePath);
-        return image;
-    }
-    // Broadcast the saved camera image to gallery
-    private void galleryAddPic() {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(imageFilePath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
-//        Toast.makeText(this, "Gallery saved", Toast.LENGTH_SHORT).show();
-    }
+
+
+
     // Open the Dialog box for camera and gallery intent
     public void startDialog() {
         AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(multi_upload.this);
@@ -379,7 +348,15 @@ public class multi_upload extends AppCompatActivity {
         myAlertDialog.setNegativeButton("Camera",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-                        openCameraIntent();
+                        //openCameraIntent();
+
+                        if(checkSelfPermission(Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+                            requestPermissions(new String[]{Manifest.permission.CAMERA},CAMERA_RESULT);
+                        }
+                        Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(it, CAMERA_RESULT);
+
+
                     }
                 });
         myAlertDialog.show();
