@@ -36,12 +36,7 @@ public class showDoctor extends AppCompatActivity {
         name.setText(doctor.getName());email.setText(doctor.getEmail());degree.setText(doctor.getDegree());phone.setText(doctor.getPhone());exp_yrs.setText(doctor.getExp_yrs());
         gender.setText(doctor.getGender());specialization.setText(doctor.getSpecialization());clinic.setText(doctor.getClinic());city.setText(doctor.getCity());mci.setText(doctor.getMci());
         ratingBar.setRating(Float.parseFloat(doctor.getRating()));
-        imageref.child(emailid).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(getApplicationContext()).load(uri).into(docPic);
-            }
-        });
+        imageref.child(emailid+".jpg").getDownloadUrl().addOnSuccessListener(uri -> Glide.with(getApplicationContext()).load(uri).into(docPic));
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,22 +54,19 @@ public class showDoctor extends AppCompatActivity {
         imageref = FirebaseStorage.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("Email").document("doctor "+emailid);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        objectDoctor doctor = document.toObject(objectDoctor.class);updateDoctor(doctor);
-                    }
-                    else {
-                        Toast.makeText(getApplicationContext(), "Document not found", Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(getApplicationContext(),login.class);startActivity(intent);finish();
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "Document not found", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(getApplicationContext(),login.class);startActivity(intent);finish();
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    objectDoctor doctor = document.toObject(objectDoctor.class);updateDoctor(doctor);
                 }
+                else {
+                    Toast.makeText(getApplicationContext(), "Document not found", Toast.LENGTH_SHORT).show();
+                    Intent intent1 =new Intent(getApplicationContext(),login.class);startActivity(intent1);finish();
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "Document not found", Toast.LENGTH_SHORT).show();
+                Intent intent1 =new Intent(getApplicationContext(),login.class);startActivity(intent1);finish();
             }
         });
         choose.setOnClickListener(new View.OnClickListener() {

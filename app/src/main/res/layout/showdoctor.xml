@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp">
+        android:layout_height="320dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,8 +21,8 @@
 
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/docPic"
-                android:layout_width="183dp"
-                android:layout_height="150dp"
+                android:layout_width="133dp"
+                android:layout_height="111dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="45dp" />
 
@@ -310,10 +310,11 @@
 
             <Button
                 android:id="@+id/choose"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_purple"
                 android:text="@string/CHOOSE" />
         </LinearLayout>
     </ScrollView>

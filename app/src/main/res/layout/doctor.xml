@@ -433,65 +433,69 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Available days and timings"
-                android:textStyle="bold"/>
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monday:"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="87dp"
-                    android:layout_height="wrap_content"
-                    android:text="Monday:"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start time:"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Start time:"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
+            <EditText
+                android:id="@+id/mon_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/mon_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="00:00"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End time:"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="End time:"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/mon_end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="00:00"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
+            <EditText
+                android:id="@+id/mon_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tuesday:"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="87dp"
-                    android:layout_height="wrap_content"
-                    android:text="Tuesday:"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -528,17 +532,18 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wednesday:"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Wednesday:"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -575,17 +580,18 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thursday:"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="102dp"
-                    android:layout_height="wrap_content"
-                    android:text="Thursday:"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -622,17 +628,18 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friday:"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="87dp"
-                    android:layout_height="wrap_content"
-                    android:text="Friday:"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -669,17 +676,18 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saturday:"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="87dp"
-                    android:layout_height="wrap_content"
-                    android:text="Saturday:"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -716,17 +724,18 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sunday:"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="87dp"
-                    android:layout_height="wrap_content"
-                    android:text="Sunday:"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
