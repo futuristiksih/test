@@ -30,18 +30,23 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.mikhaellopez.circularimageview.CircularImageView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class doctorProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     EditText name,phone,degree,gender,specialization,city,clinic;
@@ -206,8 +211,23 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
             Intent i=new Intent(getApplicationContext(),doctorProfile.class);startActivity(i);finish();
         }
         else if (id == R.id.signout) {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent=new Intent(getApplicationContext(),login.class);startActivity(intent);finish();
+            /*FirebaseAuth.getInstance().signOut();
+            Intent intent=new Intent(getApplicationContext(),login.class);startActivity(intent);finish();*/
+            Map<String,Object> tokenMapRemove = new HashMap<>();
+            tokenMapRemove.put("token", FieldValue.delete());
+            db.collection("Email").document("doctor "+user.getEmail()).update(tokenMapRemove)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            FirebaseAuth.getInstance().signOut();
+                            Intent intent=new Intent(getApplicationContext(),login.class);startActivity(intent);finish();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.i("Error","cannot remove token");
+                }
+            });
         }
         else if(id==R.id.my_appointments){
             menuItem.setVisible(false);
@@ -217,5 +237,17 @@ public class doctorProfile extends AppCompatActivity implements NavigationView.O
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    @Override
+    protected void onNewIntent(Intent intent){
+        super.onNewIntent(intent);
+        if(intent!=null){
+            String data = intent.getStringExtra("message");
+            Log.i("data",data);
+            if(data!=null){
+                menuItem.setVisible(false);
+                getSupportFragmentManager().beginTransaction().replace(R.id.contentpage, new appointmentList()).addToBackStack(null).commit();
+            }
+        }
     }
 }

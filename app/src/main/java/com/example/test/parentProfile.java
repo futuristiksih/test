@@ -38,12 +38,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
@@ -57,7 +59,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class parentProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     TextView email,address,name,phone;
@@ -323,8 +327,22 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
             fragmentManager.beginTransaction().replace(R.id.contentpage, new previous_appointment_list()).commit();
         }
         else if (id == R.id.signout) {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent=new Intent(getApplicationContext(),login.class);startActivity(intent);finish();
+            Map<String,Object> tokenMapRemove = new HashMap<>();
+            tokenMapRemove.put("token", FieldValue.delete());
+            db.collection("Email").document("parent "+user.getEmail()).update(tokenMapRemove)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            FirebaseAuth.getInstance().signOut();
+                            Intent intent=new Intent(getApplicationContext(),login.class);startActivity(intent);finish();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.i("Error","cannot remove token");
+                }
+            });
+
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

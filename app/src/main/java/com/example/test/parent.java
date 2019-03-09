@@ -31,6 +31,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -162,7 +163,8 @@ public class parent extends Fragment {
                             }
                             else{
                                 db = FirebaseFirestore.getInstance();
-                                objectParent current = new objectParent(name.getText().toString().trim(), phone.getText().toString().trim(), email.getText().toString().trim(), address.getText().toString().trim(),"0000","0");
+                                String token = FirebaseInstanceId.getInstance().getToken();
+                                objectParent current = new objectParent(name.getText().toString().trim(), phone.getText().toString().trim(), email.getText().toString().trim(), address.getText().toString().trim(),"0000","0",token);
                                 db.collection("Email").document("parent " + email.getText().toString().trim()).set(current)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -180,7 +182,8 @@ public class parent extends Fragment {
                                                     @Override
                                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                                         if(task.isSuccessful()){
-                                                            mAuth= FirebaseAuth.getInstance();final FirebaseUser user = mAuth.getCurrentUser();assert user != null;
+                                                            mAuth= FirebaseAuth.getInstance();
+                                                            final FirebaseUser user = mAuth.getCurrentUser();assert user != null;
                                                             user.sendEmailVerification().addOnCompleteListener(activity, new OnCompleteListener<Void>() {
                                                                 @Override
                                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -197,7 +200,7 @@ public class parent extends Fragment {
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(getActivity(), "CAN NOT ADD USER", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getActivity(), "CANNOT ADD USER", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }

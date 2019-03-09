@@ -44,7 +44,7 @@
     <string name="Name">Name</string>
     <string name="Email">Email</string>
     <string name="Password">Password</string>
-
+    <string name="default_notification_channel_id" translatable="false">DermaPaedia</string>
 
 
     <string name="reenter">Re-Enter Password</string>
@@ -120,9 +120,7 @@
         <item>TT1</item>
         <item>TT2</item>
     </string-array>
-
-
-
+    <string name="title_activity_notification_">Notification_Activity</string>
 
 
 </resources>
