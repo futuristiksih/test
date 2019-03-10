@@ -34,7 +34,10 @@ public class appointmentList extends Fragment {
         adapter = new appointmentAdapter(getActivity(),arrayList);
         db = FirebaseFirestore.getInstance();
         emails= new ArrayList<>();ids=new ArrayList<>();names=new ArrayList<>();
-        db.collection("Email").document("doctor "+user.getEmail()).collection("received_appointments").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        db.collection("Email")
+                .document("doctor "+user.getEmail())
+                .collection("received_appointments")
+                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for(QueryDocumentSnapshot documentSnapshot:queryDocumentSnapshots){

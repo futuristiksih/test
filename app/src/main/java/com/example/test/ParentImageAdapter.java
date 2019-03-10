@@ -27,7 +27,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
+public class ParentImageAdapter extends RecyclerView.Adapter<ParentImageAdapter.ViewHolder> {
 
     private StorageReference mStorageRef;
     private Context context;
@@ -35,8 +35,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
 
     //    private List<Upload> uploads;
-    public ImageAdapter(Context context, ArrayList<String> uploads){//List<Upload> uploads) {
+    public ParentImageAdapter(Context context, ArrayList<String> uploads, ArrayList<String> tagList){//List<Upload> uploads) {
         this.uploads = uploads;
+        this.tagList = tagList;
         this.context = context;
     }
 
@@ -46,7 +47,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_image, parent, false);
 
-        tagList = new ArrayList<String>();
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
         ViewHolder viewHolder = new ViewHolder(v);
@@ -56,53 +56,21 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final ViewHolder h = holder;
-        final String upload = uploads.get(position);
 
-        final String msg = "Tag "+String.valueOf(position);
-        holder.textViewName.setText(msg);
+        final String upload = uploads.get(position);
+        final String tag = tagList.get(position);
+
+        holder.textViewName.setText(tag);
 
         mStorageRef.child("Untag_images").child(upload).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Glide.with(context).load(uri).into(h.imageView);
+                Glide.with(context).load(uri).into(holder.imageView);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.e("error","database not loaded");
-            }
-        });
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Toast.makeText(context, "You Clicked "+upload, Toast.LENGTH_SHORT).show();
-                final View child = (LinearLayout)v;
-                LayoutInflater li = LayoutInflater.from(context);
-                View promptsView = li.inflate(R.layout.prompt_tag, null);
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setView(promptsView);
-                final AutoCompleteTextView textView = (AutoCompleteTextView)promptsView.findViewById(R.id.autoCompleteTextView);
-
-                //textView.setText(holder.textViewName.getText().toString());
-
-                builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        String s = textView.getText().toString();
-                        tagList.add(position,s);
-                        h.textViewName.setText(textView.getText());
-
-                    }
-                });
-                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog alertDialog=builder.create();alertDialog.show();
             }
         });
 
@@ -112,8 +80,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     public String getItem(int position) {
         return tagList.get(position);
     }
-
-    public int getTagCount(){ return tagList.size();}
     @Override
     public int getItemCount() {
         return uploads.size();
@@ -143,4 +109,4 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         }
 
     }
-    }
+}

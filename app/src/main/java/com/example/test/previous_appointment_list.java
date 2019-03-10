@@ -52,7 +52,9 @@ public class previous_appointment_list extends Fragment {
                 android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 ((RelativeLayout)view.findViewById(R.id.doc)).removeAllViews();
                 Bundle bundle=new Bundle();
-                bundle.putString("email",doc_emails.get(i));bundle.putString("name",names.get(i));bundle.putString("id",ids.get(i));
+                bundle.putString("email",doc_emails.get(i));
+                bundle.putString("name",names.get(i));
+                bundle.putString("id",ids.get(i));
                 view_details_parent details_parent=new view_details_parent();
                 details_parent.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.contentpage, details_parent).commit();

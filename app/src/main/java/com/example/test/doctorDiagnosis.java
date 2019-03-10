@@ -29,6 +29,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -42,7 +45,9 @@ public class doctorDiagnosis extends Fragment {
     EditText descr_text;
     ImageButton addMed, addTest;
     FirebaseFirestore db;
-    String parent_email,child_name;
+    String child_name, parent_email, id, type,doc_email,doc_name;
+    FirebaseUser user;
+
     View view;
 
     @Override
@@ -50,6 +55,7 @@ public class doctorDiagnosis extends Fragment {
         view = inflater.inflate(R.layout.doctor_diagnosis, container, false);
         setHasOptionsMenu(true);
         getActivity().setTitle("Prescription");
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         final LinearLayout rootMed =view.findViewById(R.id.medication_layout);
         rootMed.setOrientation(LinearLayout.VERTICAL);
@@ -58,11 +64,101 @@ public class doctorDiagnosis extends Fragment {
         rootTest.setOrientation(LinearLayout.VERTICAL);
 
         ListView medList,testList;
-        descr_text = view.findViewById(R.id.descr);addMed=view.findViewById(R.id.addMed);addTest = view.findViewById(R.id.addTest);
+        descr_text = view.findViewById(R.id.descr);
+        addMed=view.findViewById(R.id.addMed);
+        addTest = view.findViewById(R.id.addTest);
 
         Bundle bundle=getArguments();
-        parent_email=bundle.getString("parent_email");
-        child_name=bundle.getString("child_name");
+        child_name = bundle.getString("child_name");
+        id = bundle.getString("id");
+        type = bundle.getString("user");
+        if(type.equals("p")){
+            doc_email = bundle.getString("doctor_email");
+            parent_email = user.getEmail();
+            addMed.setVisibility(View.GONE);
+            addTest.setVisibility(View.GONE);
+
+            db = FirebaseFirestore.getInstance();
+            CollectionReference testpath =
+                    db.collection("Email")
+                    .document("doctor " + doc_email)
+                    .collection("received_appointments")
+                    .document(child_name + " " + parent_email)
+                    .collection("tests");
+
+            CollectionReference medpath = db.collection("Email")
+                    .document("doctor " + doc_email)
+                    .collection("received_appointments")
+                    .document(child_name + " " + parent_email)
+                    .collection("medication");
+
+            testpath.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        View child = getLayoutInflater().inflate(R.layout.prompts_test,null);
+                        rootTest.addView(child);
+
+                        TextView testVw = child.findViewById(R.id.test);
+                        testVw.setText(doc.get("test").toString());
+
+                    }
+
+
+                    }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.i("Error",e.getMessage());
+                }
+            });
+
+            medpath.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        Log.i("med",doc.get("medicine").toString());
+                        Log.i("dose",doc.get("doses").toString());
+                        Log.i("week",doc.get("weeks").toString());
+                        View child = getLayoutInflater().inflate(R.layout.list_item_med,null);
+                        rootMed.addView(child);
+                        TextView med = child.findViewById(R.id.medName),
+                                doses = child.findViewById(R.id.doses),
+                                conditions = child.findViewById(R.id.conditions),
+                                weeks = child.findViewById(R.id.weeks);
+
+                        med.setText("Medicine: "+doc.get("medicine").toString());
+                        doses.setText("Dose(s): "+doc.get("doses").toString());
+                        weeks.setText("Week(s): "+doc.get("weeks").toString());
+                        conditions.setText("Condition: "+doc.get("conditions").toString());
+
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.i("Error",e.getMessage());
+                }
+            });
+
+            db.collection("Email")
+                    .document("doctor " + doc_email)
+                    .collection("received_appointments")
+                    .document(child_name + " " + parent_email)
+                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    //Log.i("descr",documentSnapshot.get("description").toString());
+                    descr_text.setText(documentSnapshot.get("description").toString());
+                }
+            });
+            descr_text.setEnabled(false);
+        }
+        else{
+            doc_email = user.getEmail();
+            parent_email = bundle.getString("parent_email");
+        }
+
         // Dialog box for testimonal addition
         addMed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,10 +326,25 @@ public class doctorDiagnosis extends Fragment {
     };
 
     @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem save = menu.findItem(R.id.action_save),
+                download = menu.findItem(R.id.action_download);
+        if(type.equals("p")){
+            save.setVisible(false);
+        }else{
+            download.setVisible(false);
+        }
+
+    }
+
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_diagnosis, menu);
         super.onCreateOptionsMenu(menu, inflater);
+
     }
 
     @Override
@@ -322,8 +433,29 @@ public class doctorDiagnosis extends Fragment {
                     Log.i("i","hoini");
                 }
             });
+
+            db.collection("Email").document("doctor "+doc_email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    doc_name = documentSnapshot.get("name").toString();
+                }
+            });
+
+            Map<String,Object> notificationMessage = new HashMap<>();
+            notificationMessage.put("message",doc_name+" diagnosed "+child_name);
+            notificationMessage.put("from","doctor "+user.getEmail());
+
             Toast.makeText(getActivity(), "File Uploaded Successfully", Toast.LENGTH_SHORT).show();
             Intent i=new Intent(getActivity(),doctorProfile.class);startActivity(i);getActivity().finish();
+            return true;
+        }
+        else if(item.getItemId()==R.id.action_download){
+            //Showing pdf commented for now
+            String url="http://labemc.org/test/report.php?format=pdf&url='https://firebasestorage.googleapis.com/v0/b/fiemsih.appspot.com/o/Images%2FIMG-20190217-WA0006.jpg'&appointment_id=APT_290192039_0015&child_name=Rohan%20Roy&child_gender=Male&child_dob=20-12-2017&child_birth_weight=3%20KG&child_inception=20-12-2017&child_vomit=Yes&child_bowel_movement=Normal&child_breast_feeding=Yes&child_crying=normal&child_current_weight=5%20KG&child_infected_areas=Hand%20and%20face&child_dehydration=no&child_environment=Clean&child_fever=Slight&child_immunization=Polio2&child_intake=Normal%20Diet&parent_name=Gohan%20Roy&parent_address=Kolkata,%20West%20Bengal&parent_email=pawanshaw700@gmail.com&parent_phn=9876543210&medication1=Calpol&medication2=%20&testimonials1=TSH%20profile&testimonials2=%20";
+            Uri webpage = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+            if (intent.resolveActivity(getActivity().getPackageManager()) != null)
+                startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

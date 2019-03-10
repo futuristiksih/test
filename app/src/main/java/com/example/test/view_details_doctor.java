@@ -92,6 +92,7 @@ public class view_details_doctor extends Fragment {
                 bundle1.putString("child_name",child_name);
                 bundle1.putString("parent_email",parent_email);
                 bundle1.putString("id",id);
+                bundle1.putString("user","d");
 
 
                 annotateImage img = new annotateImage();

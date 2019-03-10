@@ -9,7 +9,7 @@
             android:title="VIEW PROFILE" />
         <item
             android:id="@+id/ml_nav"
-            android:title="Pre-Analyser" />
+            android:title="PREANALYZER" />
         <item
             android:id="@+id/appointment"
             android:enabled="true"
@@ -20,7 +20,7 @@
             android:title="PREVIOUS APPOINTMENTS" />
         <item
             android:id="@+id/voice"
-            android:title="voice commands" />
+            android:title="VOICE COMMAND" />
 
 
         <item
