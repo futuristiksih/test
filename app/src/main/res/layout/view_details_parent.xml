@@ -454,19 +454,19 @@
                 android:paddingBottom="50dp">
 
                 <Button
-                    android:id="@+id/pdf"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/see_diagnosis"
+                    android:layout_width="137dp"
                     android:layout_height="@dimen/btn_height"
                     android:layout_marginBottom="@dimen/space20"
                     android:background="@drawable/btn_white_selector"
-                    android:text="Download PDF"
+                    android:text="Check Diagnosis"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/txt16" />
 
                 <Button
                     android:id="@+id/call"
-                    android:layout_width="wrap_content"
+                    android:layout_width="113dp"
                     android:layout_height="50dp"
                     android:layout_marginBottom="@dimen/space20"
                     android:background="@drawable/btn_white_selector"

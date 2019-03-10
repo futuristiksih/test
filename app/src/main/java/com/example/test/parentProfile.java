@@ -253,12 +253,7 @@ public class parentProfile extends AppCompatActivity implements NavigationView.O
             if(item.getTitle()=="EDIT PROFILE"){
                 item.setTitle("SAVE CHANGES");
                 name.setEnabled(true);address.setEnabled(true);phone.setEnabled(true);parentPic.setEnabled(true);
-                parentPic.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                       startDialog();
-                    }
-                });
+                parentPic.setOnClickListener(view -> startDialog());
 
             }
             else{
