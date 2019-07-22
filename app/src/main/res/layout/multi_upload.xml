@@ -51,6 +51,17 @@
         android:indeterminate="true"
         android:visibility="invisible" />
 
+    <ProgressBar
+        android:id="@+id/messageProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="9dp"
+        android:indeterminate="true"
+        android:visibility="invisible" />
+
     <ImageButton
         android:id="@+id/final_upload"
         android:layout_width="221sp"
