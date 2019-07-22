@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -21,21 +22,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class login extends AppCompatActivity {
     private FirebaseAuth mAuth;final Context context=this;
     private EditText email, password;FirebaseFirestore db;String userEmail="",userPass="";TextView forgot;
+    private FirebaseFirestore mFirestore;
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -51,10 +61,36 @@ public class login extends AppCompatActivity {
                     for (QueryDocumentSnapshot document: Objects.requireNonNull(task.getResult())) {
                         if (document.exists()) {
                             String temp = document.getId().split(" ")[0];
+                            Map<String, String> tokenMaps = new HashMap<>();
+                            FirebaseFirestore db2;
+                            db2 = FirebaseFirestore.getInstance();
+                            String token = FirebaseInstanceId.getInstance().getToken();
+                            tokenMaps.put("token",token);
+
                             if (temp.equals("parent")) {
+                                Log.i("docid",document.getId());
+                                db2.collection("Email").document(document.getId()).set(tokenMaps,SetOptions.merge())
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.i("error","token not saved");
+                                            }
+                                        });
+
+
                                 Intent i = new Intent(getApplicationContext(), parentProfile.class);startActivity(i);finish();
                             }
                             else {
+                                Log.i("docid",document.getId());
+
+                                db2.collection("Email").document(document.getId()).set(tokenMaps, SetOptions.merge())
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.i("error","token not saved");
+                                            }
+                                        });
+
                                 Intent i = new Intent(getApplicationContext(), doctorProfile.class);startActivity(i);finish();
                             }
                         }
@@ -65,6 +101,7 @@ public class login extends AppCompatActivity {
         });
     }
     public void signIn(View view) {
+        mFirestore = FirebaseFirestore.getInstance();
         if (TextUtils.isEmpty(email.getText())) email.setError("EMPTY EMAIL ADDRESS FIELD");
         else if(TextUtils.isEmpty(password.getText())) password.setError("EMPTY PASSWORD FIELD");
         else {
@@ -99,8 +136,11 @@ public class login extends AppCompatActivity {
                             });
                         }
                         else{
+
+
                             Toast.makeText(login.this,"SUCCESSFUL SIGN-IN AND EMAIL VERIFICATION", Toast.LENGTH_LONG).show();
-                            userEmail=email.getText().toString().trim();getUser(userEmail);
+                            userEmail=email.getText().toString().trim();
+                            getUser(userEmail);
                         }
                     }
                     }

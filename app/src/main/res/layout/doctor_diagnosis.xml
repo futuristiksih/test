@@ -44,7 +44,7 @@
                 android:inputType="textMultiLine"
                 android:paddingLeft="7dp"
                 android:paddingRight="7dp" />
-        </LinearLayout>
+         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/medLayout"
@@ -64,6 +64,7 @@
                 android:paddingRight="7dp"
                 android:textColor="#000000"
                 android:textSize="40sp" />
+
             <ImageButton
                 android:id="@+id/addMed"
                 android:layout_width="0dp"
@@ -124,5 +125,6 @@
             android:orientation="vertical">
 
         </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

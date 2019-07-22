@@ -6,98 +6,122 @@
     <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings" translatable="false">Settings</string>
-    <string-array name="gender">
-        <item>Male</item>
-        <item>Female</item>
+    <string name="action_save" translatable="false">Save</string>
+    <string name="action_download" translatable="false">Download</string>
+    <string name="MedicineName" translatable="false">Medicine Name</string>
+    <string name="Weeks" translatable="false">Week (s)</string>
+    <string name="Doses" translatable="false">Dose (s)</string>
+    <string name="Conditions" translatable="false">Condition (s)</string>
+    <string name="demo" translatable="false">See a demo of the app</string>
+    <string name="neoped" translatable="false">Diagnosis of Neonatal and paediatric Dermatological Problems</string>
+    <string name="TestName" translatable="false">Test Name</string>
+    <string name="GoBack" translatable="false">Go Back</string>
+    <string name="details" translatable="false">Fill Up the details</string>
+    <string name="doctorname" translatable="false">Doctor\'s Name</string>
+    <string name="doctoremail" translatable="false">Doctor\'s Email</string>
+    <string name="childname" translatable="false">Child\'s Name</string>
+    <string name="birthweight" translatable="false">Birth Weight(in Kg)</string>
+    <string name="Gender" translatable="false">Gender</string>
+    <string name="Male" translatable="false">Male</string>
+    <string name="Female" translatable="false">Female</string>
+    <string name="DOB" translatable="false">Date Of Birth</string>
+    <string name="savenext" translatable="false">Save and Next Page</string>
+    <string name="appointment_id" translatable="false">appointment_id</string>
+    <string name="ChildName" translatable="false">Child Name</string>
+    <string name="camera_error" translatable="false">This device doesn\'t support Camera2 API.</string>
+    <string name="GuardianName" translatable="false">Guardian Name</string>
+    <string name="Date" translatable="false">Date</string>
+    <string name="status" translatable="false">status</string>
+    <string name="NAME" translatable="false">NAME</string>
+    <string name="EMAILID" translatable="false">EMAIL ID</string>
+    <string name="CONTACTNUMBER" translatable="false">CONTACT NUMBER</string>
+    <string name="ADDRESS" translatable="false">ADDRESS</string>
+    <string name="ye" translatable="false">Years of experience</string>
+    <string name="MCInumber" translatable="false">MCI number</string>
+    <string name="DEGREE" translatable="false">DEGREE</string>
+    <string name="SPECIALIZATION" translatable="false">SPECIALIZATION</string>
+    <string name="CLINIC" translatable="false">HOSPITAL/PERSONAL CLINIC</string>
+    <string name="NothingHere" translatable="false">NothingHere</string>
+    <string name="Name" translatable="false">Name</string>
+    <string name="Email" translatable="false">Email</string>
+    <string name="Password" translatable="false">Password</string>
+    <string name="default_notification_channel_id" translatable="false">DermaPaedia</string>
+
+
+    <string name="reenter" translatable="false">Re-Enter Password</string>
+    <string name="Degree" translatable="false">Degree</string>
+    <string name="phn" translatable="false">Phone number</string>
+    <string name="Specialization" translatable="false">Specialization</string>
+    <string name="City" translatable="false">City</string>
+    <string name="mci" translatable="false">MCI Registration Number</string>
+    <string name="ey" translatable="false">Experience in years</string>
+    <string name="pc" translatable="false">Personal Clinic/Hospital</string>
+    <string name="up" translatable="false">Upload Picture</string>
+    <string name="ca" translatable="false">Create Account</string>
+    <string name="Description" translatable="false">Description</string>
+    <string name="Medication" translatable="false">Medication</string>
+    <string name="Testimonal" translatable="false">Testimonal</string>
+    <string name="name" translatable="false">name</string>
+    <string name="profession" translatable="false">profession</string>
+    <string name="experience_year" translatable="false">experience_year</string>
+    <string name="DiseaseTag" translatable="false">Disease Tag</string>
+    <string name="Filename" translatable="false">Filename.type</string>
+    <string name="da" translatable="false">Donot have an account?</string>
+    <string name="SignUp" translatable="false">Sign Up</string>
+    <string name="Login" translatable="false">Login</string>
+    <string name="EMAIL" translatable="false">EMAIL</string>
+    <string name="PASSWORD" translatable="false">PASSWORD</string>
+
+    <string name="fp" translatable="false">Forgot Password?</string>
+    <string name="mu" translatable="false">Multiple File Upload</string>
+    <string name="fu" translatable="false">Final Upload</string>
+    <string name="Address" translatable="false">Address</string>
+
+    <string name="rc" translatable="false">Request a password change link</string>
+    <string name="pa" translatable="false">Register as Parent</string>
+    <string name="dr" translatable="false">Register as Doctor</string>
+    <string name="CHOOSE" translatable="false">CHOOSE</string>
+    <string name="du" translatable="false">Fill Up the details</string>
+    <string name="BowelMovement" translatable="false">Bowel Movement</string>
+    <string name="Breastfeed" translatable="false">Breast feed</string>
+    <string name="Vomit" translatable="false">Vomit</string>
+    <string name="Dehydration" translatable="false">Dehydration</string>
+    <string name="Fever" translatable="false">Fever</string>
+    <string name="Immunisation" translatable="false">Last Vaccination</string>
+    <string name="Inception" translatable="false">Inception</string>
+    <string name="InfectedArea" translatable="false">Infected Area</string>
+    <string name="Intake" translatable="false">Intake</string>
+    <string name="Environment" translatable="false">Environment</string>
+    <string name="Crying" translatable="false">Crying</string>
+    <string name="Diagnosis" translatable="false">Diagnosis</string>
+    <string name="Chat" translatable="false">Chat</string>
+    <string-array name="BowelMovement">
+        <item>Regular</item>
+        <item>Irregular</item>
+        <item>Abnormalities</item>
     </string-array>
-    <string name="action_save">Save</string>
-    <string name="MedicineName">Medicine Name</string>
-    <string name="Weeks">Week (s)</string>
-    <string name="Doses">Dose (s)</string>
-    <string name="Conditions">Condition (s)</string>
-    <string name="demo">See a demo of the app</string>
-    <string name="neoped">Diagnosis of Neonatal and pediatric</string>
-    <string name="TestName">Test Name</string>
-    <string name="GoBack">Go Back</string>
-    <string name="details">Fill Up the details</string>
-    <string name="doctorname">Doctor\'s Name</string>
-    <string name="doctoremail">Doctor\'s Email</string>
-    <string name="childname">Child\'s Name</string>
-    <string name="birthweight">Birth Weight(in Kg)</string>
-    <string name="Gender">Gender</string>
-    <string name="Male">Male</string>
-    <string name="Female">Female</string>
-    <string name="DOB">Date Of Birth</string>
-    <string name="savenext">Save and Next Page</string>
-    <string name="appointment_id">appointment_id</string>
-    <string name="ChildName">Child Name</string>
-    <string name="GuardianName">Guardian Name</string>
-    <string name="Date">Date</string>
-    <string name="status">status</string>
-    <string name="NAME">NAME</string>
-    <string name="EMAILID">EMAIL ID</string>
-    <string name="CONTACTNUMBER">CONTACT NUMBER</string>
-    <string name="ADDRESS">ADDRESS</string>
-    <string name="ye">Years of experience</string>
-    <string name="MCInumber">MCI number</string>
-    <string name="DEGREE">DEGREE</string>
-    <string name="SPECIALIZATION">SPECIALIZATION</string>
-    <string name="CLINIC">HOSPITAL/PERSONAL CLINIC</string>
-    <string name="NothingHere">NothingHere</string>
-    <string name="Name">Name</string>
-    <string name="Email">Email</string>
-    <string name="Password">Password</string>
-
-    
-    <string name="reenter">Re-Enter Password</string>
-    <string name="Degree">Degree</string>
-    <string name="phn">Phone number</string>
-    <string name="Specialization">Specialization</string>
-    <string name="City">City</string>
-    <string name="mci">MCI Registration Number</string>
-    <string name="ey">Experience in years</string>
-    <string name="pc">Personal Clinic/Hospital</string>
-    <string name="up">Upload Picture</string>
-    <string name="ca">Create Account</string>
-    <string name="Description">Description</string>
-    <string name="Medication">Medication</string>
-    <string name="Testimonal">Testimonal</string>
-    <string name="name">name</string>
-    <string name="profession">profession</string>
-    <string name="experience_year">experience_year</string>
-    <string name="DiseaseTag">Disease Tag</string>
-    <string name="Filename">Filename.type</string>
-    <string name="da">Donot have an account?</string>
-    <string name="SignUp">Sign Up</string>
-    <string name="Login">Login</string>
-    <string name="EMAIL">EMAIL</string>
-    <string name="PASSWORD">PASSWORD</string>
-
-    <string name="fp">Forgot Password?</string>
-    <string name="mu">Multiple File Upload</string>
-    <string name="fu">Final Upload</string>
-    <string name="Address">Address</string>
-
-    <string name="rc">Request a password change link</string>
-    <string name="pa">Register as Parent</string>
-    <string name="dr">Register as Doctor</string>
-    <string name="CHOOSE">CHOOSE</string>
-    <string name="du">Fill Up the details</string>
-    <string name="BowelMovement">Bowel Movement</string>
-    <string name="Breastfeed">Breast feed</string>
-    <string name="Vomit">Vomit</string>
-    <string name="Dehydration">Dehydration</string>
-    <string name="Fever">Fever</string>
-    <string name="Immunisation">Immunisation</string>
-    <string name="Inception">Inception</string>
-    <string name="InfectedArea">Infected Area</string>
-    <string name="Intake">Intake</string>
-    <string name="Environment">Environment</string>
-    <string name="Crying">Crying</string>
-    <string name="Diagnosis">Diagnosis</string>
-    <string name="Chat">Chat</string>
-
-
+    <string-array name="Crying">
+        <item>normal</item>
+        <item>abnormal</item>
+        <item>crying due to pain</item>
+    </string-array>
+    <string-array name="Immunisation">
+        <item>BCG,OPV(0),HepB BirthDose</item>
+        <item>OPV1,Penta1(DPT+HepB+HiB)</item>
+        <item>OPV2,Penta2(DPT+HepB+HiB)</item>
+        <item>OPV3,Penta3(DPT+HepB+HiB)</item>
+        <item>IPV</item>
+        <item>MMR-1,MR/MEASELS</item>
+        <item>JE VACCINE-1</item>
+        <item>MMR-1</item>
+        <item>OPV BOOSTER</item>
+        <item>DPT 1ST BOOSTER</item>
+        <item>JE VACCINE-2</item>
+        <item>DPT 2ND BOOSTER</item>
+        <item>TT1</item>
+        <item>TT2</item>
+    </string-array>
+    <string name="title_activity_notification_" translatable="false">Notification_Activity</string>
 
 
 </resources>

@@ -29,13 +29,15 @@ public class appointmentList extends Fragment {
         view = inflater.inflate(R.layout.doclist, container, false);getActivity().setTitle("CHOOSE A REPORT");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
-        String email = user.getEmail();
         ListView listView =  view.findViewById(R.id.doclist);
         arrayList = new ArrayList<>();
         adapter = new appointmentAdapter(getActivity(),arrayList);
         db = FirebaseFirestore.getInstance();
         emails= new ArrayList<>();ids=new ArrayList<>();names=new ArrayList<>();
-        db.collection("Email").document("doctor "+user.getEmail()).collection("received_appointments").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        db.collection("Email")
+                .document("doctor "+user.getEmail())
+                .collection("received_appointments")
+                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for(QueryDocumentSnapshot documentSnapshot:queryDocumentSnapshots){

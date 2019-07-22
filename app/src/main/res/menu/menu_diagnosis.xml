@@ -9,4 +9,11 @@
         android:icon="@drawable/ic_done"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/action_download"
+        android:icon="@drawable/pdf_icon"
+        android:title="@string/action_download"
+        app:showAsAction="always" />
+
+
 </menu>

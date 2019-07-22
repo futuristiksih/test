@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/bg" />
+        android:src="@drawable/bg6" />
 
     <TextView
         android:id="@+id/iv_back"
@@ -25,10 +25,10 @@
         android:textSize="20dp"/>
 
     <ScrollView
-        android:layout_below="@+id/iv_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-1dp">
+        android:layout_below="@+id/iv_back"
+        android:layout_marginTop="-2dp">
 
 
         <LinearLayout
@@ -149,7 +149,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/text_primary"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:lines="1"
                     android:text=""
                     android:textColor="@android:color/white"
@@ -195,12 +195,12 @@
                         android:id="@+id/female"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:buttonTint="@color/window_background"
                         android:checked="false"
                         android:text="@string/Female"
                         android:textColor="@android:color/white"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
                 </RadioGroup>
 
             </LinearLayout>
@@ -219,7 +219,7 @@
                     android:layout_marginBottom="@dimen/space5"
                     android:text="@string/DOB"
                     android:textColor="@android:color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/dob"
@@ -231,26 +231,27 @@
                     android:text=""
                     android:textColor="@android:color/white"
                     android:textColorHint="@color/txt_hint"
-                    android:textSize="@dimen/txt16" />
+                    android:textSize="@dimen/txt16"
+                    android:autofillHints="" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/next"
                     android:layout_width="@dimen/btn_width"
                     android:layout_height="@dimen/btn_height"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/btn_white_selector"
                     android:text="@string/savenext"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/txt16"
-                    android:layout_gravity="center"/>
+                    android:textSize="@dimen/txt16" />
             </LinearLayout>
 
         </LinearLayout>
